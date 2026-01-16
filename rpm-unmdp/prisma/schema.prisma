@@ -1,0 +1,283 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// --------------------------------------------------------
+// ENUMS
+// --------------------------------------------------------
+
+enum StudentStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+  NOT_STUDENT
+}
+
+enum DocType {
+  DNI
+  PASSPORT
+}
+
+enum Semester {
+  FIRST
+  SECOND
+  BOTH
+}
+
+enum CommissionRole {
+  GRADUATE_ASSISTANT
+  STUDENT_ASSISTANT
+  THEORY_PROFESSOR
+  PRACTICE_PROFESSOR
+}
+
+enum ReviewStatus {
+  PUBLISHED
+  PENDING
+  BANNED
+}
+
+enum ReviewType {
+  COMMISSION
+  PROFESSOR
+}
+
+// --------------------------------------------------------
+// ACADEMIC STRUCTURE
+// --------------------------------------------------------
+
+model Faculty {
+  id      Int      @id @default(autoincrement())
+  name    String
+  abbreviation  String?
+
+  universityId Int
+  university   University @relation(fields: [universityId], references: [id])
+
+  careers Career[]
+}
+
+model University {
+  id        Int       @id @default(autoincrement())
+  name      String
+  abbreviation  String?
+  faculties Faculty[]
+}
+
+model Career {
+  id           Int         @id @default(autoincrement())
+  name         String
+  subjectCount Int
+  years        Int
+  facultyId    Int
+
+  faculty     Faculty     @relation(fields: [facultyId], references: [id])
+  studyPlans  StudyPlan[]
+  enrollments Enrollment[]
+}
+
+model StudyPlan {
+  id        Int                @id @default(autoincrement())
+  careerId  Int
+  isActive  Boolean            @default(true)
+  year      Int
+
+  career    Career             @relation(fields: [careerId], references: [id])
+  subjects  StudyPlanSubject[]
+}
+
+model Subject {
+  id           Int                @id @default(autoincrement())
+  name         String
+  credits      Int
+  hours        Int
+
+  // Relations
+  plans        StudyPlanSubject[]
+  commissions  Commission[]
+
+  // Self-relation for Correlatives (Many-to-Many)
+  predecessors Correlation[]      @relation("SubjectSuccessor")
+  successors   Correlation[]      @relation("SubjectPredecessor")
+}
+
+model StudyPlanSubject {
+  planId    Int
+  subjectId Int
+  year      Int       // Academic year (1st, 2nd, etc.)
+  semester  Semester
+
+  plan      StudyPlan @relation(fields: [planId], references: [id])
+  subject   Subject   @relation(fields: [subjectId], references: [id])
+
+  @@id([planId, subjectId])
+}
+
+model Correlation {
+  predecessorId Int
+  successorId   Int
+
+  predecessor   Subject @relation("SubjectPredecessor", fields: [predecessorId], references: [id])
+  successor     Subject @relation("SubjectSuccessor", fields: [successorId], references: [id])
+
+  @@id([predecessorId, successorId])
+}
+
+// --------------------------------------------------------
+// OFFERINGS & STAFF
+// --------------------------------------------------------
+
+model Commission {
+  id           Int                   @id @default(autoincrement())
+  year         Int
+  schedules    String?
+  semester     Semester
+  subjectId    Int
+
+  subject      Subject               @relation(fields: [subjectId], references: [id])
+  professors   CommissionProfessor[]
+  reviews      Review[]
+}
+
+model Professor {
+  id          Int                   @id @default(autoincrement())
+  full_name   String                // Full Name
+  
+  commissions CommissionProfessor[]
+  reviews     ReviewProfessorDetail[]
+}
+
+model CommissionProfessor {
+  commissionId Int
+  professorId  Int
+  role         CommissionRole
+
+  commission   Commission @relation(fields: [commissionId], references: [id])
+  professor    Professor  @relation(fields: [professorId], references: [id])
+
+  @@id([commissionId, professorId])
+}
+
+// --------------------------------------------------------
+// USERS
+// --------------------------------------------------------
+
+model User {
+  id            Int            @id @default(autoincrement())
+  
+  docType       DocType
+  docNumber     String
+  firstName     String
+  lastName      String
+  password      String
+  email         String         @unique
+
+  isAdmin       Boolean        @default(false)
+  studentStatus StudentStatus? 
+
+  enrollments   Enrollment[]
+  reviews       Review[]
+  votes         Vote[]
+
+  reportedReviews Review[]      @relation("ReportedReviews")
+  auditLogs       ReviewAudit[] @relation("AuditReporter")
+
+  @@unique([docType, docNumber])
+}
+
+model Enrollment {
+  studentId Int
+  careerId  Int
+  date      DateTime @default(now())
+  fileNumber String  // Legajo
+
+  student   User @relation(fields: [studentId], references: [id])
+  career    Career  @relation(fields: [careerId], references: [id])
+
+  @@id([studentId, careerId])
+}
+
+// --------------------------------------------------------
+// REVIEWS & VOTING SYSTEM
+// --------------------------------------------------------
+
+model Review {
+  id           Int          @id @default(autoincrement())
+  commissionId Int
+  studentId    Int
+  dislikeCount Int          @default(0)
+  likeCount    Int          @default(0)
+  date         DateTime     @default(now())
+  status       ReviewStatus @default(PUBLISHED)
+  content      String       @db.Text
+  type         ReviewType
+
+  isAnonymous  Boolean      @default(false)
+
+  reporterId   Int?
+  reporter     User?     @relation("ReportedReviews", fields: [reporterId], references: [id])
+
+  commission   Commission   @relation(fields: [commissionId], references: [id])
+  student      User      @relation(fields: [studentId], references: [id])
+
+  // One-to-One Optional Relations (Hierarchy Implementation)
+  // Deleting the parent Review will cascade delete the detail
+  professorDetail  ReviewProfessorDetail?
+  commissionDetail ReviewCommissionDetail?
+
+  votes            Vote[]
+  audits           ReviewAudit[]
+}
+
+model ReviewProfessorDetail {
+  reviewId           Int @id // PK is also FK to Parent
+  professorId        Int
+  
+  // Scores (1-5)
+  treatmentScore     Int
+  explanationScore   Int
+
+  review    Review    @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  professor Professor @relation(fields: [professorId], references: [id])
+}
+
+model ReviewCommissionDetail {
+  reviewId       Int @id // PK is also FK to Parent
+  
+  // Scores (1-5)
+  contentScore   Int
+  difficultyScore Int
+
+  review Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+}
+
+model Vote {
+  studentId  Int
+  reviewId   Int
+  isPositive Boolean
+  date       DateTime @default(now())
+
+  student    User @relation(fields: [studentId], references: [id])
+  review     Review  @relation(fields: [reviewId], references: [id])
+
+  @@id([studentId, reviewId]) // One vote per student per review
+}
+
+model ReviewAudit {
+  id              Int      @id @default(autoincrement())
+  reviewId        Int
+  date            DateTime @default(now())
+  reason          String?
+  originalContent String?  @db.Text
+
+  reporterId      Int?
+  reporter        User? @relation("AuditReporter", fields: [reporterId], references: [id])
+
+  review          Review   @relation(fields: [reviewId], references: [id])
+}
