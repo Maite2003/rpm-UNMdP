@@ -1,0 +1,16 @@
+============ TRIGGERS ============
+
+------------ VALIDACIONES ------------
+
+- Validar que en una reseña de tipo 'PROFESOR', el profesor seleccionado pertenezca a esa comision. Se deberia agarrar el profesor_pk y comision_pk y buscar que esa combinacion exista en COMISION_PROFESOR
+
+- Comprobar que al crear una RESEñA_PROFESOR o RESEñA_COMISION, el tipo de la reseña con reseña_pk coincida. Se agarra la reseña_pk, se busca tal pk en la tabla RESEñA y se chequea el campo tipo
+
+------------ SINCRONIZACIONES ------------
+
+- Despues de INSERT, DELETE o UPDATE en VOTO, se debe ir a la reseña sobre la cual se voto y actualizar el campo cont_like o cont_dislike
+
+
+------------ AUDITORIAS ------------
+
+- Despues de un UPDATE, si el estado de la reseña cambia a 'BANEADA', se agrega la reseña_pk a la tabla RESEñA_AUDITORIAS
