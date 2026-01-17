@@ -159,7 +159,8 @@ export const CommissionScalarFieldEnum = {
   year: 'year',
   schedules: 'schedules',
   semester: 'semester',
-  subjectId: 'subjectId'
+  subjectId: 'subjectId',
+  isDeleted: 'isDeleted'
 } as const
 
 export type CommissionScalarFieldEnum = (typeof CommissionScalarFieldEnum)[keyof typeof CommissionScalarFieldEnum]
@@ -191,7 +192,8 @@ export const UserScalarFieldEnum = {
   password: 'password',
   email: 'email',
   isAdmin: 'isAdmin',
-  studentStatus: 'studentStatus'
+  studentStatus: 'studentStatus',
+  isDeleted: 'isDeleted'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]

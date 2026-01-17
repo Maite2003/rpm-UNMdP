@@ -58,7 +58,7 @@ model Faculty {
   abbreviation  String?
 
   universityId Int
-  university   University @relation(fields: [universityId], references: [id])
+  university    University @relation(fields: [universityId], references: [id], onDelete: Cascade)
 
   careers Career[]
 }
@@ -77,7 +77,7 @@ model Career {
   years        Int
   facultyId    Int
 
-  faculty     Faculty     @relation(fields: [facultyId], references: [id])
+  faculty       Faculty     @relation(fields: [facultyId], references: [id], onDelete: Cascade)
   studyPlans  StudyPlan[]
   enrollments Enrollment[]
 }
@@ -88,7 +88,7 @@ model StudyPlan {
   isActive  Boolean            @default(true)
   year      Int
 
-  career    Career             @relation(fields: [careerId], references: [id])
+  career      Career             @relation(fields: [careerId], references: [id], onDelete: Cascade)
   subjects  StudyPlanSubject[]
 }
 
@@ -140,6 +140,8 @@ model Commission {
   semester     Semester
   subjectId    Int
 
+  isDeleted     Boolean   @default(false)
+
   subject      Subject               @relation(fields: [subjectId], references: [id])
   professors   CommissionProfessor[]
   reviews      Review[]
@@ -159,7 +161,7 @@ model CommissionProfessor {
   role         CommissionRole
 
   commission   Commission @relation(fields: [commissionId], references: [id])
-  professor    Professor  @relation(fields: [professorId], references: [id])
+  professor    Professor  @relation(fields: [professorId], references: [id], onDelete: Cascade)
 
   @@id([commissionId, professorId])
 }
@@ -181,6 +183,8 @@ model User {
   isAdmin       Boolean        @default(false)
   studentStatus StudentStatus? 
 
+  isDeleted     Boolean        @default(false)
+
   enrollments   Enrollment[]
   reviews       Review[]
   votes         Vote[]
@@ -197,7 +201,7 @@ model Enrollment {
   date      DateTime @default(now())
   fileNumber String  // Legajo
 
-  student   User @relation(fields: [studentId], references: [id])
+  student   User @relation(fields: [studentId], references: [id], onDelete: Cascade)
   career    Career  @relation(fields: [careerId], references: [id])
 
   @@id([studentId, careerId])
@@ -223,8 +227,8 @@ model Review {
   reporterId   Int?
   reporter     User?     @relation("ReportedReviews", fields: [reporterId], references: [id])
 
-  commission   Commission   @relation(fields: [commissionId], references: [id])
-  student      User      @relation(fields: [studentId], references: [id])
+  commission   Commission   @relation(fields: [commissionId], references: [id], onDelete: Cascade)
+  student      User      @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   // One-to-One Optional Relations (Hierarchy Implementation)
   // Deleting the parent Review will cascade delete the detail
@@ -244,7 +248,7 @@ model ReviewProfessorDetail {
   explanationScore   Int
 
   review    Review    @relation(fields: [reviewId], references: [id], onDelete: Cascade)
-  professor Professor @relation(fields: [professorId], references: [id])
+  professor Professor @relation(fields: [professorId], references: [id], onDelete: Cascade)
 }
 
 model ReviewCommissionDetail {
@@ -263,8 +267,8 @@ model Vote {
   isPositive Boolean
   date       DateTime @default(now())
 
-  student    User @relation(fields: [studentId], references: [id])
-  review     Review  @relation(fields: [reviewId], references: [id])
+  student    User @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  review     Review  @relation(fields: [reviewId], references: [id], onDelete: Cascade)
 
   @@id([studentId, reviewId]) // One vote per student per review
 }
@@ -277,7 +281,7 @@ model ReviewAudit {
   originalContent String?  @db.Text
 
   reporterId      Int?
-  reporter        User? @relation("AuditReporter", fields: [reporterId], references: [id])
+  reporter        User? @relation("AuditReporter", fields: [reporterId], references: [id], onDelete: SetNull)
 
   review          Review   @relation(fields: [reviewId], references: [id])
 }

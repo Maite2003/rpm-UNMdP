@@ -44,6 +44,7 @@ export type UserMinAggregateOutputType = {
   email: string | null
   isAdmin: boolean | null
   studentStatus: $Enums.StudentStatus | null
+  isDeleted: boolean | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -56,6 +57,7 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   isAdmin: boolean | null
   studentStatus: $Enums.StudentStatus | null
+  isDeleted: boolean | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -68,6 +70,7 @@ export type UserCountAggregateOutputType = {
   email: number
   isAdmin: number
   studentStatus: number
+  isDeleted: number
   _all: number
 }
 
@@ -90,6 +93,7 @@ export type UserMinAggregateInputType = {
   email?: true
   isAdmin?: true
   studentStatus?: true
+  isDeleted?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -102,6 +106,7 @@ export type UserMaxAggregateInputType = {
   email?: true
   isAdmin?: true
   studentStatus?: true
+  isDeleted?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -114,6 +119,7 @@ export type UserCountAggregateInputType = {
   email?: true
   isAdmin?: true
   studentStatus?: true
+  isDeleted?: true
   _all?: true
 }
 
@@ -213,6 +219,7 @@ export type UserGroupByOutputType = {
   email: string
   isAdmin: boolean
   studentStatus: $Enums.StudentStatus | null
+  isDeleted: boolean
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -248,6 +255,7 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   isAdmin?: Prisma.BoolFilter<"User"> | boolean
   studentStatus?: Prisma.EnumStudentStatusNullableFilter<"User"> | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFilter<"User"> | boolean
   enrollments?: Prisma.EnrollmentListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   votes?: Prisma.VoteListRelationFilter
@@ -265,6 +273,7 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
   studentStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
   enrollments?: Prisma.EnrollmentOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   votes?: Prisma.VoteOrderByRelationAggregateInput
@@ -286,6 +295,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringFilter<"User"> | string
   isAdmin?: Prisma.BoolFilter<"User"> | boolean
   studentStatus?: Prisma.EnumStudentStatusNullableFilter<"User"> | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFilter<"User"> | boolean
   enrollments?: Prisma.EnrollmentListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   votes?: Prisma.VoteListRelationFilter
@@ -303,6 +313,7 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
   studentStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -323,6 +334,7 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   isAdmin?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   studentStatus?: Prisma.EnumStudentStatusNullableWithAggregatesFilter<"User"> | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
 }
 
 export type UserCreateInput = {
@@ -334,6 +346,7 @@ export type UserCreateInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutStudentInput
   votes?: Prisma.VoteCreateNestedManyWithoutStudentInput
@@ -351,6 +364,7 @@ export type UserUncheckedCreateInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutStudentInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutStudentInput
@@ -367,6 +381,7 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutStudentNestedInput
   votes?: Prisma.VoteUpdateManyWithoutStudentNestedInput
@@ -384,6 +399,7 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutStudentNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutStudentNestedInput
@@ -401,6 +417,7 @@ export type UserCreateManyInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
 }
 
 export type UserUpdateManyMutationInput = {
@@ -412,6 +429,7 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -424,6 +442,7 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserDocTypeDocNumberCompoundUniqueInput = {
@@ -441,6 +460,7 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
   studentStatus?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -457,6 +477,7 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
   studentStatus?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -469,6 +490,7 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   isAdmin?: Prisma.SortOrder
   studentStatus?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -576,6 +598,7 @@ export type UserCreateWithoutEnrollmentsInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
   reviews?: Prisma.ReviewCreateNestedManyWithoutStudentInput
   votes?: Prisma.VoteCreateNestedManyWithoutStudentInput
   reportedReviews?: Prisma.ReviewCreateNestedManyWithoutReporterInput
@@ -592,6 +615,7 @@ export type UserUncheckedCreateWithoutEnrollmentsInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutStudentInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutStudentInput
   reportedReviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutReporterInput
@@ -623,6 +647,7 @@ export type UserUpdateWithoutEnrollmentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviews?: Prisma.ReviewUpdateManyWithoutStudentNestedInput
   votes?: Prisma.VoteUpdateManyWithoutStudentNestedInput
   reportedReviews?: Prisma.ReviewUpdateManyWithoutReporterNestedInput
@@ -639,6 +664,7 @@ export type UserUncheckedUpdateWithoutEnrollmentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutStudentNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutStudentNestedInput
   reportedReviews?: Prisma.ReviewUncheckedUpdateManyWithoutReporterNestedInput
@@ -654,6 +680,7 @@ export type UserCreateWithoutReportedReviewsInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutStudentInput
   votes?: Prisma.VoteCreateNestedManyWithoutStudentInput
@@ -670,6 +697,7 @@ export type UserUncheckedCreateWithoutReportedReviewsInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutStudentInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutStudentInput
@@ -690,6 +718,7 @@ export type UserCreateWithoutReviewsInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
   votes?: Prisma.VoteCreateNestedManyWithoutStudentInput
   reportedReviews?: Prisma.ReviewCreateNestedManyWithoutReporterInput
@@ -706,6 +735,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutStudentInput
   reportedReviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutReporterInput
@@ -737,6 +767,7 @@ export type UserUpdateWithoutReportedReviewsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutStudentNestedInput
   votes?: Prisma.VoteUpdateManyWithoutStudentNestedInput
@@ -753,6 +784,7 @@ export type UserUncheckedUpdateWithoutReportedReviewsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutStudentNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutStudentNestedInput
@@ -779,6 +811,7 @@ export type UserUpdateWithoutReviewsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
   votes?: Prisma.VoteUpdateManyWithoutStudentNestedInput
   reportedReviews?: Prisma.ReviewUpdateManyWithoutReporterNestedInput
@@ -795,6 +828,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutStudentNestedInput
   reportedReviews?: Prisma.ReviewUncheckedUpdateManyWithoutReporterNestedInput
@@ -810,6 +844,7 @@ export type UserCreateWithoutVotesInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutStudentInput
   reportedReviews?: Prisma.ReviewCreateNestedManyWithoutReporterInput
@@ -826,6 +861,7 @@ export type UserUncheckedCreateWithoutVotesInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutStudentInput
   reportedReviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutReporterInput
@@ -857,6 +893,7 @@ export type UserUpdateWithoutVotesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutStudentNestedInput
   reportedReviews?: Prisma.ReviewUpdateManyWithoutReporterNestedInput
@@ -873,6 +910,7 @@ export type UserUncheckedUpdateWithoutVotesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutStudentNestedInput
   reportedReviews?: Prisma.ReviewUncheckedUpdateManyWithoutReporterNestedInput
@@ -888,6 +926,7 @@ export type UserCreateWithoutAuditLogsInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutStudentInput
   votes?: Prisma.VoteCreateNestedManyWithoutStudentInput
@@ -904,6 +943,7 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   email: string
   isAdmin?: boolean
   studentStatus?: $Enums.StudentStatus | null
+  isDeleted?: boolean
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutStudentInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutStudentInput
@@ -935,6 +975,7 @@ export type UserUpdateWithoutAuditLogsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutStudentNestedInput
   votes?: Prisma.VoteUpdateManyWithoutStudentNestedInput
@@ -951,6 +992,7 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studentStatus?: Prisma.NullableEnumStudentStatusFieldUpdateOperationsInput | $Enums.StudentStatus | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutStudentNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutStudentNestedInput
@@ -1034,6 +1076,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   isAdmin?: boolean
   studentStatus?: boolean
+  isDeleted?: boolean
   enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   votes?: boolean | Prisma.User$votesArgs<ExtArgs>
@@ -1052,6 +1095,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   isAdmin?: boolean
   studentStatus?: boolean
+  isDeleted?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1064,6 +1108,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   isAdmin?: boolean
   studentStatus?: boolean
+  isDeleted?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -1076,9 +1121,10 @@ export type UserSelectScalar = {
   email?: boolean
   isAdmin?: boolean
   studentStatus?: boolean
+  isDeleted?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "docType" | "docNumber" | "firstName" | "lastName" | "password" | "email" | "isAdmin" | "studentStatus", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "docType" | "docNumber" | "firstName" | "lastName" | "password" | "email" | "isAdmin" | "studentStatus" | "isDeleted", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
@@ -1109,6 +1155,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string
     isAdmin: boolean
     studentStatus: $Enums.StudentStatus | null
+    isDeleted: boolean
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1546,6 +1593,7 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly isAdmin: Prisma.FieldRef<"User", 'Boolean'>
   readonly studentStatus: Prisma.FieldRef<"User", 'StudentStatus'>
+  readonly isDeleted: Prisma.FieldRef<"User", 'Boolean'>
 }
     
 
