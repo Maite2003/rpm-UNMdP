@@ -20,32 +20,20 @@ export type EnrollmentModel = runtime.Types.Result.DefaultSelection<Prisma.$Enro
 
 export type AggregateEnrollment = {
   _count: EnrollmentCountAggregateOutputType | null
-  _avg: EnrollmentAvgAggregateOutputType | null
-  _sum: EnrollmentSumAggregateOutputType | null
   _min: EnrollmentMinAggregateOutputType | null
   _max: EnrollmentMaxAggregateOutputType | null
 }
 
-export type EnrollmentAvgAggregateOutputType = {
-  studentId: number | null
-  careerId: number | null
-}
-
-export type EnrollmentSumAggregateOutputType = {
-  studentId: number | null
-  careerId: number | null
-}
-
 export type EnrollmentMinAggregateOutputType = {
-  studentId: number | null
-  careerId: number | null
+  studentId: string | null
+  careerId: string | null
   date: Date | null
   fileNumber: string | null
 }
 
 export type EnrollmentMaxAggregateOutputType = {
-  studentId: number | null
-  careerId: number | null
+  studentId: string | null
+  careerId: string | null
   date: Date | null
   fileNumber: string | null
 }
@@ -58,16 +46,6 @@ export type EnrollmentCountAggregateOutputType = {
   _all: number
 }
 
-
-export type EnrollmentAvgAggregateInputType = {
-  studentId?: true
-  careerId?: true
-}
-
-export type EnrollmentSumAggregateInputType = {
-  studentId?: true
-  careerId?: true
-}
 
 export type EnrollmentMinAggregateInputType = {
   studentId?: true
@@ -129,18 +107,6 @@ export type EnrollmentAggregateArgs<ExtArgs extends runtime.Types.Extensions.Int
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: EnrollmentAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: EnrollmentSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: EnrollmentMinAggregateInputType
@@ -171,20 +137,16 @@ export type EnrollmentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   _count?: EnrollmentCountAggregateInputType | true
-  _avg?: EnrollmentAvgAggregateInputType
-  _sum?: EnrollmentSumAggregateInputType
   _min?: EnrollmentMinAggregateInputType
   _max?: EnrollmentMaxAggregateInputType
 }
 
 export type EnrollmentGroupByOutputType = {
-  studentId: number
-  careerId: number
+  studentId: string
+  careerId: string
   date: Date
   fileNumber: string
   _count: EnrollmentCountAggregateOutputType | null
-  _avg: EnrollmentAvgAggregateOutputType | null
-  _sum: EnrollmentSumAggregateOutputType | null
   _min: EnrollmentMinAggregateOutputType | null
   _max: EnrollmentMaxAggregateOutputType | null
 }
@@ -208,8 +170,8 @@ export type EnrollmentWhereInput = {
   AND?: Prisma.EnrollmentWhereInput | Prisma.EnrollmentWhereInput[]
   OR?: Prisma.EnrollmentWhereInput[]
   NOT?: Prisma.EnrollmentWhereInput | Prisma.EnrollmentWhereInput[]
-  studentId?: Prisma.IntFilter<"Enrollment"> | number
-  careerId?: Prisma.IntFilter<"Enrollment"> | number
+  studentId?: Prisma.StringFilter<"Enrollment"> | string
+  careerId?: Prisma.StringFilter<"Enrollment"> | string
   date?: Prisma.DateTimeFilter<"Enrollment"> | Date | string
   fileNumber?: Prisma.StringFilter<"Enrollment"> | string
   student?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -230,8 +192,8 @@ export type EnrollmentWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.EnrollmentWhereInput | Prisma.EnrollmentWhereInput[]
   OR?: Prisma.EnrollmentWhereInput[]
   NOT?: Prisma.EnrollmentWhereInput | Prisma.EnrollmentWhereInput[]
-  studentId?: Prisma.IntFilter<"Enrollment"> | number
-  careerId?: Prisma.IntFilter<"Enrollment"> | number
+  studentId?: Prisma.StringFilter<"Enrollment"> | string
+  careerId?: Prisma.StringFilter<"Enrollment"> | string
   date?: Prisma.DateTimeFilter<"Enrollment"> | Date | string
   fileNumber?: Prisma.StringFilter<"Enrollment"> | string
   student?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -244,18 +206,16 @@ export type EnrollmentOrderByWithAggregationInput = {
   date?: Prisma.SortOrder
   fileNumber?: Prisma.SortOrder
   _count?: Prisma.EnrollmentCountOrderByAggregateInput
-  _avg?: Prisma.EnrollmentAvgOrderByAggregateInput
   _max?: Prisma.EnrollmentMaxOrderByAggregateInput
   _min?: Prisma.EnrollmentMinOrderByAggregateInput
-  _sum?: Prisma.EnrollmentSumOrderByAggregateInput
 }
 
 export type EnrollmentScalarWhereWithAggregatesInput = {
   AND?: Prisma.EnrollmentScalarWhereWithAggregatesInput | Prisma.EnrollmentScalarWhereWithAggregatesInput[]
   OR?: Prisma.EnrollmentScalarWhereWithAggregatesInput[]
   NOT?: Prisma.EnrollmentScalarWhereWithAggregatesInput | Prisma.EnrollmentScalarWhereWithAggregatesInput[]
-  studentId?: Prisma.IntWithAggregatesFilter<"Enrollment"> | number
-  careerId?: Prisma.IntWithAggregatesFilter<"Enrollment"> | number
+  studentId?: Prisma.StringWithAggregatesFilter<"Enrollment"> | string
+  careerId?: Prisma.StringWithAggregatesFilter<"Enrollment"> | string
   date?: Prisma.DateTimeWithAggregatesFilter<"Enrollment"> | Date | string
   fileNumber?: Prisma.StringWithAggregatesFilter<"Enrollment"> | string
 }
@@ -268,8 +228,8 @@ export type EnrollmentCreateInput = {
 }
 
 export type EnrollmentUncheckedCreateInput = {
-  studentId: number
-  careerId: number
+  studentId: string
+  careerId: string
   date?: Date | string
   fileNumber: string
 }
@@ -282,15 +242,15 @@ export type EnrollmentUpdateInput = {
 }
 
 export type EnrollmentUncheckedUpdateInput = {
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
-  careerId?: Prisma.IntFieldUpdateOperationsInput | number
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
+  careerId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fileNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type EnrollmentCreateManyInput = {
-  studentId: number
-  careerId: number
+  studentId: string
+  careerId: string
   date?: Date | string
   fileNumber: string
 }
@@ -301,8 +261,8 @@ export type EnrollmentUpdateManyMutationInput = {
 }
 
 export type EnrollmentUncheckedUpdateManyInput = {
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
-  careerId?: Prisma.IntFieldUpdateOperationsInput | number
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
+  careerId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fileNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -318,8 +278,8 @@ export type EnrollmentOrderByRelationAggregateInput = {
 }
 
 export type EnrollmentStudentIdCareerIdCompoundUniqueInput = {
-  studentId: number
-  careerId: number
+  studentId: string
+  careerId: string
 }
 
 export type EnrollmentCountOrderByAggregateInput = {
@@ -327,11 +287,6 @@ export type EnrollmentCountOrderByAggregateInput = {
   careerId?: Prisma.SortOrder
   date?: Prisma.SortOrder
   fileNumber?: Prisma.SortOrder
-}
-
-export type EnrollmentAvgOrderByAggregateInput = {
-  studentId?: Prisma.SortOrder
-  careerId?: Prisma.SortOrder
 }
 
 export type EnrollmentMaxOrderByAggregateInput = {
@@ -346,11 +301,6 @@ export type EnrollmentMinOrderByAggregateInput = {
   careerId?: Prisma.SortOrder
   date?: Prisma.SortOrder
   fileNumber?: Prisma.SortOrder
-}
-
-export type EnrollmentSumOrderByAggregateInput = {
-  studentId?: Prisma.SortOrder
-  careerId?: Prisma.SortOrder
 }
 
 export type EnrollmentCreateNestedManyWithoutCareerInput = {
@@ -448,7 +398,7 @@ export type EnrollmentCreateWithoutCareerInput = {
 }
 
 export type EnrollmentUncheckedCreateWithoutCareerInput = {
-  studentId: number
+  studentId: string
   date?: Date | string
   fileNumber: string
 }
@@ -483,8 +433,8 @@ export type EnrollmentScalarWhereInput = {
   AND?: Prisma.EnrollmentScalarWhereInput | Prisma.EnrollmentScalarWhereInput[]
   OR?: Prisma.EnrollmentScalarWhereInput[]
   NOT?: Prisma.EnrollmentScalarWhereInput | Prisma.EnrollmentScalarWhereInput[]
-  studentId?: Prisma.IntFilter<"Enrollment"> | number
-  careerId?: Prisma.IntFilter<"Enrollment"> | number
+  studentId?: Prisma.StringFilter<"Enrollment"> | string
+  careerId?: Prisma.StringFilter<"Enrollment"> | string
   date?: Prisma.DateTimeFilter<"Enrollment"> | Date | string
   fileNumber?: Prisma.StringFilter<"Enrollment"> | string
 }
@@ -496,7 +446,7 @@ export type EnrollmentCreateWithoutStudentInput = {
 }
 
 export type EnrollmentUncheckedCreateWithoutStudentInput = {
-  careerId: number
+  careerId: string
   date?: Date | string
   fileNumber: string
 }
@@ -528,7 +478,7 @@ export type EnrollmentUpdateManyWithWhereWithoutStudentInput = {
 }
 
 export type EnrollmentCreateManyCareerInput = {
-  studentId: number
+  studentId: string
   date?: Date | string
   fileNumber: string
 }
@@ -540,19 +490,19 @@ export type EnrollmentUpdateWithoutCareerInput = {
 }
 
 export type EnrollmentUncheckedUpdateWithoutCareerInput = {
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fileNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type EnrollmentUncheckedUpdateManyWithoutCareerInput = {
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fileNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type EnrollmentCreateManyStudentInput = {
-  careerId: number
+  careerId: string
   date?: Date | string
   fileNumber: string
 }
@@ -564,13 +514,13 @@ export type EnrollmentUpdateWithoutStudentInput = {
 }
 
 export type EnrollmentUncheckedUpdateWithoutStudentInput = {
-  careerId?: Prisma.IntFieldUpdateOperationsInput | number
+  careerId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fileNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type EnrollmentUncheckedUpdateManyWithoutStudentInput = {
-  careerId?: Prisma.IntFieldUpdateOperationsInput | number
+  careerId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fileNumber?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -632,8 +582,8 @@ export type $EnrollmentPayload<ExtArgs extends runtime.Types.Extensions.Internal
     career: Prisma.$CareerPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    studentId: number
-    careerId: number
+    studentId: string
+    careerId: string
     date: Date
     fileNumber: string
   }, ExtArgs["result"]["enrollment"]>
@@ -1061,8 +1011,8 @@ export interface Prisma__EnrollmentClient<T, Null = never, ExtArgs extends runti
  * Fields of the Enrollment model
  */
 export interface EnrollmentFieldRefs {
-  readonly studentId: Prisma.FieldRef<"Enrollment", 'Int'>
-  readonly careerId: Prisma.FieldRef<"Enrollment", 'Int'>
+  readonly studentId: Prisma.FieldRef<"Enrollment", 'String'>
+  readonly careerId: Prisma.FieldRef<"Enrollment", 'String'>
   readonly date: Prisma.FieldRef<"Enrollment", 'DateTime'>
   readonly fileNumber: Prisma.FieldRef<"Enrollment", 'String'>
 }

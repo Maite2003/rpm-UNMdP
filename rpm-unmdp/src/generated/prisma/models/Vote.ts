@@ -20,32 +20,20 @@ export type VoteModel = runtime.Types.Result.DefaultSelection<Prisma.$VotePayloa
 
 export type AggregateVote = {
   _count: VoteCountAggregateOutputType | null
-  _avg: VoteAvgAggregateOutputType | null
-  _sum: VoteSumAggregateOutputType | null
   _min: VoteMinAggregateOutputType | null
   _max: VoteMaxAggregateOutputType | null
 }
 
-export type VoteAvgAggregateOutputType = {
-  studentId: number | null
-  reviewId: number | null
-}
-
-export type VoteSumAggregateOutputType = {
-  studentId: number | null
-  reviewId: number | null
-}
-
 export type VoteMinAggregateOutputType = {
-  studentId: number | null
-  reviewId: number | null
+  studentId: string | null
+  reviewId: string | null
   isPositive: boolean | null
   date: Date | null
 }
 
 export type VoteMaxAggregateOutputType = {
-  studentId: number | null
-  reviewId: number | null
+  studentId: string | null
+  reviewId: string | null
   isPositive: boolean | null
   date: Date | null
 }
@@ -58,16 +46,6 @@ export type VoteCountAggregateOutputType = {
   _all: number
 }
 
-
-export type VoteAvgAggregateInputType = {
-  studentId?: true
-  reviewId?: true
-}
-
-export type VoteSumAggregateInputType = {
-  studentId?: true
-  reviewId?: true
-}
 
 export type VoteMinAggregateInputType = {
   studentId?: true
@@ -129,18 +107,6 @@ export type VoteAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: VoteAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: VoteSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: VoteMinAggregateInputType
@@ -171,20 +137,16 @@ export type VoteGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: VoteCountAggregateInputType | true
-  _avg?: VoteAvgAggregateInputType
-  _sum?: VoteSumAggregateInputType
   _min?: VoteMinAggregateInputType
   _max?: VoteMaxAggregateInputType
 }
 
 export type VoteGroupByOutputType = {
-  studentId: number
-  reviewId: number
+  studentId: string
+  reviewId: string
   isPositive: boolean
   date: Date
   _count: VoteCountAggregateOutputType | null
-  _avg: VoteAvgAggregateOutputType | null
-  _sum: VoteSumAggregateOutputType | null
   _min: VoteMinAggregateOutputType | null
   _max: VoteMaxAggregateOutputType | null
 }
@@ -208,8 +170,8 @@ export type VoteWhereInput = {
   AND?: Prisma.VoteWhereInput | Prisma.VoteWhereInput[]
   OR?: Prisma.VoteWhereInput[]
   NOT?: Prisma.VoteWhereInput | Prisma.VoteWhereInput[]
-  studentId?: Prisma.IntFilter<"Vote"> | number
-  reviewId?: Prisma.IntFilter<"Vote"> | number
+  studentId?: Prisma.StringFilter<"Vote"> | string
+  reviewId?: Prisma.StringFilter<"Vote"> | string
   isPositive?: Prisma.BoolFilter<"Vote"> | boolean
   date?: Prisma.DateTimeFilter<"Vote"> | Date | string
   student?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -230,8 +192,8 @@ export type VoteWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.VoteWhereInput | Prisma.VoteWhereInput[]
   OR?: Prisma.VoteWhereInput[]
   NOT?: Prisma.VoteWhereInput | Prisma.VoteWhereInput[]
-  studentId?: Prisma.IntFilter<"Vote"> | number
-  reviewId?: Prisma.IntFilter<"Vote"> | number
+  studentId?: Prisma.StringFilter<"Vote"> | string
+  reviewId?: Prisma.StringFilter<"Vote"> | string
   isPositive?: Prisma.BoolFilter<"Vote"> | boolean
   date?: Prisma.DateTimeFilter<"Vote"> | Date | string
   student?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -244,18 +206,16 @@ export type VoteOrderByWithAggregationInput = {
   isPositive?: Prisma.SortOrder
   date?: Prisma.SortOrder
   _count?: Prisma.VoteCountOrderByAggregateInput
-  _avg?: Prisma.VoteAvgOrderByAggregateInput
   _max?: Prisma.VoteMaxOrderByAggregateInput
   _min?: Prisma.VoteMinOrderByAggregateInput
-  _sum?: Prisma.VoteSumOrderByAggregateInput
 }
 
 export type VoteScalarWhereWithAggregatesInput = {
   AND?: Prisma.VoteScalarWhereWithAggregatesInput | Prisma.VoteScalarWhereWithAggregatesInput[]
   OR?: Prisma.VoteScalarWhereWithAggregatesInput[]
   NOT?: Prisma.VoteScalarWhereWithAggregatesInput | Prisma.VoteScalarWhereWithAggregatesInput[]
-  studentId?: Prisma.IntWithAggregatesFilter<"Vote"> | number
-  reviewId?: Prisma.IntWithAggregatesFilter<"Vote"> | number
+  studentId?: Prisma.StringWithAggregatesFilter<"Vote"> | string
+  reviewId?: Prisma.StringWithAggregatesFilter<"Vote"> | string
   isPositive?: Prisma.BoolWithAggregatesFilter<"Vote"> | boolean
   date?: Prisma.DateTimeWithAggregatesFilter<"Vote"> | Date | string
 }
@@ -268,8 +228,8 @@ export type VoteCreateInput = {
 }
 
 export type VoteUncheckedCreateInput = {
-  studentId: number
-  reviewId: number
+  studentId: string
+  reviewId: string
   isPositive: boolean
   date?: Date | string
 }
@@ -282,15 +242,15 @@ export type VoteUpdateInput = {
 }
 
 export type VoteUncheckedUpdateInput = {
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
   isPositive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VoteCreateManyInput = {
-  studentId: number
-  reviewId: number
+  studentId: string
+  reviewId: string
   isPositive: boolean
   date?: Date | string
 }
@@ -301,8 +261,8 @@ export type VoteUpdateManyMutationInput = {
 }
 
 export type VoteUncheckedUpdateManyInput = {
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
   isPositive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -318,8 +278,8 @@ export type VoteOrderByRelationAggregateInput = {
 }
 
 export type VoteStudentIdReviewIdCompoundUniqueInput = {
-  studentId: number
-  reviewId: number
+  studentId: string
+  reviewId: string
 }
 
 export type VoteCountOrderByAggregateInput = {
@@ -327,11 +287,6 @@ export type VoteCountOrderByAggregateInput = {
   reviewId?: Prisma.SortOrder
   isPositive?: Prisma.SortOrder
   date?: Prisma.SortOrder
-}
-
-export type VoteAvgOrderByAggregateInput = {
-  studentId?: Prisma.SortOrder
-  reviewId?: Prisma.SortOrder
 }
 
 export type VoteMaxOrderByAggregateInput = {
@@ -346,11 +301,6 @@ export type VoteMinOrderByAggregateInput = {
   reviewId?: Prisma.SortOrder
   isPositive?: Prisma.SortOrder
   date?: Prisma.SortOrder
-}
-
-export type VoteSumOrderByAggregateInput = {
-  studentId?: Prisma.SortOrder
-  reviewId?: Prisma.SortOrder
 }
 
 export type VoteCreateNestedManyWithoutStudentInput = {
@@ -444,7 +394,7 @@ export type VoteCreateWithoutStudentInput = {
 }
 
 export type VoteUncheckedCreateWithoutStudentInput = {
-  reviewId: number
+  reviewId: string
   isPositive: boolean
   date?: Date | string
 }
@@ -479,8 +429,8 @@ export type VoteScalarWhereInput = {
   AND?: Prisma.VoteScalarWhereInput | Prisma.VoteScalarWhereInput[]
   OR?: Prisma.VoteScalarWhereInput[]
   NOT?: Prisma.VoteScalarWhereInput | Prisma.VoteScalarWhereInput[]
-  studentId?: Prisma.IntFilter<"Vote"> | number
-  reviewId?: Prisma.IntFilter<"Vote"> | number
+  studentId?: Prisma.StringFilter<"Vote"> | string
+  reviewId?: Prisma.StringFilter<"Vote"> | string
   isPositive?: Prisma.BoolFilter<"Vote"> | boolean
   date?: Prisma.DateTimeFilter<"Vote"> | Date | string
 }
@@ -492,7 +442,7 @@ export type VoteCreateWithoutReviewInput = {
 }
 
 export type VoteUncheckedCreateWithoutReviewInput = {
-  studentId: number
+  studentId: string
   isPositive: boolean
   date?: Date | string
 }
@@ -524,7 +474,7 @@ export type VoteUpdateManyWithWhereWithoutReviewInput = {
 }
 
 export type VoteCreateManyStudentInput = {
-  reviewId: number
+  reviewId: string
   isPositive: boolean
   date?: Date | string
 }
@@ -536,19 +486,19 @@ export type VoteUpdateWithoutStudentInput = {
 }
 
 export type VoteUncheckedUpdateWithoutStudentInput = {
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
   isPositive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VoteUncheckedUpdateManyWithoutStudentInput = {
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
   isPositive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VoteCreateManyReviewInput = {
-  studentId: number
+  studentId: string
   isPositive: boolean
   date?: Date | string
 }
@@ -560,13 +510,13 @@ export type VoteUpdateWithoutReviewInput = {
 }
 
 export type VoteUncheckedUpdateWithoutReviewInput = {
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   isPositive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type VoteUncheckedUpdateManyWithoutReviewInput = {
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   isPositive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -628,8 +578,8 @@ export type $VotePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     review: Prisma.$ReviewPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    studentId: number
-    reviewId: number
+    studentId: string
+    reviewId: string
     isPositive: boolean
     date: Date
   }, ExtArgs["result"]["vote"]>
@@ -1057,8 +1007,8 @@ export interface Prisma__VoteClient<T, Null = never, ExtArgs extends runtime.Typ
  * Fields of the Vote model
  */
 export interface VoteFieldRefs {
-  readonly studentId: Prisma.FieldRef<"Vote", 'Int'>
-  readonly reviewId: Prisma.FieldRef<"Vote", 'Int'>
+  readonly studentId: Prisma.FieldRef<"Vote", 'String'>
+  readonly reviewId: Prisma.FieldRef<"Vote", 'String'>
   readonly isPositive: Prisma.FieldRef<"Vote", 'Boolean'>
   readonly date: Prisma.FieldRef<"Vote", 'DateTime'>
 }

@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { verifyPassword } from '@/lib/password';
 import { User } from '@/generated/prisma/client';
+import { getUserByEmail } from './services/user';
 
 const LoginSchema = z.object({
   email: z.email(),
@@ -19,11 +20,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
 
-          const user = await prisma.user.findUnique({
-            where: { email },
-          });
+          const user = await getUserByEmail(email);
 
-          if (!user) return null;
+          if (!user || !user.password) return null;
 
           const passwordsMatch = await verifyPassword(password, user.password);
           if (passwordsMatch) {

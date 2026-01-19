@@ -20,40 +20,26 @@ export type ReviewAuditModel = runtime.Types.Result.DefaultSelection<Prisma.$Rev
 
 export type AggregateReviewAudit = {
   _count: ReviewAuditCountAggregateOutputType | null
-  _avg: ReviewAuditAvgAggregateOutputType | null
-  _sum: ReviewAuditSumAggregateOutputType | null
   _min: ReviewAuditMinAggregateOutputType | null
   _max: ReviewAuditMaxAggregateOutputType | null
 }
 
-export type ReviewAuditAvgAggregateOutputType = {
-  id: number | null
-  reviewId: number | null
-  reporterId: number | null
-}
-
-export type ReviewAuditSumAggregateOutputType = {
-  id: number | null
-  reviewId: number | null
-  reporterId: number | null
-}
-
 export type ReviewAuditMinAggregateOutputType = {
-  id: number | null
-  reviewId: number | null
+  id: string | null
+  reviewId: string | null
   date: Date | null
   reason: string | null
   originalContent: string | null
-  reporterId: number | null
+  reporterId: string | null
 }
 
 export type ReviewAuditMaxAggregateOutputType = {
-  id: number | null
-  reviewId: number | null
+  id: string | null
+  reviewId: string | null
   date: Date | null
   reason: string | null
   originalContent: string | null
-  reporterId: number | null
+  reporterId: string | null
 }
 
 export type ReviewAuditCountAggregateOutputType = {
@@ -66,18 +52,6 @@ export type ReviewAuditCountAggregateOutputType = {
   _all: number
 }
 
-
-export type ReviewAuditAvgAggregateInputType = {
-  id?: true
-  reviewId?: true
-  reporterId?: true
-}
-
-export type ReviewAuditSumAggregateInputType = {
-  id?: true
-  reviewId?: true
-  reporterId?: true
-}
 
 export type ReviewAuditMinAggregateInputType = {
   id?: true
@@ -145,18 +119,6 @@ export type ReviewAuditAggregateArgs<ExtArgs extends runtime.Types.Extensions.In
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: ReviewAuditAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: ReviewAuditSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: ReviewAuditMinAggregateInputType
@@ -187,22 +149,18 @@ export type ReviewAuditGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   _count?: ReviewAuditCountAggregateInputType | true
-  _avg?: ReviewAuditAvgAggregateInputType
-  _sum?: ReviewAuditSumAggregateInputType
   _min?: ReviewAuditMinAggregateInputType
   _max?: ReviewAuditMaxAggregateInputType
 }
 
 export type ReviewAuditGroupByOutputType = {
-  id: number
-  reviewId: number
+  id: string
+  reviewId: string
   date: Date
   reason: string | null
   originalContent: string | null
-  reporterId: number | null
+  reporterId: string | null
   _count: ReviewAuditCountAggregateOutputType | null
-  _avg: ReviewAuditAvgAggregateOutputType | null
-  _sum: ReviewAuditSumAggregateOutputType | null
   _min: ReviewAuditMinAggregateOutputType | null
   _max: ReviewAuditMaxAggregateOutputType | null
 }
@@ -226,12 +184,12 @@ export type ReviewAuditWhereInput = {
   AND?: Prisma.ReviewAuditWhereInput | Prisma.ReviewAuditWhereInput[]
   OR?: Prisma.ReviewAuditWhereInput[]
   NOT?: Prisma.ReviewAuditWhereInput | Prisma.ReviewAuditWhereInput[]
-  id?: Prisma.IntFilter<"ReviewAudit"> | number
-  reviewId?: Prisma.IntFilter<"ReviewAudit"> | number
+  id?: Prisma.StringFilter<"ReviewAudit"> | string
+  reviewId?: Prisma.StringFilter<"ReviewAudit"> | string
   date?: Prisma.DateTimeFilter<"ReviewAudit"> | Date | string
   reason?: Prisma.StringNullableFilter<"ReviewAudit"> | string | null
   originalContent?: Prisma.StringNullableFilter<"ReviewAudit"> | string | null
-  reporterId?: Prisma.IntNullableFilter<"ReviewAudit"> | number | null
+  reporterId?: Prisma.StringNullableFilter<"ReviewAudit"> | string | null
   reporter?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   review?: Prisma.XOR<Prisma.ReviewScalarRelationFilter, Prisma.ReviewWhereInput>
 }
@@ -248,15 +206,15 @@ export type ReviewAuditOrderByWithRelationInput = {
 }
 
 export type ReviewAuditWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.ReviewAuditWhereInput | Prisma.ReviewAuditWhereInput[]
   OR?: Prisma.ReviewAuditWhereInput[]
   NOT?: Prisma.ReviewAuditWhereInput | Prisma.ReviewAuditWhereInput[]
-  reviewId?: Prisma.IntFilter<"ReviewAudit"> | number
+  reviewId?: Prisma.StringFilter<"ReviewAudit"> | string
   date?: Prisma.DateTimeFilter<"ReviewAudit"> | Date | string
   reason?: Prisma.StringNullableFilter<"ReviewAudit"> | string | null
   originalContent?: Prisma.StringNullableFilter<"ReviewAudit"> | string | null
-  reporterId?: Prisma.IntNullableFilter<"ReviewAudit"> | number | null
+  reporterId?: Prisma.StringNullableFilter<"ReviewAudit"> | string | null
   reporter?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   review?: Prisma.XOR<Prisma.ReviewScalarRelationFilter, Prisma.ReviewWhereInput>
 }, "id">
@@ -269,25 +227,24 @@ export type ReviewAuditOrderByWithAggregationInput = {
   originalContent?: Prisma.SortOrderInput | Prisma.SortOrder
   reporterId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ReviewAuditCountOrderByAggregateInput
-  _avg?: Prisma.ReviewAuditAvgOrderByAggregateInput
   _max?: Prisma.ReviewAuditMaxOrderByAggregateInput
   _min?: Prisma.ReviewAuditMinOrderByAggregateInput
-  _sum?: Prisma.ReviewAuditSumOrderByAggregateInput
 }
 
 export type ReviewAuditScalarWhereWithAggregatesInput = {
   AND?: Prisma.ReviewAuditScalarWhereWithAggregatesInput | Prisma.ReviewAuditScalarWhereWithAggregatesInput[]
   OR?: Prisma.ReviewAuditScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ReviewAuditScalarWhereWithAggregatesInput | Prisma.ReviewAuditScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"ReviewAudit"> | number
-  reviewId?: Prisma.IntWithAggregatesFilter<"ReviewAudit"> | number
+  id?: Prisma.StringWithAggregatesFilter<"ReviewAudit"> | string
+  reviewId?: Prisma.StringWithAggregatesFilter<"ReviewAudit"> | string
   date?: Prisma.DateTimeWithAggregatesFilter<"ReviewAudit"> | Date | string
   reason?: Prisma.StringNullableWithAggregatesFilter<"ReviewAudit"> | string | null
   originalContent?: Prisma.StringNullableWithAggregatesFilter<"ReviewAudit"> | string | null
-  reporterId?: Prisma.IntNullableWithAggregatesFilter<"ReviewAudit"> | number | null
+  reporterId?: Prisma.StringNullableWithAggregatesFilter<"ReviewAudit"> | string | null
 }
 
 export type ReviewAuditCreateInput = {
+  id?: string
   date?: Date | string
   reason?: string | null
   originalContent?: string | null
@@ -296,15 +253,16 @@ export type ReviewAuditCreateInput = {
 }
 
 export type ReviewAuditUncheckedCreateInput = {
-  id?: number
-  reviewId: number
+  id?: string
+  reviewId: string
   date?: Date | string
   reason?: string | null
   originalContent?: string | null
-  reporterId?: number | null
+  reporterId?: string | null
 }
 
 export type ReviewAuditUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -313,36 +271,37 @@ export type ReviewAuditUpdateInput = {
 }
 
 export type ReviewAuditUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewAuditCreateManyInput = {
-  id?: number
-  reviewId: number
+  id?: string
+  reviewId: string
   date?: Date | string
   reason?: string | null
   originalContent?: string | null
-  reporterId?: number | null
+  reporterId?: string | null
 }
 
 export type ReviewAuditUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewAuditUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewAuditListRelationFilter = {
@@ -364,12 +323,6 @@ export type ReviewAuditCountOrderByAggregateInput = {
   reporterId?: Prisma.SortOrder
 }
 
-export type ReviewAuditAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  reviewId?: Prisma.SortOrder
-  reporterId?: Prisma.SortOrder
-}
-
 export type ReviewAuditMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   reviewId?: Prisma.SortOrder
@@ -385,12 +338,6 @@ export type ReviewAuditMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   reason?: Prisma.SortOrder
   originalContent?: Prisma.SortOrder
-  reporterId?: Prisma.SortOrder
-}
-
-export type ReviewAuditSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  reviewId?: Prisma.SortOrder
   reporterId?: Prisma.SortOrder
 }
 
@@ -479,6 +426,7 @@ export type ReviewAuditUncheckedUpdateManyWithoutReviewNestedInput = {
 }
 
 export type ReviewAuditCreateWithoutReporterInput = {
+  id?: string
   date?: Date | string
   reason?: string | null
   originalContent?: string | null
@@ -486,8 +434,8 @@ export type ReviewAuditCreateWithoutReporterInput = {
 }
 
 export type ReviewAuditUncheckedCreateWithoutReporterInput = {
-  id?: number
-  reviewId: number
+  id?: string
+  reviewId: string
   date?: Date | string
   reason?: string | null
   originalContent?: string | null
@@ -523,15 +471,16 @@ export type ReviewAuditScalarWhereInput = {
   AND?: Prisma.ReviewAuditScalarWhereInput | Prisma.ReviewAuditScalarWhereInput[]
   OR?: Prisma.ReviewAuditScalarWhereInput[]
   NOT?: Prisma.ReviewAuditScalarWhereInput | Prisma.ReviewAuditScalarWhereInput[]
-  id?: Prisma.IntFilter<"ReviewAudit"> | number
-  reviewId?: Prisma.IntFilter<"ReviewAudit"> | number
+  id?: Prisma.StringFilter<"ReviewAudit"> | string
+  reviewId?: Prisma.StringFilter<"ReviewAudit"> | string
   date?: Prisma.DateTimeFilter<"ReviewAudit"> | Date | string
   reason?: Prisma.StringNullableFilter<"ReviewAudit"> | string | null
   originalContent?: Prisma.StringNullableFilter<"ReviewAudit"> | string | null
-  reporterId?: Prisma.IntNullableFilter<"ReviewAudit"> | number | null
+  reporterId?: Prisma.StringNullableFilter<"ReviewAudit"> | string | null
 }
 
 export type ReviewAuditCreateWithoutReviewInput = {
+  id?: string
   date?: Date | string
   reason?: string | null
   originalContent?: string | null
@@ -539,11 +488,11 @@ export type ReviewAuditCreateWithoutReviewInput = {
 }
 
 export type ReviewAuditUncheckedCreateWithoutReviewInput = {
-  id?: number
+  id?: string
   date?: Date | string
   reason?: string | null
   originalContent?: string | null
-  reporterId?: number | null
+  reporterId?: string | null
 }
 
 export type ReviewAuditCreateOrConnectWithoutReviewInput = {
@@ -573,14 +522,15 @@ export type ReviewAuditUpdateManyWithWhereWithoutReviewInput = {
 }
 
 export type ReviewAuditCreateManyReporterInput = {
-  id?: number
-  reviewId: number
+  id?: string
+  reviewId: string
   date?: Date | string
   reason?: string | null
   originalContent?: string | null
 }
 
 export type ReviewAuditUpdateWithoutReporterInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -588,30 +538,31 @@ export type ReviewAuditUpdateWithoutReporterInput = {
 }
 
 export type ReviewAuditUncheckedUpdateWithoutReporterInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewAuditUncheckedUpdateManyWithoutReporterInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewAuditCreateManyReviewInput = {
-  id?: number
+  id?: string
   date?: Date | string
   reason?: string | null
   originalContent?: string | null
-  reporterId?: number | null
+  reporterId?: string | null
 }
 
 export type ReviewAuditUpdateWithoutReviewInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -619,19 +570,19 @@ export type ReviewAuditUpdateWithoutReviewInput = {
 }
 
 export type ReviewAuditUncheckedUpdateWithoutReviewInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewAuditUncheckedUpdateManyWithoutReviewInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   originalContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -699,12 +650,12 @@ export type $ReviewAuditPayload<ExtArgs extends runtime.Types.Extensions.Interna
     review: Prisma.$ReviewPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
-    reviewId: number
+    id: string
+    reviewId: string
     date: Date
     reason: string | null
     originalContent: string | null
-    reporterId: number | null
+    reporterId: string | null
   }, ExtArgs["result"]["reviewAudit"]>
   composites: {}
 }
@@ -1130,12 +1081,12 @@ export interface Prisma__ReviewAuditClient<T, Null = never, ExtArgs extends runt
  * Fields of the ReviewAudit model
  */
 export interface ReviewAuditFieldRefs {
-  readonly id: Prisma.FieldRef<"ReviewAudit", 'Int'>
-  readonly reviewId: Prisma.FieldRef<"ReviewAudit", 'Int'>
+  readonly id: Prisma.FieldRef<"ReviewAudit", 'String'>
+  readonly reviewId: Prisma.FieldRef<"ReviewAudit", 'String'>
   readonly date: Prisma.FieldRef<"ReviewAudit", 'DateTime'>
   readonly reason: Prisma.FieldRef<"ReviewAudit", 'String'>
   readonly originalContent: Prisma.FieldRef<"ReviewAudit", 'String'>
-  readonly reporterId: Prisma.FieldRef<"ReviewAudit", 'Int'>
+  readonly reporterId: Prisma.FieldRef<"ReviewAudit", 'String'>
 }
     
 

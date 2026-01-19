@@ -27,7 +27,7 @@ enum DocType {
 enum Semester {
   FIRST
   SECOND
-  BOTH
+  ANNUAL
 }
 
 enum CommissionRole {
@@ -53,48 +53,50 @@ enum ReviewType {
 // --------------------------------------------------------
 
 model Faculty {
-  id      Int      @id @default(autoincrement())
-  name    String
+  id            String      @id @default(uuid())
+  name          String
   abbreviation  String?
 
-  universityId Int
+  universityId  String
   university    University @relation(fields: [universityId], references: [id], onDelete: Cascade)
 
   careers Career[]
 }
 
 model University {
-  id        Int       @id @default(autoincrement())
-  name      String
+  id            String      @id @default(uuid())
+  name          String
   abbreviation  String?
+  website       String?
   faculties Faculty[]
 }
 
 model Career {
-  id           Int         @id @default(autoincrement())
+  id           String      @id @default(uuid())
   name         String
-  subjectCount Int
-  years        Int
-  facultyId    Int
+  facultyId    String
 
-  faculty       Faculty     @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  faculty     Faculty     @relation(fields: [facultyId], references: [id], onDelete: Cascade)
   studyPlans  StudyPlan[]
   enrollments Enrollment[]
 }
 
 model StudyPlan {
-  id        Int                @id @default(autoincrement())
-  careerId  Int
-  isActive  Boolean            @default(true)
-  year      Int
+  id           String      @id @default(uuid())
+  careerId     String
+  subjectCount Int
+  totalYears  Int
+  isActive     Boolean            @default(true)
+  year         Int
 
-  career      Career             @relation(fields: [careerId], references: [id], onDelete: Cascade)
+  career    Career             @relation(fields: [careerId], references: [id], onDelete: Cascade)
   subjects  StudyPlanSubject[]
 }
 
 model Subject {
-  id           Int                @id @default(autoincrement())
+  id           String      @id @default(uuid())
   name         String
+  code         String
   credits      Int
   hours        Int
 
@@ -108,23 +110,24 @@ model Subject {
 }
 
 model StudyPlanSubject {
-  planId    Int
-  subjectId Int
-  year      Int       // Academic year (1st, 2nd, etc.)
-  semester  Semester
+  planId          String
+  subjectId       String
+  year            Int       // Academic year (1st, 2nd, etc.)
+  semester        Semester
+  offCycleOption  Boolean  @default(false)
 
-  plan      StudyPlan @relation(fields: [planId], references: [id])
-  subject   Subject   @relation(fields: [subjectId], references: [id])
+  plan      StudyPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  subject   Subject   @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 
   @@id([planId, subjectId])
 }
 
 model Correlation {
-  predecessorId Int
-  successorId   Int
+  predecessorId String
+  successorId   String
 
-  predecessor   Subject @relation("SubjectPredecessor", fields: [predecessorId], references: [id])
-  successor     Subject @relation("SubjectSuccessor", fields: [successorId], references: [id])
+  predecessor   Subject @relation("SubjectPredecessor", fields: [predecessorId], references: [id], onDelete: Cascade)
+  successor     Subject @relation("SubjectSuccessor", fields: [successorId], references: [id], onDelete: Cascade)
 
   @@id([predecessorId, successorId])
 }
@@ -134,21 +137,21 @@ model Correlation {
 // --------------------------------------------------------
 
 model Commission {
-  id           Int                   @id @default(autoincrement())
+  id           String      @id @default(uuid())
   year         Int
   schedules    String?
   semester     Semester
-  subjectId    Int
+  subjectId    String
 
   isDeleted     Boolean   @default(false)
 
-  subject      Subject               @relation(fields: [subjectId], references: [id])
+  subject      Subject               @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   professors   CommissionProfessor[]
   reviews      Review[]
 }
 
 model Professor {
-  id          Int                   @id @default(autoincrement())
+  id          String      @id @default(uuid())
   full_name   String                // Full Name
   
   commissions CommissionProfessor[]
@@ -156,11 +159,11 @@ model Professor {
 }
 
 model CommissionProfessor {
-  commissionId Int
-  professorId  Int
+  commissionId String
+  professorId  String
   role         CommissionRole
 
-  commission   Commission @relation(fields: [commissionId], references: [id])
+  commission   Commission @relation(fields: [commissionId], references: [id], onDelete: Cascade)
   professor    Professor  @relation(fields: [professorId], references: [id], onDelete: Cascade)
 
   @@id([commissionId, professorId])
@@ -171,7 +174,7 @@ model CommissionProfessor {
 // --------------------------------------------------------
 
 model User {
-  id            Int            @id @default(autoincrement())
+  id            String      @id @default(uuid())
   
   docType       DocType
   docNumber     String
@@ -196,13 +199,13 @@ model User {
 }
 
 model Enrollment {
-  studentId Int
-  careerId  Int
-  date      DateTime @default(now())
+  studentId  String
+  careerId   String
+  date       DateTime @default(now())
   fileNumber String  // Legajo
 
   student   User @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  career    Career  @relation(fields: [careerId], references: [id])
+  career    Career  @relation(fields: [careerId], references: [id], onDelete: Cascade)
 
   @@id([studentId, careerId])
 }
@@ -212,9 +215,9 @@ model Enrollment {
 // --------------------------------------------------------
 
 model Review {
-  id           Int          @id @default(autoincrement())
-  commissionId Int
-  studentId    Int
+  id           String      @id @default(uuid())
+  commissionId String
+  studentId    String
   dislikeCount Int          @default(0)
   likeCount    Int          @default(0)
   date         DateTime     @default(now())
@@ -224,8 +227,8 @@ model Review {
 
   isAnonymous  Boolean      @default(false)
 
-  reporterId   Int?
-  reporter     User?     @relation("ReportedReviews", fields: [reporterId], references: [id])
+  reporterId   String?
+  reporter     User?     @relation("ReportedReviews", fields: [reporterId], references: [id], onDelete: SetNull)
 
   commission   Commission   @relation(fields: [commissionId], references: [id], onDelete: Cascade)
   student      User      @relation(fields: [studentId], references: [id], onDelete: Cascade)
@@ -240,8 +243,8 @@ model Review {
 }
 
 model ReviewProfessorDetail {
-  reviewId           Int @id // PK is also FK to Parent
-  professorId        Int
+  reviewId           String @id // PK is also FK to Parent
+  professorId        String
   
   // Scores (1-5)
   treatmentScore     Int
@@ -252,7 +255,7 @@ model ReviewProfessorDetail {
 }
 
 model ReviewCommissionDetail {
-  reviewId       Int @id // PK is also FK to Parent
+  reviewId       String @id // PK is also FK to Parent
   
   // Scores (1-5)
   contentScore   Int
@@ -262,8 +265,8 @@ model ReviewCommissionDetail {
 }
 
 model Vote {
-  studentId  Int
-  reviewId   Int
+  studentId  String
+  reviewId   String
   isPositive Boolean
   date       DateTime @default(now())
 
@@ -274,14 +277,14 @@ model Vote {
 }
 
 model ReviewAudit {
-  id              Int      @id @default(autoincrement())
-  reviewId        Int
+  id              String      @id @default(uuid())
+  reviewId        String
   date            DateTime @default(now())
   reason          String?
   originalContent String?  @db.Text
 
-  reporterId      Int?
+  reporterId      String?
   reporter        User? @relation("AuditReporter", fields: [reporterId], references: [id], onDelete: SetNull)
 
-  review          Review   @relation(fields: [reviewId], references: [id])
+  review          Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
 }

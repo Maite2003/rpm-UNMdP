@@ -27,32 +27,28 @@ export type AggregateCommission = {
 }
 
 export type CommissionAvgAggregateOutputType = {
-  id: number | null
   year: number | null
-  subjectId: number | null
 }
 
 export type CommissionSumAggregateOutputType = {
-  id: number | null
   year: number | null
-  subjectId: number | null
 }
 
 export type CommissionMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   year: number | null
   schedules: string | null
   semester: $Enums.Semester | null
-  subjectId: number | null
+  subjectId: string | null
   isDeleted: boolean | null
 }
 
 export type CommissionMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   year: number | null
   schedules: string | null
   semester: $Enums.Semester | null
-  subjectId: number | null
+  subjectId: string | null
   isDeleted: boolean | null
 }
 
@@ -68,15 +64,11 @@ export type CommissionCountAggregateOutputType = {
 
 
 export type CommissionAvgAggregateInputType = {
-  id?: true
   year?: true
-  subjectId?: true
 }
 
 export type CommissionSumAggregateInputType = {
-  id?: true
   year?: true
-  subjectId?: true
 }
 
 export type CommissionMinAggregateInputType = {
@@ -194,11 +186,11 @@ export type CommissionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 export type CommissionGroupByOutputType = {
-  id: number
+  id: string
   year: number
   schedules: string | null
   semester: $Enums.Semester
-  subjectId: number
+  subjectId: string
   isDeleted: boolean
   _count: CommissionCountAggregateOutputType | null
   _avg: CommissionAvgAggregateOutputType | null
@@ -226,11 +218,11 @@ export type CommissionWhereInput = {
   AND?: Prisma.CommissionWhereInput | Prisma.CommissionWhereInput[]
   OR?: Prisma.CommissionWhereInput[]
   NOT?: Prisma.CommissionWhereInput | Prisma.CommissionWhereInput[]
-  id?: Prisma.IntFilter<"Commission"> | number
+  id?: Prisma.StringFilter<"Commission"> | string
   year?: Prisma.IntFilter<"Commission"> | number
   schedules?: Prisma.StringNullableFilter<"Commission"> | string | null
   semester?: Prisma.EnumSemesterFilter<"Commission"> | $Enums.Semester
-  subjectId?: Prisma.IntFilter<"Commission"> | number
+  subjectId?: Prisma.StringFilter<"Commission"> | string
   isDeleted?: Prisma.BoolFilter<"Commission"> | boolean
   subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
   professors?: Prisma.CommissionProfessorListRelationFilter
@@ -250,14 +242,14 @@ export type CommissionOrderByWithRelationInput = {
 }
 
 export type CommissionWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.CommissionWhereInput | Prisma.CommissionWhereInput[]
   OR?: Prisma.CommissionWhereInput[]
   NOT?: Prisma.CommissionWhereInput | Prisma.CommissionWhereInput[]
   year?: Prisma.IntFilter<"Commission"> | number
   schedules?: Prisma.StringNullableFilter<"Commission"> | string | null
   semester?: Prisma.EnumSemesterFilter<"Commission"> | $Enums.Semester
-  subjectId?: Prisma.IntFilter<"Commission"> | number
+  subjectId?: Prisma.StringFilter<"Commission"> | string
   isDeleted?: Prisma.BoolFilter<"Commission"> | boolean
   subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
   professors?: Prisma.CommissionProfessorListRelationFilter
@@ -282,15 +274,16 @@ export type CommissionScalarWhereWithAggregatesInput = {
   AND?: Prisma.CommissionScalarWhereWithAggregatesInput | Prisma.CommissionScalarWhereWithAggregatesInput[]
   OR?: Prisma.CommissionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CommissionScalarWhereWithAggregatesInput | Prisma.CommissionScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Commission"> | number
+  id?: Prisma.StringWithAggregatesFilter<"Commission"> | string
   year?: Prisma.IntWithAggregatesFilter<"Commission"> | number
   schedules?: Prisma.StringNullableWithAggregatesFilter<"Commission"> | string | null
   semester?: Prisma.EnumSemesterWithAggregatesFilter<"Commission"> | $Enums.Semester
-  subjectId?: Prisma.IntWithAggregatesFilter<"Commission"> | number
+  subjectId?: Prisma.StringWithAggregatesFilter<"Commission"> | string
   isDeleted?: Prisma.BoolWithAggregatesFilter<"Commission"> | boolean
 }
 
 export type CommissionCreateInput = {
+  id?: string
   year: number
   schedules?: string | null
   semester: $Enums.Semester
@@ -301,17 +294,18 @@ export type CommissionCreateInput = {
 }
 
 export type CommissionUncheckedCreateInput = {
-  id?: number
+  id?: string
   year: number
   schedules?: string | null
   semester: $Enums.Semester
-  subjectId: number
+  subjectId: string
   isDeleted?: boolean
   professors?: Prisma.CommissionProfessorUncheckedCreateNestedManyWithoutCommissionInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCommissionInput
 }
 
 export type CommissionUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   schedules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
@@ -322,26 +316,27 @@ export type CommissionUpdateInput = {
 }
 
 export type CommissionUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   schedules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
-  subjectId?: Prisma.IntFieldUpdateOperationsInput | number
+  subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   professors?: Prisma.CommissionProfessorUncheckedUpdateManyWithoutCommissionNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCommissionNestedInput
 }
 
 export type CommissionCreateManyInput = {
-  id?: number
+  id?: string
   year: number
   schedules?: string | null
   semester: $Enums.Semester
-  subjectId: number
+  subjectId: string
   isDeleted?: boolean
 }
 
 export type CommissionUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   schedules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
@@ -349,11 +344,11 @@ export type CommissionUpdateManyMutationInput = {
 }
 
 export type CommissionUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   schedules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
-  subjectId?: Prisma.IntFieldUpdateOperationsInput | number
+  subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
@@ -377,9 +372,7 @@ export type CommissionCountOrderByAggregateInput = {
 }
 
 export type CommissionAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   year?: Prisma.SortOrder
-  subjectId?: Prisma.SortOrder
 }
 
 export type CommissionMaxOrderByAggregateInput = {
@@ -401,9 +394,7 @@ export type CommissionMinOrderByAggregateInput = {
 }
 
 export type CommissionSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   year?: Prisma.SortOrder
-  subjectId?: Prisma.SortOrder
 }
 
 export type CommissionScalarRelationFilter = {
@@ -482,6 +473,7 @@ export type CommissionUpdateOneRequiredWithoutReviewsNestedInput = {
 }
 
 export type CommissionCreateWithoutSubjectInput = {
+  id?: string
   year: number
   schedules?: string | null
   semester: $Enums.Semester
@@ -491,7 +483,7 @@ export type CommissionCreateWithoutSubjectInput = {
 }
 
 export type CommissionUncheckedCreateWithoutSubjectInput = {
-  id?: number
+  id?: string
   year: number
   schedules?: string | null
   semester: $Enums.Semester
@@ -530,15 +522,16 @@ export type CommissionScalarWhereInput = {
   AND?: Prisma.CommissionScalarWhereInput | Prisma.CommissionScalarWhereInput[]
   OR?: Prisma.CommissionScalarWhereInput[]
   NOT?: Prisma.CommissionScalarWhereInput | Prisma.CommissionScalarWhereInput[]
-  id?: Prisma.IntFilter<"Commission"> | number
+  id?: Prisma.StringFilter<"Commission"> | string
   year?: Prisma.IntFilter<"Commission"> | number
   schedules?: Prisma.StringNullableFilter<"Commission"> | string | null
   semester?: Prisma.EnumSemesterFilter<"Commission"> | $Enums.Semester
-  subjectId?: Prisma.IntFilter<"Commission"> | number
+  subjectId?: Prisma.StringFilter<"Commission"> | string
   isDeleted?: Prisma.BoolFilter<"Commission"> | boolean
 }
 
 export type CommissionCreateWithoutProfessorsInput = {
+  id?: string
   year: number
   schedules?: string | null
   semester: $Enums.Semester
@@ -548,11 +541,11 @@ export type CommissionCreateWithoutProfessorsInput = {
 }
 
 export type CommissionUncheckedCreateWithoutProfessorsInput = {
-  id?: number
+  id?: string
   year: number
   schedules?: string | null
   semester: $Enums.Semester
-  subjectId: number
+  subjectId: string
   isDeleted?: boolean
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutCommissionInput
 }
@@ -574,6 +567,7 @@ export type CommissionUpdateToOneWithWhereWithoutProfessorsInput = {
 }
 
 export type CommissionUpdateWithoutProfessorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   schedules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
@@ -583,16 +577,17 @@ export type CommissionUpdateWithoutProfessorsInput = {
 }
 
 export type CommissionUncheckedUpdateWithoutProfessorsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   schedules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
-  subjectId?: Prisma.IntFieldUpdateOperationsInput | number
+  subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutCommissionNestedInput
 }
 
 export type CommissionCreateWithoutReviewsInput = {
+  id?: string
   year: number
   schedules?: string | null
   semester: $Enums.Semester
@@ -602,11 +597,11 @@ export type CommissionCreateWithoutReviewsInput = {
 }
 
 export type CommissionUncheckedCreateWithoutReviewsInput = {
-  id?: number
+  id?: string
   year: number
   schedules?: string | null
   semester: $Enums.Semester
-  subjectId: number
+  subjectId: string
   isDeleted?: boolean
   professors?: Prisma.CommissionProfessorUncheckedCreateNestedManyWithoutCommissionInput
 }
@@ -628,6 +623,7 @@ export type CommissionUpdateToOneWithWhereWithoutReviewsInput = {
 }
 
 export type CommissionUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   schedules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
@@ -637,17 +633,17 @@ export type CommissionUpdateWithoutReviewsInput = {
 }
 
 export type CommissionUncheckedUpdateWithoutReviewsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   schedules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
-  subjectId?: Prisma.IntFieldUpdateOperationsInput | number
+  subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   professors?: Prisma.CommissionProfessorUncheckedUpdateManyWithoutCommissionNestedInput
 }
 
 export type CommissionCreateManySubjectInput = {
-  id?: number
+  id?: string
   year: number
   schedules?: string | null
   semester: $Enums.Semester
@@ -655,6 +651,7 @@ export type CommissionCreateManySubjectInput = {
 }
 
 export type CommissionUpdateWithoutSubjectInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   schedules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
@@ -664,7 +661,7 @@ export type CommissionUpdateWithoutSubjectInput = {
 }
 
 export type CommissionUncheckedUpdateWithoutSubjectInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   schedules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
@@ -674,7 +671,7 @@ export type CommissionUncheckedUpdateWithoutSubjectInput = {
 }
 
 export type CommissionUncheckedUpdateManyWithoutSubjectInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   schedules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
@@ -785,11 +782,11 @@ export type $CommissionPayload<ExtArgs extends runtime.Types.Extensions.Internal
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     year: number
     schedules: string | null
     semester: $Enums.Semester
-    subjectId: number
+    subjectId: string
     isDeleted: boolean
   }, ExtArgs["result"]["commission"]>
   composites: {}
@@ -1217,11 +1214,11 @@ export interface Prisma__CommissionClient<T, Null = never, ExtArgs extends runti
  * Fields of the Commission model
  */
 export interface CommissionFieldRefs {
-  readonly id: Prisma.FieldRef<"Commission", 'Int'>
+  readonly id: Prisma.FieldRef<"Commission", 'String'>
   readonly year: Prisma.FieldRef<"Commission", 'Int'>
   readonly schedules: Prisma.FieldRef<"Commission", 'String'>
   readonly semester: Prisma.FieldRef<"Commission", 'Semester'>
-  readonly subjectId: Prisma.FieldRef<"Commission", 'Int'>
+  readonly subjectId: Prisma.FieldRef<"Commission", 'String'>
   readonly isDeleted: Prisma.FieldRef<"Commission", 'Boolean'>
 }
     

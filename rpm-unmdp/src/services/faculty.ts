@@ -6,7 +6,7 @@ import { Prisma } from "@/generated/prisma/client";
  * Ordered alphabetically by name.
  * Includes a count of careers for dashboard display.
  */
-export const getFacultiesByUniversity = async (universityId: number) => {
+export const getFacultiesByUniversity = async (universityId: string) => {
   return await prisma.faculty.findMany({
     where: { universityId },
     orderBy: {
@@ -22,17 +22,27 @@ export const getFacultiesByUniversity = async (universityId: number) => {
 
 /**
  * Retrieves a single faculty by its ID.
- * Includes the university data for context.
+ * Includes the faculty data for context.
  */
-export const getFacultyById = async (id: number) => {
+export const getFacultyById = async (id: string) => {
   return await prisma.faculty.findUnique({
     where: { id },
     include: {
-      university: true,
+      university: {
+        select: {
+          id: true,
+          name: true
+        }
+      },
       careers: {
-        orderBy: { name: 'asc' }
+        orderBy: { name: 'asc' },
+        include: {
+          _count: {
+            select: { studyPlans: true }
+          }
+        }
       }
-    },
+    }
   });
 };
 
@@ -49,7 +59,7 @@ export const createFaculty = async (data: Prisma.FacultyUncheckedCreateInput) =>
 /**
  * Updates an existing faculty.
  */
-export const updateFaculty = async (id: number, data: Prisma.FacultyUncheckedUpdateInput) => {
+export const updateFaculty = async (id: string, data: Prisma.FacultyUncheckedUpdateInput) => {
   return await prisma.faculty.update({
     where: { id },
     data,
@@ -59,7 +69,7 @@ export const updateFaculty = async (id: number, data: Prisma.FacultyUncheckedUpd
 /**
  * Deletes a faculty by its ID.
  */
-export const deleteFaculty = async (id: number) => {
+export const deleteFaculty = async (id: string) => {
   return await prisma.faculty.delete({
     where: { id },
   });

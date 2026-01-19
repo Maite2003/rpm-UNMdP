@@ -1,15 +1,15 @@
-// src/actions/register.ts
 'use server';
 
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { saltAndHashPassword } from '@/lib/password';
 import { DocType, StudentStatus } from '@/generated/prisma/client';
+import { validateNewUserInfo } from '@/services/user';
 
 const RegisterSchema = z.object({
   firstName: z.string().min(2, 'Nombre muy corto'),
   lastName: z.string().min(2, 'Apellido muy corto'),
-  email: z.string().email('Email inválido'),
+  email: z.email('Email inválido'),
   password: z.string().min(6, 'Mínimo 6 caracteres'),
   docType: z.enum(DocType),
   docNumber: z.string().min(7, 'Documento inválido'),
@@ -35,7 +35,7 @@ export async function registerUser(prevState: RegisterState, formData: FormData)
 
   if (!validatedFields.success) {
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
+      errors: validatedFields.error.flatten((issue) => issue.message).fieldErrors,
       message: 'Faltan campos o son inválidos.',
       success: false,
     };
@@ -44,18 +44,17 @@ export async function registerUser(prevState: RegisterState, formData: FormData)
   const { email, password, firstName, lastName, docType, docNumber } = validatedFields.data;
 
   try {
-    const existingUser = await prisma.user.findFirst({
-      where: {
-        OR: [
-          { email: email },
-          { docType: docType, docNumber: docNumber }
-        ]
-      }
-    });
+    const conflict = await validateNewUserInfo(email, docType, docNumber);
 
-    if (existingUser) {
+    if (conflict) {
+      if (conflict.isDeleted) {
+        return { 
+          message: "Esta cuenta existía anteriormente. Contacta a soporte para reactivarla.",
+          success: false,
+        };
+      }
       return {
-        message: 'El usuario ya existe (Email o DNI repetido).',
+        message: conflict.error,
         success: false,
       };
     }

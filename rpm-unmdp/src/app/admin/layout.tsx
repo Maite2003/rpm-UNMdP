@@ -33,7 +33,7 @@ export default async function AdminLayout({
           </MenuSection>
 
           <MenuSection title="Estructura Académica">
-            <MenuLink href="/admin/acamdemic/universities">Universidades</MenuLink>
+            <MenuLink href="/admin/academic/universities">Universidades</MenuLink>
           </MenuSection>
 
           <MenuSection title="Oferta">

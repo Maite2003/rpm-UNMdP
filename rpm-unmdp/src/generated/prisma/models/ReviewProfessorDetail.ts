@@ -27,29 +27,25 @@ export type AggregateReviewProfessorDetail = {
 }
 
 export type ReviewProfessorDetailAvgAggregateOutputType = {
-  reviewId: number | null
-  professorId: number | null
   treatmentScore: number | null
   explanationScore: number | null
 }
 
 export type ReviewProfessorDetailSumAggregateOutputType = {
-  reviewId: number | null
-  professorId: number | null
   treatmentScore: number | null
   explanationScore: number | null
 }
 
 export type ReviewProfessorDetailMinAggregateOutputType = {
-  reviewId: number | null
-  professorId: number | null
+  reviewId: string | null
+  professorId: string | null
   treatmentScore: number | null
   explanationScore: number | null
 }
 
 export type ReviewProfessorDetailMaxAggregateOutputType = {
-  reviewId: number | null
-  professorId: number | null
+  reviewId: string | null
+  professorId: string | null
   treatmentScore: number | null
   explanationScore: number | null
 }
@@ -64,15 +60,11 @@ export type ReviewProfessorDetailCountAggregateOutputType = {
 
 
 export type ReviewProfessorDetailAvgAggregateInputType = {
-  reviewId?: true
-  professorId?: true
   treatmentScore?: true
   explanationScore?: true
 }
 
 export type ReviewProfessorDetailSumAggregateInputType = {
-  reviewId?: true
-  professorId?: true
   treatmentScore?: true
   explanationScore?: true
 }
@@ -186,8 +178,8 @@ export type ReviewProfessorDetailGroupByArgs<ExtArgs extends runtime.Types.Exten
 }
 
 export type ReviewProfessorDetailGroupByOutputType = {
-  reviewId: number
-  professorId: number
+  reviewId: string
+  professorId: string
   treatmentScore: number
   explanationScore: number
   _count: ReviewProfessorDetailCountAggregateOutputType | null
@@ -216,8 +208,8 @@ export type ReviewProfessorDetailWhereInput = {
   AND?: Prisma.ReviewProfessorDetailWhereInput | Prisma.ReviewProfessorDetailWhereInput[]
   OR?: Prisma.ReviewProfessorDetailWhereInput[]
   NOT?: Prisma.ReviewProfessorDetailWhereInput | Prisma.ReviewProfessorDetailWhereInput[]
-  reviewId?: Prisma.IntFilter<"ReviewProfessorDetail"> | number
-  professorId?: Prisma.IntFilter<"ReviewProfessorDetail"> | number
+  reviewId?: Prisma.StringFilter<"ReviewProfessorDetail"> | string
+  professorId?: Prisma.StringFilter<"ReviewProfessorDetail"> | string
   treatmentScore?: Prisma.IntFilter<"ReviewProfessorDetail"> | number
   explanationScore?: Prisma.IntFilter<"ReviewProfessorDetail"> | number
   review?: Prisma.XOR<Prisma.ReviewScalarRelationFilter, Prisma.ReviewWhereInput>
@@ -234,11 +226,11 @@ export type ReviewProfessorDetailOrderByWithRelationInput = {
 }
 
 export type ReviewProfessorDetailWhereUniqueInput = Prisma.AtLeast<{
-  reviewId?: number
+  reviewId?: string
   AND?: Prisma.ReviewProfessorDetailWhereInput | Prisma.ReviewProfessorDetailWhereInput[]
   OR?: Prisma.ReviewProfessorDetailWhereInput[]
   NOT?: Prisma.ReviewProfessorDetailWhereInput | Prisma.ReviewProfessorDetailWhereInput[]
-  professorId?: Prisma.IntFilter<"ReviewProfessorDetail"> | number
+  professorId?: Prisma.StringFilter<"ReviewProfessorDetail"> | string
   treatmentScore?: Prisma.IntFilter<"ReviewProfessorDetail"> | number
   explanationScore?: Prisma.IntFilter<"ReviewProfessorDetail"> | number
   review?: Prisma.XOR<Prisma.ReviewScalarRelationFilter, Prisma.ReviewWhereInput>
@@ -261,8 +253,8 @@ export type ReviewProfessorDetailScalarWhereWithAggregatesInput = {
   AND?: Prisma.ReviewProfessorDetailScalarWhereWithAggregatesInput | Prisma.ReviewProfessorDetailScalarWhereWithAggregatesInput[]
   OR?: Prisma.ReviewProfessorDetailScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ReviewProfessorDetailScalarWhereWithAggregatesInput | Prisma.ReviewProfessorDetailScalarWhereWithAggregatesInput[]
-  reviewId?: Prisma.IntWithAggregatesFilter<"ReviewProfessorDetail"> | number
-  professorId?: Prisma.IntWithAggregatesFilter<"ReviewProfessorDetail"> | number
+  reviewId?: Prisma.StringWithAggregatesFilter<"ReviewProfessorDetail"> | string
+  professorId?: Prisma.StringWithAggregatesFilter<"ReviewProfessorDetail"> | string
   treatmentScore?: Prisma.IntWithAggregatesFilter<"ReviewProfessorDetail"> | number
   explanationScore?: Prisma.IntWithAggregatesFilter<"ReviewProfessorDetail"> | number
 }
@@ -275,8 +267,8 @@ export type ReviewProfessorDetailCreateInput = {
 }
 
 export type ReviewProfessorDetailUncheckedCreateInput = {
-  reviewId: number
-  professorId: number
+  reviewId: string
+  professorId: string
   treatmentScore: number
   explanationScore: number
 }
@@ -289,15 +281,15 @@ export type ReviewProfessorDetailUpdateInput = {
 }
 
 export type ReviewProfessorDetailUncheckedUpdateInput = {
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
-  professorId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
+  professorId?: Prisma.StringFieldUpdateOperationsInput | string
   treatmentScore?: Prisma.IntFieldUpdateOperationsInput | number
   explanationScore?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ReviewProfessorDetailCreateManyInput = {
-  reviewId: number
-  professorId: number
+  reviewId: string
+  professorId: string
   treatmentScore: number
   explanationScore: number
 }
@@ -308,8 +300,8 @@ export type ReviewProfessorDetailUpdateManyMutationInput = {
 }
 
 export type ReviewProfessorDetailUncheckedUpdateManyInput = {
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
-  professorId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
+  professorId?: Prisma.StringFieldUpdateOperationsInput | string
   treatmentScore?: Prisma.IntFieldUpdateOperationsInput | number
   explanationScore?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -337,8 +329,6 @@ export type ReviewProfessorDetailCountOrderByAggregateInput = {
 }
 
 export type ReviewProfessorDetailAvgOrderByAggregateInput = {
-  reviewId?: Prisma.SortOrder
-  professorId?: Prisma.SortOrder
   treatmentScore?: Prisma.SortOrder
   explanationScore?: Prisma.SortOrder
 }
@@ -358,8 +348,6 @@ export type ReviewProfessorDetailMinOrderByAggregateInput = {
 }
 
 export type ReviewProfessorDetailSumOrderByAggregateInput = {
-  reviewId?: Prisma.SortOrder
-  professorId?: Prisma.SortOrder
   treatmentScore?: Prisma.SortOrder
   explanationScore?: Prisma.SortOrder
 }
@@ -445,7 +433,7 @@ export type ReviewProfessorDetailCreateWithoutProfessorInput = {
 }
 
 export type ReviewProfessorDetailUncheckedCreateWithoutProfessorInput = {
-  reviewId: number
+  reviewId: string
   treatmentScore: number
   explanationScore: number
 }
@@ -480,8 +468,8 @@ export type ReviewProfessorDetailScalarWhereInput = {
   AND?: Prisma.ReviewProfessorDetailScalarWhereInput | Prisma.ReviewProfessorDetailScalarWhereInput[]
   OR?: Prisma.ReviewProfessorDetailScalarWhereInput[]
   NOT?: Prisma.ReviewProfessorDetailScalarWhereInput | Prisma.ReviewProfessorDetailScalarWhereInput[]
-  reviewId?: Prisma.IntFilter<"ReviewProfessorDetail"> | number
-  professorId?: Prisma.IntFilter<"ReviewProfessorDetail"> | number
+  reviewId?: Prisma.StringFilter<"ReviewProfessorDetail"> | string
+  professorId?: Prisma.StringFilter<"ReviewProfessorDetail"> | string
   treatmentScore?: Prisma.IntFilter<"ReviewProfessorDetail"> | number
   explanationScore?: Prisma.IntFilter<"ReviewProfessorDetail"> | number
 }
@@ -493,7 +481,7 @@ export type ReviewProfessorDetailCreateWithoutReviewInput = {
 }
 
 export type ReviewProfessorDetailUncheckedCreateWithoutReviewInput = {
-  professorId: number
+  professorId: string
   treatmentScore: number
   explanationScore: number
 }
@@ -521,13 +509,13 @@ export type ReviewProfessorDetailUpdateWithoutReviewInput = {
 }
 
 export type ReviewProfessorDetailUncheckedUpdateWithoutReviewInput = {
-  professorId?: Prisma.IntFieldUpdateOperationsInput | number
+  professorId?: Prisma.StringFieldUpdateOperationsInput | string
   treatmentScore?: Prisma.IntFieldUpdateOperationsInput | number
   explanationScore?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ReviewProfessorDetailCreateManyProfessorInput = {
-  reviewId: number
+  reviewId: string
   treatmentScore: number
   explanationScore: number
 }
@@ -539,13 +527,13 @@ export type ReviewProfessorDetailUpdateWithoutProfessorInput = {
 }
 
 export type ReviewProfessorDetailUncheckedUpdateWithoutProfessorInput = {
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
   treatmentScore?: Prisma.IntFieldUpdateOperationsInput | number
   explanationScore?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ReviewProfessorDetailUncheckedUpdateManyWithoutProfessorInput = {
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
   treatmentScore?: Prisma.IntFieldUpdateOperationsInput | number
   explanationScore?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -607,8 +595,8 @@ export type $ReviewProfessorDetailPayload<ExtArgs extends runtime.Types.Extensio
     professor: Prisma.$ProfessorPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    reviewId: number
-    professorId: number
+    reviewId: string
+    professorId: string
     treatmentScore: number
     explanationScore: number
   }, ExtArgs["result"]["reviewProfessorDetail"]>
@@ -1036,8 +1024,8 @@ export interface Prisma__ReviewProfessorDetailClient<T, Null = never, ExtArgs ex
  * Fields of the ReviewProfessorDetail model
  */
 export interface ReviewProfessorDetailFieldRefs {
-  readonly reviewId: Prisma.FieldRef<"ReviewProfessorDetail", 'Int'>
-  readonly professorId: Prisma.FieldRef<"ReviewProfessorDetail", 'Int'>
+  readonly reviewId: Prisma.FieldRef<"ReviewProfessorDetail", 'String'>
+  readonly professorId: Prisma.FieldRef<"ReviewProfessorDetail", 'String'>
   readonly treatmentScore: Prisma.FieldRef<"ReviewProfessorDetail", 'Int'>
   readonly explanationScore: Prisma.FieldRef<"ReviewProfessorDetail", 'Int'>
 }

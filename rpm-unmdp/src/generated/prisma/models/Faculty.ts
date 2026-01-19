@@ -20,34 +20,22 @@ export type FacultyModel = runtime.Types.Result.DefaultSelection<Prisma.$Faculty
 
 export type AggregateFaculty = {
   _count: FacultyCountAggregateOutputType | null
-  _avg: FacultyAvgAggregateOutputType | null
-  _sum: FacultySumAggregateOutputType | null
   _min: FacultyMinAggregateOutputType | null
   _max: FacultyMaxAggregateOutputType | null
 }
 
-export type FacultyAvgAggregateOutputType = {
-  id: number | null
-  universityId: number | null
-}
-
-export type FacultySumAggregateOutputType = {
-  id: number | null
-  universityId: number | null
-}
-
 export type FacultyMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   name: string | null
   abbreviation: string | null
-  universityId: number | null
+  universityId: string | null
 }
 
 export type FacultyMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   name: string | null
   abbreviation: string | null
-  universityId: number | null
+  universityId: string | null
 }
 
 export type FacultyCountAggregateOutputType = {
@@ -58,16 +46,6 @@ export type FacultyCountAggregateOutputType = {
   _all: number
 }
 
-
-export type FacultyAvgAggregateInputType = {
-  id?: true
-  universityId?: true
-}
-
-export type FacultySumAggregateInputType = {
-  id?: true
-  universityId?: true
-}
 
 export type FacultyMinAggregateInputType = {
   id?: true
@@ -129,18 +107,6 @@ export type FacultyAggregateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: FacultyAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: FacultySumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: FacultyMinAggregateInputType
@@ -171,20 +137,16 @@ export type FacultyGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   _count?: FacultyCountAggregateInputType | true
-  _avg?: FacultyAvgAggregateInputType
-  _sum?: FacultySumAggregateInputType
   _min?: FacultyMinAggregateInputType
   _max?: FacultyMaxAggregateInputType
 }
 
 export type FacultyGroupByOutputType = {
-  id: number
+  id: string
   name: string
   abbreviation: string | null
-  universityId: number
+  universityId: string
   _count: FacultyCountAggregateOutputType | null
-  _avg: FacultyAvgAggregateOutputType | null
-  _sum: FacultySumAggregateOutputType | null
   _min: FacultyMinAggregateOutputType | null
   _max: FacultyMaxAggregateOutputType | null
 }
@@ -208,10 +170,10 @@ export type FacultyWhereInput = {
   AND?: Prisma.FacultyWhereInput | Prisma.FacultyWhereInput[]
   OR?: Prisma.FacultyWhereInput[]
   NOT?: Prisma.FacultyWhereInput | Prisma.FacultyWhereInput[]
-  id?: Prisma.IntFilter<"Faculty"> | number
+  id?: Prisma.StringFilter<"Faculty"> | string
   name?: Prisma.StringFilter<"Faculty"> | string
   abbreviation?: Prisma.StringNullableFilter<"Faculty"> | string | null
-  universityId?: Prisma.IntFilter<"Faculty"> | number
+  universityId?: Prisma.StringFilter<"Faculty"> | string
   university?: Prisma.XOR<Prisma.UniversityScalarRelationFilter, Prisma.UniversityWhereInput>
   careers?: Prisma.CareerListRelationFilter
 }
@@ -226,13 +188,13 @@ export type FacultyOrderByWithRelationInput = {
 }
 
 export type FacultyWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.FacultyWhereInput | Prisma.FacultyWhereInput[]
   OR?: Prisma.FacultyWhereInput[]
   NOT?: Prisma.FacultyWhereInput | Prisma.FacultyWhereInput[]
   name?: Prisma.StringFilter<"Faculty"> | string
   abbreviation?: Prisma.StringNullableFilter<"Faculty"> | string | null
-  universityId?: Prisma.IntFilter<"Faculty"> | number
+  universityId?: Prisma.StringFilter<"Faculty"> | string
   university?: Prisma.XOR<Prisma.UniversityScalarRelationFilter, Prisma.UniversityWhereInput>
   careers?: Prisma.CareerListRelationFilter
 }, "id">
@@ -243,23 +205,22 @@ export type FacultyOrderByWithAggregationInput = {
   abbreviation?: Prisma.SortOrderInput | Prisma.SortOrder
   universityId?: Prisma.SortOrder
   _count?: Prisma.FacultyCountOrderByAggregateInput
-  _avg?: Prisma.FacultyAvgOrderByAggregateInput
   _max?: Prisma.FacultyMaxOrderByAggregateInput
   _min?: Prisma.FacultyMinOrderByAggregateInput
-  _sum?: Prisma.FacultySumOrderByAggregateInput
 }
 
 export type FacultyScalarWhereWithAggregatesInput = {
   AND?: Prisma.FacultyScalarWhereWithAggregatesInput | Prisma.FacultyScalarWhereWithAggregatesInput[]
   OR?: Prisma.FacultyScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FacultyScalarWhereWithAggregatesInput | Prisma.FacultyScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Faculty"> | number
+  id?: Prisma.StringWithAggregatesFilter<"Faculty"> | string
   name?: Prisma.StringWithAggregatesFilter<"Faculty"> | string
   abbreviation?: Prisma.StringNullableWithAggregatesFilter<"Faculty"> | string | null
-  universityId?: Prisma.IntWithAggregatesFilter<"Faculty"> | number
+  universityId?: Prisma.StringWithAggregatesFilter<"Faculty"> | string
 }
 
 export type FacultyCreateInput = {
+  id?: string
   name: string
   abbreviation?: string | null
   university: Prisma.UniversityCreateNestedOneWithoutFacultiesInput
@@ -267,14 +228,15 @@ export type FacultyCreateInput = {
 }
 
 export type FacultyUncheckedCreateInput = {
-  id?: number
+  id?: string
   name: string
   abbreviation?: string | null
-  universityId: number
+  universityId: string
   careers?: Prisma.CareerUncheckedCreateNestedManyWithoutFacultyInput
 }
 
 export type FacultyUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   abbreviation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   university?: Prisma.UniversityUpdateOneRequiredWithoutFacultiesNestedInput
@@ -282,41 +244,37 @@ export type FacultyUpdateInput = {
 }
 
 export type FacultyUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   abbreviation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityId?: Prisma.IntFieldUpdateOperationsInput | number
+  universityId?: Prisma.StringFieldUpdateOperationsInput | string
   careers?: Prisma.CareerUncheckedUpdateManyWithoutFacultyNestedInput
 }
 
 export type FacultyCreateManyInput = {
-  id?: number
+  id?: string
   name: string
   abbreviation?: string | null
-  universityId: number
+  universityId: string
 }
 
 export type FacultyUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   abbreviation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FacultyUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   abbreviation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityId?: Prisma.IntFieldUpdateOperationsInput | number
+  universityId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type FacultyCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   abbreviation?: Prisma.SortOrder
-  universityId?: Prisma.SortOrder
-}
-
-export type FacultyAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   universityId?: Prisma.SortOrder
 }
 
@@ -331,11 +289,6 @@ export type FacultyMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   abbreviation?: Prisma.SortOrder
-  universityId?: Prisma.SortOrder
-}
-
-export type FacultySumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   universityId?: Prisma.SortOrder
 }
 
@@ -360,14 +313,6 @@ export type StringFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 export type FacultyCreateNestedManyWithoutUniversityInput = {
@@ -427,13 +372,14 @@ export type FacultyUpdateOneRequiredWithoutCareersNestedInput = {
 }
 
 export type FacultyCreateWithoutUniversityInput = {
+  id?: string
   name: string
   abbreviation?: string | null
   careers?: Prisma.CareerCreateNestedManyWithoutFacultyInput
 }
 
 export type FacultyUncheckedCreateWithoutUniversityInput = {
-  id?: number
+  id?: string
   name: string
   abbreviation?: string | null
   careers?: Prisma.CareerUncheckedCreateNestedManyWithoutFacultyInput
@@ -469,23 +415,24 @@ export type FacultyScalarWhereInput = {
   AND?: Prisma.FacultyScalarWhereInput | Prisma.FacultyScalarWhereInput[]
   OR?: Prisma.FacultyScalarWhereInput[]
   NOT?: Prisma.FacultyScalarWhereInput | Prisma.FacultyScalarWhereInput[]
-  id?: Prisma.IntFilter<"Faculty"> | number
+  id?: Prisma.StringFilter<"Faculty"> | string
   name?: Prisma.StringFilter<"Faculty"> | string
   abbreviation?: Prisma.StringNullableFilter<"Faculty"> | string | null
-  universityId?: Prisma.IntFilter<"Faculty"> | number
+  universityId?: Prisma.StringFilter<"Faculty"> | string
 }
 
 export type FacultyCreateWithoutCareersInput = {
+  id?: string
   name: string
   abbreviation?: string | null
   university: Prisma.UniversityCreateNestedOneWithoutFacultiesInput
 }
 
 export type FacultyUncheckedCreateWithoutCareersInput = {
-  id?: number
+  id?: string
   name: string
   abbreviation?: string | null
-  universityId: number
+  universityId: string
 }
 
 export type FacultyCreateOrConnectWithoutCareersInput = {
@@ -505,39 +452,41 @@ export type FacultyUpdateToOneWithWhereWithoutCareersInput = {
 }
 
 export type FacultyUpdateWithoutCareersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   abbreviation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   university?: Prisma.UniversityUpdateOneRequiredWithoutFacultiesNestedInput
 }
 
 export type FacultyUncheckedUpdateWithoutCareersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   abbreviation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  universityId?: Prisma.IntFieldUpdateOperationsInput | number
+  universityId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type FacultyCreateManyUniversityInput = {
-  id?: number
+  id?: string
   name: string
   abbreviation?: string | null
 }
 
 export type FacultyUpdateWithoutUniversityInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   abbreviation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   careers?: Prisma.CareerUpdateManyWithoutFacultyNestedInput
 }
 
 export type FacultyUncheckedUpdateWithoutUniversityInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   abbreviation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   careers?: Prisma.CareerUncheckedUpdateManyWithoutFacultyNestedInput
 }
 
 export type FacultyUncheckedUpdateManyWithoutUniversityInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   abbreviation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -626,10 +575,10 @@ export type $FacultyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     careers: Prisma.$CareerPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     name: string
     abbreviation: string | null
-    universityId: number
+    universityId: string
   }, ExtArgs["result"]["faculty"]>
   composites: {}
 }
@@ -1055,10 +1004,10 @@ export interface Prisma__FacultyClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Faculty model
  */
 export interface FacultyFieldRefs {
-  readonly id: Prisma.FieldRef<"Faculty", 'Int'>
+  readonly id: Prisma.FieldRef<"Faculty", 'String'>
   readonly name: Prisma.FieldRef<"Faculty", 'String'>
   readonly abbreviation: Prisma.FieldRef<"Faculty", 'String'>
-  readonly universityId: Prisma.FieldRef<"Faculty", 'Int'>
+  readonly universityId: Prisma.FieldRef<"Faculty", 'String'>
 }
     
 

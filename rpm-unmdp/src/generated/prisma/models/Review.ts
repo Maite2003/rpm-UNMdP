@@ -27,27 +27,19 @@ export type AggregateReview = {
 }
 
 export type ReviewAvgAggregateOutputType = {
-  id: number | null
-  commissionId: number | null
-  studentId: number | null
   dislikeCount: number | null
   likeCount: number | null
-  reporterId: number | null
 }
 
 export type ReviewSumAggregateOutputType = {
-  id: number | null
-  commissionId: number | null
-  studentId: number | null
   dislikeCount: number | null
   likeCount: number | null
-  reporterId: number | null
 }
 
 export type ReviewMinAggregateOutputType = {
-  id: number | null
-  commissionId: number | null
-  studentId: number | null
+  id: string | null
+  commissionId: string | null
+  studentId: string | null
   dislikeCount: number | null
   likeCount: number | null
   date: Date | null
@@ -55,13 +47,13 @@ export type ReviewMinAggregateOutputType = {
   content: string | null
   type: $Enums.ReviewType | null
   isAnonymous: boolean | null
-  reporterId: number | null
+  reporterId: string | null
 }
 
 export type ReviewMaxAggregateOutputType = {
-  id: number | null
-  commissionId: number | null
-  studentId: number | null
+  id: string | null
+  commissionId: string | null
+  studentId: string | null
   dislikeCount: number | null
   likeCount: number | null
   date: Date | null
@@ -69,7 +61,7 @@ export type ReviewMaxAggregateOutputType = {
   content: string | null
   type: $Enums.ReviewType | null
   isAnonymous: boolean | null
-  reporterId: number | null
+  reporterId: string | null
 }
 
 export type ReviewCountAggregateOutputType = {
@@ -89,21 +81,13 @@ export type ReviewCountAggregateOutputType = {
 
 
 export type ReviewAvgAggregateInputType = {
-  id?: true
-  commissionId?: true
-  studentId?: true
   dislikeCount?: true
   likeCount?: true
-  reporterId?: true
 }
 
 export type ReviewSumAggregateInputType = {
-  id?: true
-  commissionId?: true
-  studentId?: true
   dislikeCount?: true
   likeCount?: true
-  reporterId?: true
 }
 
 export type ReviewMinAggregateInputType = {
@@ -236,9 +220,9 @@ export type ReviewGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 export type ReviewGroupByOutputType = {
-  id: number
-  commissionId: number
-  studentId: number
+  id: string
+  commissionId: string
+  studentId: string
   dislikeCount: number
   likeCount: number
   date: Date
@@ -246,7 +230,7 @@ export type ReviewGroupByOutputType = {
   content: string
   type: $Enums.ReviewType
   isAnonymous: boolean
-  reporterId: number | null
+  reporterId: string | null
   _count: ReviewCountAggregateOutputType | null
   _avg: ReviewAvgAggregateOutputType | null
   _sum: ReviewSumAggregateOutputType | null
@@ -273,9 +257,9 @@ export type ReviewWhereInput = {
   AND?: Prisma.ReviewWhereInput | Prisma.ReviewWhereInput[]
   OR?: Prisma.ReviewWhereInput[]
   NOT?: Prisma.ReviewWhereInput | Prisma.ReviewWhereInput[]
-  id?: Prisma.IntFilter<"Review"> | number
-  commissionId?: Prisma.IntFilter<"Review"> | number
-  studentId?: Prisma.IntFilter<"Review"> | number
+  id?: Prisma.StringFilter<"Review"> | string
+  commissionId?: Prisma.StringFilter<"Review"> | string
+  studentId?: Prisma.StringFilter<"Review"> | string
   dislikeCount?: Prisma.IntFilter<"Review"> | number
   likeCount?: Prisma.IntFilter<"Review"> | number
   date?: Prisma.DateTimeFilter<"Review"> | Date | string
@@ -283,7 +267,7 @@ export type ReviewWhereInput = {
   content?: Prisma.StringFilter<"Review"> | string
   type?: Prisma.EnumReviewTypeFilter<"Review"> | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFilter<"Review"> | boolean
-  reporterId?: Prisma.IntNullableFilter<"Review"> | number | null
+  reporterId?: Prisma.StringNullableFilter<"Review"> | string | null
   reporter?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   commission?: Prisma.XOR<Prisma.CommissionScalarRelationFilter, Prisma.CommissionWhereInput>
   student?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -315,12 +299,12 @@ export type ReviewOrderByWithRelationInput = {
 }
 
 export type ReviewWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.ReviewWhereInput | Prisma.ReviewWhereInput[]
   OR?: Prisma.ReviewWhereInput[]
   NOT?: Prisma.ReviewWhereInput | Prisma.ReviewWhereInput[]
-  commissionId?: Prisma.IntFilter<"Review"> | number
-  studentId?: Prisma.IntFilter<"Review"> | number
+  commissionId?: Prisma.StringFilter<"Review"> | string
+  studentId?: Prisma.StringFilter<"Review"> | string
   dislikeCount?: Prisma.IntFilter<"Review"> | number
   likeCount?: Prisma.IntFilter<"Review"> | number
   date?: Prisma.DateTimeFilter<"Review"> | Date | string
@@ -328,7 +312,7 @@ export type ReviewWhereUniqueInput = Prisma.AtLeast<{
   content?: Prisma.StringFilter<"Review"> | string
   type?: Prisma.EnumReviewTypeFilter<"Review"> | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFilter<"Review"> | boolean
-  reporterId?: Prisma.IntNullableFilter<"Review"> | number | null
+  reporterId?: Prisma.StringNullableFilter<"Review"> | string | null
   reporter?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   commission?: Prisma.XOR<Prisma.CommissionScalarRelationFilter, Prisma.CommissionWhereInput>
   student?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -361,9 +345,9 @@ export type ReviewScalarWhereWithAggregatesInput = {
   AND?: Prisma.ReviewScalarWhereWithAggregatesInput | Prisma.ReviewScalarWhereWithAggregatesInput[]
   OR?: Prisma.ReviewScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ReviewScalarWhereWithAggregatesInput | Prisma.ReviewScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Review"> | number
-  commissionId?: Prisma.IntWithAggregatesFilter<"Review"> | number
-  studentId?: Prisma.IntWithAggregatesFilter<"Review"> | number
+  id?: Prisma.StringWithAggregatesFilter<"Review"> | string
+  commissionId?: Prisma.StringWithAggregatesFilter<"Review"> | string
+  studentId?: Prisma.StringWithAggregatesFilter<"Review"> | string
   dislikeCount?: Prisma.IntWithAggregatesFilter<"Review"> | number
   likeCount?: Prisma.IntWithAggregatesFilter<"Review"> | number
   date?: Prisma.DateTimeWithAggregatesFilter<"Review"> | Date | string
@@ -371,10 +355,11 @@ export type ReviewScalarWhereWithAggregatesInput = {
   content?: Prisma.StringWithAggregatesFilter<"Review"> | string
   type?: Prisma.EnumReviewTypeWithAggregatesFilter<"Review"> | $Enums.ReviewType
   isAnonymous?: Prisma.BoolWithAggregatesFilter<"Review"> | boolean
-  reporterId?: Prisma.IntNullableWithAggregatesFilter<"Review"> | number | null
+  reporterId?: Prisma.StringNullableWithAggregatesFilter<"Review"> | string | null
 }
 
 export type ReviewCreateInput = {
+  id?: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -392,9 +377,9 @@ export type ReviewCreateInput = {
 }
 
 export type ReviewUncheckedCreateInput = {
-  id?: number
-  commissionId: number
-  studentId: number
+  id?: string
+  commissionId: string
+  studentId: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -402,7 +387,7 @@ export type ReviewUncheckedCreateInput = {
   content: string
   type: $Enums.ReviewType
   isAnonymous?: boolean
-  reporterId?: number | null
+  reporterId?: string | null
   professorDetail?: Prisma.ReviewProfessorDetailUncheckedCreateNestedOneWithoutReviewInput
   commissionDetail?: Prisma.ReviewCommissionDetailUncheckedCreateNestedOneWithoutReviewInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutReviewInput
@@ -410,6 +395,7 @@ export type ReviewUncheckedCreateInput = {
 }
 
 export type ReviewUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -427,9 +413,9 @@ export type ReviewUpdateInput = {
 }
 
 export type ReviewUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -437,7 +423,7 @@ export type ReviewUncheckedUpdateInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   professorDetail?: Prisma.ReviewProfessorDetailUncheckedUpdateOneWithoutReviewNestedInput
   commissionDetail?: Prisma.ReviewCommissionDetailUncheckedUpdateOneWithoutReviewNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutReviewNestedInput
@@ -445,9 +431,9 @@ export type ReviewUncheckedUpdateInput = {
 }
 
 export type ReviewCreateManyInput = {
-  id?: number
-  commissionId: number
-  studentId: number
+  id?: string
+  commissionId: string
+  studentId: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -455,10 +441,11 @@ export type ReviewCreateManyInput = {
   content: string
   type: $Enums.ReviewType
   isAnonymous?: boolean
-  reporterId?: number | null
+  reporterId?: string | null
 }
 
 export type ReviewUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -469,9 +456,9 @@ export type ReviewUpdateManyMutationInput = {
 }
 
 export type ReviewUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -479,7 +466,7 @@ export type ReviewUncheckedUpdateManyInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewListRelationFilter = {
@@ -507,12 +494,8 @@ export type ReviewCountOrderByAggregateInput = {
 }
 
 export type ReviewAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  commissionId?: Prisma.SortOrder
-  studentId?: Prisma.SortOrder
   dislikeCount?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
-  reporterId?: Prisma.SortOrder
 }
 
 export type ReviewMaxOrderByAggregateInput = {
@@ -544,12 +527,8 @@ export type ReviewMinOrderByAggregateInput = {
 }
 
 export type ReviewSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  commissionId?: Prisma.SortOrder
-  studentId?: Prisma.SortOrder
   dislikeCount?: Prisma.SortOrder
   likeCount?: Prisma.SortOrder
-  reporterId?: Prisma.SortOrder
 }
 
 export type ReviewScalarRelationFilter = {
@@ -691,14 +670,6 @@ export type EnumReviewTypeFieldUpdateOperationsInput = {
   set?: $Enums.ReviewType
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ReviewCreateNestedOneWithoutProfessorDetailInput = {
   create?: Prisma.XOR<Prisma.ReviewCreateWithoutProfessorDetailInput, Prisma.ReviewUncheckedCreateWithoutProfessorDetailInput>
   connectOrCreate?: Prisma.ReviewCreateOrConnectWithoutProfessorDetailInput
@@ -756,6 +727,7 @@ export type ReviewUpdateOneRequiredWithoutAuditsNestedInput = {
 }
 
 export type ReviewCreateWithoutCommissionInput = {
+  id?: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -772,8 +744,8 @@ export type ReviewCreateWithoutCommissionInput = {
 }
 
 export type ReviewUncheckedCreateWithoutCommissionInput = {
-  id?: number
-  studentId: number
+  id?: string
+  studentId: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -781,7 +753,7 @@ export type ReviewUncheckedCreateWithoutCommissionInput = {
   content: string
   type: $Enums.ReviewType
   isAnonymous?: boolean
-  reporterId?: number | null
+  reporterId?: string | null
   professorDetail?: Prisma.ReviewProfessorDetailUncheckedCreateNestedOneWithoutReviewInput
   commissionDetail?: Prisma.ReviewCommissionDetailUncheckedCreateNestedOneWithoutReviewInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutReviewInput
@@ -818,9 +790,9 @@ export type ReviewScalarWhereInput = {
   AND?: Prisma.ReviewScalarWhereInput | Prisma.ReviewScalarWhereInput[]
   OR?: Prisma.ReviewScalarWhereInput[]
   NOT?: Prisma.ReviewScalarWhereInput | Prisma.ReviewScalarWhereInput[]
-  id?: Prisma.IntFilter<"Review"> | number
-  commissionId?: Prisma.IntFilter<"Review"> | number
-  studentId?: Prisma.IntFilter<"Review"> | number
+  id?: Prisma.StringFilter<"Review"> | string
+  commissionId?: Prisma.StringFilter<"Review"> | string
+  studentId?: Prisma.StringFilter<"Review"> | string
   dislikeCount?: Prisma.IntFilter<"Review"> | number
   likeCount?: Prisma.IntFilter<"Review"> | number
   date?: Prisma.DateTimeFilter<"Review"> | Date | string
@@ -828,10 +800,11 @@ export type ReviewScalarWhereInput = {
   content?: Prisma.StringFilter<"Review"> | string
   type?: Prisma.EnumReviewTypeFilter<"Review"> | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFilter<"Review"> | boolean
-  reporterId?: Prisma.IntNullableFilter<"Review"> | number | null
+  reporterId?: Prisma.StringNullableFilter<"Review"> | string | null
 }
 
 export type ReviewCreateWithoutStudentInput = {
+  id?: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -848,8 +821,8 @@ export type ReviewCreateWithoutStudentInput = {
 }
 
 export type ReviewUncheckedCreateWithoutStudentInput = {
-  id?: number
-  commissionId: number
+  id?: string
+  commissionId: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -857,7 +830,7 @@ export type ReviewUncheckedCreateWithoutStudentInput = {
   content: string
   type: $Enums.ReviewType
   isAnonymous?: boolean
-  reporterId?: number | null
+  reporterId?: string | null
   professorDetail?: Prisma.ReviewProfessorDetailUncheckedCreateNestedOneWithoutReviewInput
   commissionDetail?: Prisma.ReviewCommissionDetailUncheckedCreateNestedOneWithoutReviewInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutReviewInput
@@ -875,6 +848,7 @@ export type ReviewCreateManyStudentInputEnvelope = {
 }
 
 export type ReviewCreateWithoutReporterInput = {
+  id?: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -891,9 +865,9 @@ export type ReviewCreateWithoutReporterInput = {
 }
 
 export type ReviewUncheckedCreateWithoutReporterInput = {
-  id?: number
-  commissionId: number
-  studentId: number
+  id?: string
+  commissionId: string
+  studentId: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -950,6 +924,7 @@ export type ReviewUpdateManyWithWhereWithoutReporterInput = {
 }
 
 export type ReviewCreateWithoutProfessorDetailInput = {
+  id?: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -966,9 +941,9 @@ export type ReviewCreateWithoutProfessorDetailInput = {
 }
 
 export type ReviewUncheckedCreateWithoutProfessorDetailInput = {
-  id?: number
-  commissionId: number
-  studentId: number
+  id?: string
+  commissionId: string
+  studentId: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -976,7 +951,7 @@ export type ReviewUncheckedCreateWithoutProfessorDetailInput = {
   content: string
   type: $Enums.ReviewType
   isAnonymous?: boolean
-  reporterId?: number | null
+  reporterId?: string | null
   commissionDetail?: Prisma.ReviewCommissionDetailUncheckedCreateNestedOneWithoutReviewInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutReviewInput
   audits?: Prisma.ReviewAuditUncheckedCreateNestedManyWithoutReviewInput
@@ -999,6 +974,7 @@ export type ReviewUpdateToOneWithWhereWithoutProfessorDetailInput = {
 }
 
 export type ReviewUpdateWithoutProfessorDetailInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1015,9 +991,9 @@ export type ReviewUpdateWithoutProfessorDetailInput = {
 }
 
 export type ReviewUncheckedUpdateWithoutProfessorDetailInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1025,13 +1001,14 @@ export type ReviewUncheckedUpdateWithoutProfessorDetailInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commissionDetail?: Prisma.ReviewCommissionDetailUncheckedUpdateOneWithoutReviewNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutReviewNestedInput
   audits?: Prisma.ReviewAuditUncheckedUpdateManyWithoutReviewNestedInput
 }
 
 export type ReviewCreateWithoutCommissionDetailInput = {
+  id?: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -1048,9 +1025,9 @@ export type ReviewCreateWithoutCommissionDetailInput = {
 }
 
 export type ReviewUncheckedCreateWithoutCommissionDetailInput = {
-  id?: number
-  commissionId: number
-  studentId: number
+  id?: string
+  commissionId: string
+  studentId: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -1058,7 +1035,7 @@ export type ReviewUncheckedCreateWithoutCommissionDetailInput = {
   content: string
   type: $Enums.ReviewType
   isAnonymous?: boolean
-  reporterId?: number | null
+  reporterId?: string | null
   professorDetail?: Prisma.ReviewProfessorDetailUncheckedCreateNestedOneWithoutReviewInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutReviewInput
   audits?: Prisma.ReviewAuditUncheckedCreateNestedManyWithoutReviewInput
@@ -1081,6 +1058,7 @@ export type ReviewUpdateToOneWithWhereWithoutCommissionDetailInput = {
 }
 
 export type ReviewUpdateWithoutCommissionDetailInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1097,9 +1075,9 @@ export type ReviewUpdateWithoutCommissionDetailInput = {
 }
 
 export type ReviewUncheckedUpdateWithoutCommissionDetailInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1107,13 +1085,14 @@ export type ReviewUncheckedUpdateWithoutCommissionDetailInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   professorDetail?: Prisma.ReviewProfessorDetailUncheckedUpdateOneWithoutReviewNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutReviewNestedInput
   audits?: Prisma.ReviewAuditUncheckedUpdateManyWithoutReviewNestedInput
 }
 
 export type ReviewCreateWithoutVotesInput = {
+  id?: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -1130,9 +1109,9 @@ export type ReviewCreateWithoutVotesInput = {
 }
 
 export type ReviewUncheckedCreateWithoutVotesInput = {
-  id?: number
-  commissionId: number
-  studentId: number
+  id?: string
+  commissionId: string
+  studentId: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -1140,7 +1119,7 @@ export type ReviewUncheckedCreateWithoutVotesInput = {
   content: string
   type: $Enums.ReviewType
   isAnonymous?: boolean
-  reporterId?: number | null
+  reporterId?: string | null
   professorDetail?: Prisma.ReviewProfessorDetailUncheckedCreateNestedOneWithoutReviewInput
   commissionDetail?: Prisma.ReviewCommissionDetailUncheckedCreateNestedOneWithoutReviewInput
   audits?: Prisma.ReviewAuditUncheckedCreateNestedManyWithoutReviewInput
@@ -1163,6 +1142,7 @@ export type ReviewUpdateToOneWithWhereWithoutVotesInput = {
 }
 
 export type ReviewUpdateWithoutVotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1179,9 +1159,9 @@ export type ReviewUpdateWithoutVotesInput = {
 }
 
 export type ReviewUncheckedUpdateWithoutVotesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1189,13 +1169,14 @@ export type ReviewUncheckedUpdateWithoutVotesInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   professorDetail?: Prisma.ReviewProfessorDetailUncheckedUpdateOneWithoutReviewNestedInput
   commissionDetail?: Prisma.ReviewCommissionDetailUncheckedUpdateOneWithoutReviewNestedInput
   audits?: Prisma.ReviewAuditUncheckedUpdateManyWithoutReviewNestedInput
 }
 
 export type ReviewCreateWithoutAuditsInput = {
+  id?: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -1212,9 +1193,9 @@ export type ReviewCreateWithoutAuditsInput = {
 }
 
 export type ReviewUncheckedCreateWithoutAuditsInput = {
-  id?: number
-  commissionId: number
-  studentId: number
+  id?: string
+  commissionId: string
+  studentId: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -1222,7 +1203,7 @@ export type ReviewUncheckedCreateWithoutAuditsInput = {
   content: string
   type: $Enums.ReviewType
   isAnonymous?: boolean
-  reporterId?: number | null
+  reporterId?: string | null
   professorDetail?: Prisma.ReviewProfessorDetailUncheckedCreateNestedOneWithoutReviewInput
   commissionDetail?: Prisma.ReviewCommissionDetailUncheckedCreateNestedOneWithoutReviewInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutReviewInput
@@ -1245,6 +1226,7 @@ export type ReviewUpdateToOneWithWhereWithoutAuditsInput = {
 }
 
 export type ReviewUpdateWithoutAuditsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1261,9 +1243,9 @@ export type ReviewUpdateWithoutAuditsInput = {
 }
 
 export type ReviewUncheckedUpdateWithoutAuditsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1271,15 +1253,15 @@ export type ReviewUncheckedUpdateWithoutAuditsInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   professorDetail?: Prisma.ReviewProfessorDetailUncheckedUpdateOneWithoutReviewNestedInput
   commissionDetail?: Prisma.ReviewCommissionDetailUncheckedUpdateOneWithoutReviewNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutReviewNestedInput
 }
 
 export type ReviewCreateManyCommissionInput = {
-  id?: number
-  studentId: number
+  id?: string
+  studentId: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -1287,10 +1269,11 @@ export type ReviewCreateManyCommissionInput = {
   content: string
   type: $Enums.ReviewType
   isAnonymous?: boolean
-  reporterId?: number | null
+  reporterId?: string | null
 }
 
 export type ReviewUpdateWithoutCommissionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1307,8 +1290,8 @@ export type ReviewUpdateWithoutCommissionInput = {
 }
 
 export type ReviewUncheckedUpdateWithoutCommissionInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1316,7 +1299,7 @@ export type ReviewUncheckedUpdateWithoutCommissionInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   professorDetail?: Prisma.ReviewProfessorDetailUncheckedUpdateOneWithoutReviewNestedInput
   commissionDetail?: Prisma.ReviewCommissionDetailUncheckedUpdateOneWithoutReviewNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutReviewNestedInput
@@ -1324,8 +1307,8 @@ export type ReviewUncheckedUpdateWithoutCommissionInput = {
 }
 
 export type ReviewUncheckedUpdateManyWithoutCommissionInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1333,12 +1316,12 @@ export type ReviewUncheckedUpdateManyWithoutCommissionInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewCreateManyStudentInput = {
-  id?: number
-  commissionId: number
+  id?: string
+  commissionId: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -1346,13 +1329,13 @@ export type ReviewCreateManyStudentInput = {
   content: string
   type: $Enums.ReviewType
   isAnonymous?: boolean
-  reporterId?: number | null
+  reporterId?: string | null
 }
 
 export type ReviewCreateManyReporterInput = {
-  id?: number
-  commissionId: number
-  studentId: number
+  id?: string
+  commissionId: string
+  studentId: string
   dislikeCount?: number
   likeCount?: number
   date?: Date | string
@@ -1363,6 +1346,7 @@ export type ReviewCreateManyReporterInput = {
 }
 
 export type ReviewUpdateWithoutStudentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1379,8 +1363,8 @@ export type ReviewUpdateWithoutStudentInput = {
 }
 
 export type ReviewUncheckedUpdateWithoutStudentInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1388,7 +1372,7 @@ export type ReviewUncheckedUpdateWithoutStudentInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   professorDetail?: Prisma.ReviewProfessorDetailUncheckedUpdateOneWithoutReviewNestedInput
   commissionDetail?: Prisma.ReviewCommissionDetailUncheckedUpdateOneWithoutReviewNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutReviewNestedInput
@@ -1396,8 +1380,8 @@ export type ReviewUncheckedUpdateWithoutStudentInput = {
 }
 
 export type ReviewUncheckedUpdateManyWithoutStudentInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1405,10 +1389,11 @@ export type ReviewUncheckedUpdateManyWithoutStudentInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  reporterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reporterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReviewUpdateWithoutReporterInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1425,9 +1410,9 @@ export type ReviewUpdateWithoutReporterInput = {
 }
 
 export type ReviewUncheckedUpdateWithoutReporterInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1442,9 +1427,9 @@ export type ReviewUncheckedUpdateWithoutReporterInput = {
 }
 
 export type ReviewUncheckedUpdateManyWithoutReporterInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
-  studentId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
+  studentId?: Prisma.StringFieldUpdateOperationsInput | string
   dislikeCount?: Prisma.IntFieldUpdateOperationsInput | number
   likeCount?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1598,9 +1583,9 @@ export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     audits: Prisma.$ReviewAuditPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
-    commissionId: number
-    studentId: number
+    id: string
+    commissionId: string
+    studentId: string
     dislikeCount: number
     likeCount: number
     date: Date
@@ -1608,7 +1593,7 @@ export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     content: string
     type: $Enums.ReviewType
     isAnonymous: boolean
-    reporterId: number | null
+    reporterId: string | null
   }, ExtArgs["result"]["review"]>
   composites: {}
 }
@@ -2039,9 +2024,9 @@ export interface Prisma__ReviewClient<T, Null = never, ExtArgs extends runtime.T
  * Fields of the Review model
  */
 export interface ReviewFieldRefs {
-  readonly id: Prisma.FieldRef<"Review", 'Int'>
-  readonly commissionId: Prisma.FieldRef<"Review", 'Int'>
-  readonly studentId: Prisma.FieldRef<"Review", 'Int'>
+  readonly id: Prisma.FieldRef<"Review", 'String'>
+  readonly commissionId: Prisma.FieldRef<"Review", 'String'>
+  readonly studentId: Prisma.FieldRef<"Review", 'String'>
   readonly dislikeCount: Prisma.FieldRef<"Review", 'Int'>
   readonly likeCount: Prisma.FieldRef<"Review", 'Int'>
   readonly date: Prisma.FieldRef<"Review", 'DateTime'>
@@ -2049,7 +2034,7 @@ export interface ReviewFieldRefs {
   readonly content: Prisma.FieldRef<"Review", 'String'>
   readonly type: Prisma.FieldRef<"Review", 'ReviewType'>
   readonly isAnonymous: Prisma.FieldRef<"Review", 'Boolean'>
-  readonly reporterId: Prisma.FieldRef<"Review", 'Int'>
+  readonly reporterId: Prisma.FieldRef<"Review", 'String'>
 }
     
 

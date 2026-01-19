@@ -27,27 +27,27 @@ export type AggregateSubject = {
 }
 
 export type SubjectAvgAggregateOutputType = {
-  id: number | null
   credits: number | null
   hours: number | null
 }
 
 export type SubjectSumAggregateOutputType = {
-  id: number | null
   credits: number | null
   hours: number | null
 }
 
 export type SubjectMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   name: string | null
+  code: string | null
   credits: number | null
   hours: number | null
 }
 
 export type SubjectMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   name: string | null
+  code: string | null
   credits: number | null
   hours: number | null
 }
@@ -55,6 +55,7 @@ export type SubjectMaxAggregateOutputType = {
 export type SubjectCountAggregateOutputType = {
   id: number
   name: number
+  code: number
   credits: number
   hours: number
   _all: number
@@ -62,13 +63,11 @@ export type SubjectCountAggregateOutputType = {
 
 
 export type SubjectAvgAggregateInputType = {
-  id?: true
   credits?: true
   hours?: true
 }
 
 export type SubjectSumAggregateInputType = {
-  id?: true
   credits?: true
   hours?: true
 }
@@ -76,6 +75,7 @@ export type SubjectSumAggregateInputType = {
 export type SubjectMinAggregateInputType = {
   id?: true
   name?: true
+  code?: true
   credits?: true
   hours?: true
 }
@@ -83,6 +83,7 @@ export type SubjectMinAggregateInputType = {
 export type SubjectMaxAggregateInputType = {
   id?: true
   name?: true
+  code?: true
   credits?: true
   hours?: true
 }
@@ -90,6 +91,7 @@ export type SubjectMaxAggregateInputType = {
 export type SubjectCountAggregateInputType = {
   id?: true
   name?: true
+  code?: true
   credits?: true
   hours?: true
   _all?: true
@@ -182,8 +184,9 @@ export type SubjectGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 export type SubjectGroupByOutputType = {
-  id: number
+  id: string
   name: string
+  code: string
   credits: number
   hours: number
   _count: SubjectCountAggregateOutputType | null
@@ -212,8 +215,9 @@ export type SubjectWhereInput = {
   AND?: Prisma.SubjectWhereInput | Prisma.SubjectWhereInput[]
   OR?: Prisma.SubjectWhereInput[]
   NOT?: Prisma.SubjectWhereInput | Prisma.SubjectWhereInput[]
-  id?: Prisma.IntFilter<"Subject"> | number
+  id?: Prisma.StringFilter<"Subject"> | string
   name?: Prisma.StringFilter<"Subject"> | string
+  code?: Prisma.StringFilter<"Subject"> | string
   credits?: Prisma.IntFilter<"Subject"> | number
   hours?: Prisma.IntFilter<"Subject"> | number
   plans?: Prisma.StudyPlanSubjectListRelationFilter
@@ -225,6 +229,7 @@ export type SubjectWhereInput = {
 export type SubjectOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   credits?: Prisma.SortOrder
   hours?: Prisma.SortOrder
   plans?: Prisma.StudyPlanSubjectOrderByRelationAggregateInput
@@ -234,11 +239,12 @@ export type SubjectOrderByWithRelationInput = {
 }
 
 export type SubjectWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.SubjectWhereInput | Prisma.SubjectWhereInput[]
   OR?: Prisma.SubjectWhereInput[]
   NOT?: Prisma.SubjectWhereInput | Prisma.SubjectWhereInput[]
   name?: Prisma.StringFilter<"Subject"> | string
+  code?: Prisma.StringFilter<"Subject"> | string
   credits?: Prisma.IntFilter<"Subject"> | number
   hours?: Prisma.IntFilter<"Subject"> | number
   plans?: Prisma.StudyPlanSubjectListRelationFilter
@@ -250,6 +256,7 @@ export type SubjectWhereUniqueInput = Prisma.AtLeast<{
 export type SubjectOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   credits?: Prisma.SortOrder
   hours?: Prisma.SortOrder
   _count?: Prisma.SubjectCountOrderByAggregateInput
@@ -263,14 +270,17 @@ export type SubjectScalarWhereWithAggregatesInput = {
   AND?: Prisma.SubjectScalarWhereWithAggregatesInput | Prisma.SubjectScalarWhereWithAggregatesInput[]
   OR?: Prisma.SubjectScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SubjectScalarWhereWithAggregatesInput | Prisma.SubjectScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Subject"> | number
+  id?: Prisma.StringWithAggregatesFilter<"Subject"> | string
   name?: Prisma.StringWithAggregatesFilter<"Subject"> | string
+  code?: Prisma.StringWithAggregatesFilter<"Subject"> | string
   credits?: Prisma.IntWithAggregatesFilter<"Subject"> | number
   hours?: Prisma.IntWithAggregatesFilter<"Subject"> | number
 }
 
 export type SubjectCreateInput = {
+  id?: string
   name: string
+  code: string
   credits: number
   hours: number
   plans?: Prisma.StudyPlanSubjectCreateNestedManyWithoutSubjectInput
@@ -280,8 +290,9 @@ export type SubjectCreateInput = {
 }
 
 export type SubjectUncheckedCreateInput = {
-  id?: number
+  id?: string
   name: string
+  code: string
   credits: number
   hours: number
   plans?: Prisma.StudyPlanSubjectUncheckedCreateNestedManyWithoutSubjectInput
@@ -291,7 +302,9 @@ export type SubjectUncheckedCreateInput = {
 }
 
 export type SubjectUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   hours?: Prisma.IntFieldUpdateOperationsInput | number
   plans?: Prisma.StudyPlanSubjectUpdateManyWithoutSubjectNestedInput
@@ -301,8 +314,9 @@ export type SubjectUpdateInput = {
 }
 
 export type SubjectUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   hours?: Prisma.IntFieldUpdateOperationsInput | number
   plans?: Prisma.StudyPlanSubjectUncheckedUpdateManyWithoutSubjectNestedInput
@@ -312,21 +326,25 @@ export type SubjectUncheckedUpdateInput = {
 }
 
 export type SubjectCreateManyInput = {
-  id?: number
+  id?: string
   name: string
+  code: string
   credits: number
   hours: number
 }
 
 export type SubjectUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   hours?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type SubjectUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   hours?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -334,12 +352,12 @@ export type SubjectUncheckedUpdateManyInput = {
 export type SubjectCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   credits?: Prisma.SortOrder
   hours?: Prisma.SortOrder
 }
 
 export type SubjectAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   credits?: Prisma.SortOrder
   hours?: Prisma.SortOrder
 }
@@ -347,6 +365,7 @@ export type SubjectAvgOrderByAggregateInput = {
 export type SubjectMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   credits?: Prisma.SortOrder
   hours?: Prisma.SortOrder
 }
@@ -354,12 +373,12 @@ export type SubjectMaxOrderByAggregateInput = {
 export type SubjectMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   credits?: Prisma.SortOrder
   hours?: Prisma.SortOrder
 }
 
 export type SubjectSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   credits?: Prisma.SortOrder
   hours?: Prisma.SortOrder
 }
@@ -426,7 +445,9 @@ export type SubjectUpdateOneRequiredWithoutCommissionsNestedInput = {
 }
 
 export type SubjectCreateWithoutPlansInput = {
+  id?: string
   name: string
+  code: string
   credits: number
   hours: number
   commissions?: Prisma.CommissionCreateNestedManyWithoutSubjectInput
@@ -435,8 +456,9 @@ export type SubjectCreateWithoutPlansInput = {
 }
 
 export type SubjectUncheckedCreateWithoutPlansInput = {
-  id?: number
+  id?: string
   name: string
+  code: string
   credits: number
   hours: number
   commissions?: Prisma.CommissionUncheckedCreateNestedManyWithoutSubjectInput
@@ -461,7 +483,9 @@ export type SubjectUpdateToOneWithWhereWithoutPlansInput = {
 }
 
 export type SubjectUpdateWithoutPlansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   hours?: Prisma.IntFieldUpdateOperationsInput | number
   commissions?: Prisma.CommissionUpdateManyWithoutSubjectNestedInput
@@ -470,8 +494,9 @@ export type SubjectUpdateWithoutPlansInput = {
 }
 
 export type SubjectUncheckedUpdateWithoutPlansInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   hours?: Prisma.IntFieldUpdateOperationsInput | number
   commissions?: Prisma.CommissionUncheckedUpdateManyWithoutSubjectNestedInput
@@ -480,7 +505,9 @@ export type SubjectUncheckedUpdateWithoutPlansInput = {
 }
 
 export type SubjectCreateWithoutSuccessorsInput = {
+  id?: string
   name: string
+  code: string
   credits: number
   hours: number
   plans?: Prisma.StudyPlanSubjectCreateNestedManyWithoutSubjectInput
@@ -489,8 +516,9 @@ export type SubjectCreateWithoutSuccessorsInput = {
 }
 
 export type SubjectUncheckedCreateWithoutSuccessorsInput = {
-  id?: number
+  id?: string
   name: string
+  code: string
   credits: number
   hours: number
   plans?: Prisma.StudyPlanSubjectUncheckedCreateNestedManyWithoutSubjectInput
@@ -504,7 +532,9 @@ export type SubjectCreateOrConnectWithoutSuccessorsInput = {
 }
 
 export type SubjectCreateWithoutPredecessorsInput = {
+  id?: string
   name: string
+  code: string
   credits: number
   hours: number
   plans?: Prisma.StudyPlanSubjectCreateNestedManyWithoutSubjectInput
@@ -513,8 +543,9 @@ export type SubjectCreateWithoutPredecessorsInput = {
 }
 
 export type SubjectUncheckedCreateWithoutPredecessorsInput = {
-  id?: number
+  id?: string
   name: string
+  code: string
   credits: number
   hours: number
   plans?: Prisma.StudyPlanSubjectUncheckedCreateNestedManyWithoutSubjectInput
@@ -539,7 +570,9 @@ export type SubjectUpdateToOneWithWhereWithoutSuccessorsInput = {
 }
 
 export type SubjectUpdateWithoutSuccessorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   hours?: Prisma.IntFieldUpdateOperationsInput | number
   plans?: Prisma.StudyPlanSubjectUpdateManyWithoutSubjectNestedInput
@@ -548,8 +581,9 @@ export type SubjectUpdateWithoutSuccessorsInput = {
 }
 
 export type SubjectUncheckedUpdateWithoutSuccessorsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   hours?: Prisma.IntFieldUpdateOperationsInput | number
   plans?: Prisma.StudyPlanSubjectUncheckedUpdateManyWithoutSubjectNestedInput
@@ -569,7 +603,9 @@ export type SubjectUpdateToOneWithWhereWithoutPredecessorsInput = {
 }
 
 export type SubjectUpdateWithoutPredecessorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   hours?: Prisma.IntFieldUpdateOperationsInput | number
   plans?: Prisma.StudyPlanSubjectUpdateManyWithoutSubjectNestedInput
@@ -578,8 +614,9 @@ export type SubjectUpdateWithoutPredecessorsInput = {
 }
 
 export type SubjectUncheckedUpdateWithoutPredecessorsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   hours?: Prisma.IntFieldUpdateOperationsInput | number
   plans?: Prisma.StudyPlanSubjectUncheckedUpdateManyWithoutSubjectNestedInput
@@ -588,7 +625,9 @@ export type SubjectUncheckedUpdateWithoutPredecessorsInput = {
 }
 
 export type SubjectCreateWithoutCommissionsInput = {
+  id?: string
   name: string
+  code: string
   credits: number
   hours: number
   plans?: Prisma.StudyPlanSubjectCreateNestedManyWithoutSubjectInput
@@ -597,8 +636,9 @@ export type SubjectCreateWithoutCommissionsInput = {
 }
 
 export type SubjectUncheckedCreateWithoutCommissionsInput = {
-  id?: number
+  id?: string
   name: string
+  code: string
   credits: number
   hours: number
   plans?: Prisma.StudyPlanSubjectUncheckedCreateNestedManyWithoutSubjectInput
@@ -623,7 +663,9 @@ export type SubjectUpdateToOneWithWhereWithoutCommissionsInput = {
 }
 
 export type SubjectUpdateWithoutCommissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   hours?: Prisma.IntFieldUpdateOperationsInput | number
   plans?: Prisma.StudyPlanSubjectUpdateManyWithoutSubjectNestedInput
@@ -632,8 +674,9 @@ export type SubjectUpdateWithoutCommissionsInput = {
 }
 
 export type SubjectUncheckedUpdateWithoutCommissionsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   hours?: Prisma.IntFieldUpdateOperationsInput | number
   plans?: Prisma.StudyPlanSubjectUncheckedUpdateManyWithoutSubjectNestedInput
@@ -702,6 +745,7 @@ export type SubjectCountOutputTypeCountSuccessorsArgs<ExtArgs extends runtime.Ty
 export type SubjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  code?: boolean
   credits?: boolean
   hours?: boolean
   plans?: boolean | Prisma.Subject$plansArgs<ExtArgs>
@@ -714,6 +758,7 @@ export type SubjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type SubjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  code?: boolean
   credits?: boolean
   hours?: boolean
 }, ExtArgs["result"]["subject"]>
@@ -721,6 +766,7 @@ export type SubjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type SubjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  code?: boolean
   credits?: boolean
   hours?: boolean
 }, ExtArgs["result"]["subject"]>
@@ -728,11 +774,12 @@ export type SubjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type SubjectSelectScalar = {
   id?: boolean
   name?: boolean
+  code?: boolean
   credits?: boolean
   hours?: boolean
 }
 
-export type SubjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "credits" | "hours", ExtArgs["result"]["subject"]>
+export type SubjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "credits" | "hours", ExtArgs["result"]["subject"]>
 export type SubjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   plans?: boolean | Prisma.Subject$plansArgs<ExtArgs>
   commissions?: boolean | Prisma.Subject$commissionsArgs<ExtArgs>
@@ -752,8 +799,9 @@ export type $SubjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     successors: Prisma.$CorrelationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     name: string
+    code: string
     credits: number
     hours: number
   }, ExtArgs["result"]["subject"]>
@@ -1183,8 +1231,9 @@ export interface Prisma__SubjectClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Subject model
  */
 export interface SubjectFieldRefs {
-  readonly id: Prisma.FieldRef<"Subject", 'Int'>
+  readonly id: Prisma.FieldRef<"Subject", 'String'>
   readonly name: Prisma.FieldRef<"Subject", 'String'>
+  readonly code: Prisma.FieldRef<"Subject", 'String'>
   readonly credits: Prisma.FieldRef<"Subject", 'Int'>
   readonly hours: Prisma.FieldRef<"Subject", 'Int'>
 }

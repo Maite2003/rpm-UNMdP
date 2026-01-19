@@ -1,0 +1,1 @@
+// Lista de usuarios que requieren verificacion de certificado manual

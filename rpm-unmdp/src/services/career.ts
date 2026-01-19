@@ -5,7 +5,7 @@ import { Prisma } from '@/generated/prisma/client';
  * Retrieves all careers belonging to a specific faculty.
  * Ordered alphabetically by name.
  */
-export const getCareersByFaculty = async (facultyId: number) => {
+export const getCareersByFaculty = async (facultyId: string) => {
   return await prisma.career.findMany({
     where: { facultyId },
     orderBy: {
@@ -26,17 +26,39 @@ export const getCareersByFaculty = async (facultyId: number) => {
  * Retrieves a single career by its ID.
  * Includes the Faculty name and the currently ACTIVE study plan.
  */
-export const getCareerById = async (id: number) => {
-  return await prisma.career.findUnique({
-    where: { id },
+export const getCareerWithPlansById = async (careerId: string, planId?: string) => {
+  const career = await prisma.career.findUnique({
+    where: { id: careerId },
     include: {
-      faculty: true,
+      faculty: {
+        include: { university: true }
+      },
       studyPlans: {
-        where: { isActive: true },
+        orderBy: { year: 'desc' },
+        select: { id: true, year: true }
       }
     }
   });
-}
+
+  if (!career) return null;
+
+  const activePlanId = planId || career.studyPlans[0]?.id;
+  let selectedPlan = null;
+
+  if (activePlanId) {
+    selectedPlan = await prisma.studyPlan.findUnique({
+      where: { id: activePlanId },
+      include: {
+        subjects: {
+          orderBy: [{ year: 'asc' }]
+        },
+        _count: { select: { subjects: true } }
+      }
+    });
+  }
+
+  return { career, selectedPlan };
+};
 
 /**
  * Creates a new career.
@@ -51,7 +73,7 @@ export const createCareer = async (data: Prisma.CareerUncheckedCreateInput) => {
 /**
  * Updates an existing career.
  */
-export const updateCareer = async (id: number, data: Prisma.CareerUncheckedCreateInput) => {
+export const updateCareer = async (id: string, data: Prisma.CareerUncheckedUpdateInput) => {
   return await prisma.career.update({
     where: { id },
     data,
@@ -62,7 +84,7 @@ export const updateCareer = async (id: number, data: Prisma.CareerUncheckedCreat
  * Deletes a career by its ID.
  * Will cascade delete associated Study Plans and Enrollments.
  */
-export const deleteCareer = async (id: number) => {
+export const deleteCareer = async (id: string) => {
   return await prisma.career.delete({
     where: { id }
   })

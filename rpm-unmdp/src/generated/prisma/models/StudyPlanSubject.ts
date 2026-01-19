@@ -27,29 +27,27 @@ export type AggregateStudyPlanSubject = {
 }
 
 export type StudyPlanSubjectAvgAggregateOutputType = {
-  planId: number | null
-  subjectId: number | null
   year: number | null
 }
 
 export type StudyPlanSubjectSumAggregateOutputType = {
-  planId: number | null
-  subjectId: number | null
   year: number | null
 }
 
 export type StudyPlanSubjectMinAggregateOutputType = {
-  planId: number | null
-  subjectId: number | null
+  planId: string | null
+  subjectId: string | null
   year: number | null
   semester: $Enums.Semester | null
+  offCycleOption: boolean | null
 }
 
 export type StudyPlanSubjectMaxAggregateOutputType = {
-  planId: number | null
-  subjectId: number | null
+  planId: string | null
+  subjectId: string | null
   year: number | null
   semester: $Enums.Semester | null
+  offCycleOption: boolean | null
 }
 
 export type StudyPlanSubjectCountAggregateOutputType = {
@@ -57,19 +55,16 @@ export type StudyPlanSubjectCountAggregateOutputType = {
   subjectId: number
   year: number
   semester: number
+  offCycleOption: number
   _all: number
 }
 
 
 export type StudyPlanSubjectAvgAggregateInputType = {
-  planId?: true
-  subjectId?: true
   year?: true
 }
 
 export type StudyPlanSubjectSumAggregateInputType = {
-  planId?: true
-  subjectId?: true
   year?: true
 }
 
@@ -78,6 +73,7 @@ export type StudyPlanSubjectMinAggregateInputType = {
   subjectId?: true
   year?: true
   semester?: true
+  offCycleOption?: true
 }
 
 export type StudyPlanSubjectMaxAggregateInputType = {
@@ -85,6 +81,7 @@ export type StudyPlanSubjectMaxAggregateInputType = {
   subjectId?: true
   year?: true
   semester?: true
+  offCycleOption?: true
 }
 
 export type StudyPlanSubjectCountAggregateInputType = {
@@ -92,6 +89,7 @@ export type StudyPlanSubjectCountAggregateInputType = {
   subjectId?: true
   year?: true
   semester?: true
+  offCycleOption?: true
   _all?: true
 }
 
@@ -182,10 +180,11 @@ export type StudyPlanSubjectGroupByArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 export type StudyPlanSubjectGroupByOutputType = {
-  planId: number
-  subjectId: number
+  planId: string
+  subjectId: string
   year: number
   semester: $Enums.Semester
+  offCycleOption: boolean
   _count: StudyPlanSubjectCountAggregateOutputType | null
   _avg: StudyPlanSubjectAvgAggregateOutputType | null
   _sum: StudyPlanSubjectSumAggregateOutputType | null
@@ -212,10 +211,11 @@ export type StudyPlanSubjectWhereInput = {
   AND?: Prisma.StudyPlanSubjectWhereInput | Prisma.StudyPlanSubjectWhereInput[]
   OR?: Prisma.StudyPlanSubjectWhereInput[]
   NOT?: Prisma.StudyPlanSubjectWhereInput | Prisma.StudyPlanSubjectWhereInput[]
-  planId?: Prisma.IntFilter<"StudyPlanSubject"> | number
-  subjectId?: Prisma.IntFilter<"StudyPlanSubject"> | number
+  planId?: Prisma.StringFilter<"StudyPlanSubject"> | string
+  subjectId?: Prisma.StringFilter<"StudyPlanSubject"> | string
   year?: Prisma.IntFilter<"StudyPlanSubject"> | number
   semester?: Prisma.EnumSemesterFilter<"StudyPlanSubject"> | $Enums.Semester
+  offCycleOption?: Prisma.BoolFilter<"StudyPlanSubject"> | boolean
   plan?: Prisma.XOR<Prisma.StudyPlanScalarRelationFilter, Prisma.StudyPlanWhereInput>
   subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
 }
@@ -225,6 +225,7 @@ export type StudyPlanSubjectOrderByWithRelationInput = {
   subjectId?: Prisma.SortOrder
   year?: Prisma.SortOrder
   semester?: Prisma.SortOrder
+  offCycleOption?: Prisma.SortOrder
   plan?: Prisma.StudyPlanOrderByWithRelationInput
   subject?: Prisma.SubjectOrderByWithRelationInput
 }
@@ -234,10 +235,11 @@ export type StudyPlanSubjectWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.StudyPlanSubjectWhereInput | Prisma.StudyPlanSubjectWhereInput[]
   OR?: Prisma.StudyPlanSubjectWhereInput[]
   NOT?: Prisma.StudyPlanSubjectWhereInput | Prisma.StudyPlanSubjectWhereInput[]
-  planId?: Prisma.IntFilter<"StudyPlanSubject"> | number
-  subjectId?: Prisma.IntFilter<"StudyPlanSubject"> | number
+  planId?: Prisma.StringFilter<"StudyPlanSubject"> | string
+  subjectId?: Prisma.StringFilter<"StudyPlanSubject"> | string
   year?: Prisma.IntFilter<"StudyPlanSubject"> | number
   semester?: Prisma.EnumSemesterFilter<"StudyPlanSubject"> | $Enums.Semester
+  offCycleOption?: Prisma.BoolFilter<"StudyPlanSubject"> | boolean
   plan?: Prisma.XOR<Prisma.StudyPlanScalarRelationFilter, Prisma.StudyPlanWhereInput>
   subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
 }, "planId_subjectId">
@@ -247,6 +249,7 @@ export type StudyPlanSubjectOrderByWithAggregationInput = {
   subjectId?: Prisma.SortOrder
   year?: Prisma.SortOrder
   semester?: Prisma.SortOrder
+  offCycleOption?: Prisma.SortOrder
   _count?: Prisma.StudyPlanSubjectCountOrderByAggregateInput
   _avg?: Prisma.StudyPlanSubjectAvgOrderByAggregateInput
   _max?: Prisma.StudyPlanSubjectMaxOrderByAggregateInput
@@ -258,57 +261,65 @@ export type StudyPlanSubjectScalarWhereWithAggregatesInput = {
   AND?: Prisma.StudyPlanSubjectScalarWhereWithAggregatesInput | Prisma.StudyPlanSubjectScalarWhereWithAggregatesInput[]
   OR?: Prisma.StudyPlanSubjectScalarWhereWithAggregatesInput[]
   NOT?: Prisma.StudyPlanSubjectScalarWhereWithAggregatesInput | Prisma.StudyPlanSubjectScalarWhereWithAggregatesInput[]
-  planId?: Prisma.IntWithAggregatesFilter<"StudyPlanSubject"> | number
-  subjectId?: Prisma.IntWithAggregatesFilter<"StudyPlanSubject"> | number
+  planId?: Prisma.StringWithAggregatesFilter<"StudyPlanSubject"> | string
+  subjectId?: Prisma.StringWithAggregatesFilter<"StudyPlanSubject"> | string
   year?: Prisma.IntWithAggregatesFilter<"StudyPlanSubject"> | number
   semester?: Prisma.EnumSemesterWithAggregatesFilter<"StudyPlanSubject"> | $Enums.Semester
+  offCycleOption?: Prisma.BoolWithAggregatesFilter<"StudyPlanSubject"> | boolean
 }
 
 export type StudyPlanSubjectCreateInput = {
   year: number
   semester: $Enums.Semester
+  offCycleOption?: boolean
   plan: Prisma.StudyPlanCreateNestedOneWithoutSubjectsInput
   subject: Prisma.SubjectCreateNestedOneWithoutPlansInput
 }
 
 export type StudyPlanSubjectUncheckedCreateInput = {
-  planId: number
-  subjectId: number
+  planId: string
+  subjectId: string
   year: number
   semester: $Enums.Semester
+  offCycleOption?: boolean
 }
 
 export type StudyPlanSubjectUpdateInput = {
   year?: Prisma.IntFieldUpdateOperationsInput | number
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
+  offCycleOption?: Prisma.BoolFieldUpdateOperationsInput | boolean
   plan?: Prisma.StudyPlanUpdateOneRequiredWithoutSubjectsNestedInput
   subject?: Prisma.SubjectUpdateOneRequiredWithoutPlansNestedInput
 }
 
 export type StudyPlanSubjectUncheckedUpdateInput = {
-  planId?: Prisma.IntFieldUpdateOperationsInput | number
-  subjectId?: Prisma.IntFieldUpdateOperationsInput | number
+  planId?: Prisma.StringFieldUpdateOperationsInput | string
+  subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
+  offCycleOption?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type StudyPlanSubjectCreateManyInput = {
-  planId: number
-  subjectId: number
+  planId: string
+  subjectId: string
   year: number
   semester: $Enums.Semester
+  offCycleOption?: boolean
 }
 
 export type StudyPlanSubjectUpdateManyMutationInput = {
   year?: Prisma.IntFieldUpdateOperationsInput | number
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
+  offCycleOption?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type StudyPlanSubjectUncheckedUpdateManyInput = {
-  planId?: Prisma.IntFieldUpdateOperationsInput | number
-  subjectId?: Prisma.IntFieldUpdateOperationsInput | number
+  planId?: Prisma.StringFieldUpdateOperationsInput | string
+  subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
+  offCycleOption?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type StudyPlanSubjectListRelationFilter = {
@@ -322,8 +333,8 @@ export type StudyPlanSubjectOrderByRelationAggregateInput = {
 }
 
 export type StudyPlanSubjectPlanIdSubjectIdCompoundUniqueInput = {
-  planId: number
-  subjectId: number
+  planId: string
+  subjectId: string
 }
 
 export type StudyPlanSubjectCountOrderByAggregateInput = {
@@ -331,11 +342,10 @@ export type StudyPlanSubjectCountOrderByAggregateInput = {
   subjectId?: Prisma.SortOrder
   year?: Prisma.SortOrder
   semester?: Prisma.SortOrder
+  offCycleOption?: Prisma.SortOrder
 }
 
 export type StudyPlanSubjectAvgOrderByAggregateInput = {
-  planId?: Prisma.SortOrder
-  subjectId?: Prisma.SortOrder
   year?: Prisma.SortOrder
 }
 
@@ -344,6 +354,7 @@ export type StudyPlanSubjectMaxOrderByAggregateInput = {
   subjectId?: Prisma.SortOrder
   year?: Prisma.SortOrder
   semester?: Prisma.SortOrder
+  offCycleOption?: Prisma.SortOrder
 }
 
 export type StudyPlanSubjectMinOrderByAggregateInput = {
@@ -351,11 +362,10 @@ export type StudyPlanSubjectMinOrderByAggregateInput = {
   subjectId?: Prisma.SortOrder
   year?: Prisma.SortOrder
   semester?: Prisma.SortOrder
+  offCycleOption?: Prisma.SortOrder
 }
 
 export type StudyPlanSubjectSumOrderByAggregateInput = {
-  planId?: Prisma.SortOrder
-  subjectId?: Prisma.SortOrder
   year?: Prisma.SortOrder
 }
 
@@ -450,13 +460,15 @@ export type EnumSemesterFieldUpdateOperationsInput = {
 export type StudyPlanSubjectCreateWithoutPlanInput = {
   year: number
   semester: $Enums.Semester
+  offCycleOption?: boolean
   subject: Prisma.SubjectCreateNestedOneWithoutPlansInput
 }
 
 export type StudyPlanSubjectUncheckedCreateWithoutPlanInput = {
-  subjectId: number
+  subjectId: string
   year: number
   semester: $Enums.Semester
+  offCycleOption?: boolean
 }
 
 export type StudyPlanSubjectCreateOrConnectWithoutPlanInput = {
@@ -489,22 +501,25 @@ export type StudyPlanSubjectScalarWhereInput = {
   AND?: Prisma.StudyPlanSubjectScalarWhereInput | Prisma.StudyPlanSubjectScalarWhereInput[]
   OR?: Prisma.StudyPlanSubjectScalarWhereInput[]
   NOT?: Prisma.StudyPlanSubjectScalarWhereInput | Prisma.StudyPlanSubjectScalarWhereInput[]
-  planId?: Prisma.IntFilter<"StudyPlanSubject"> | number
-  subjectId?: Prisma.IntFilter<"StudyPlanSubject"> | number
+  planId?: Prisma.StringFilter<"StudyPlanSubject"> | string
+  subjectId?: Prisma.StringFilter<"StudyPlanSubject"> | string
   year?: Prisma.IntFilter<"StudyPlanSubject"> | number
   semester?: Prisma.EnumSemesterFilter<"StudyPlanSubject"> | $Enums.Semester
+  offCycleOption?: Prisma.BoolFilter<"StudyPlanSubject"> | boolean
 }
 
 export type StudyPlanSubjectCreateWithoutSubjectInput = {
   year: number
   semester: $Enums.Semester
+  offCycleOption?: boolean
   plan: Prisma.StudyPlanCreateNestedOneWithoutSubjectsInput
 }
 
 export type StudyPlanSubjectUncheckedCreateWithoutSubjectInput = {
-  planId: number
+  planId: string
   year: number
   semester: $Enums.Semester
+  offCycleOption?: boolean
 }
 
 export type StudyPlanSubjectCreateOrConnectWithoutSubjectInput = {
@@ -534,51 +549,59 @@ export type StudyPlanSubjectUpdateManyWithWhereWithoutSubjectInput = {
 }
 
 export type StudyPlanSubjectCreateManyPlanInput = {
-  subjectId: number
+  subjectId: string
   year: number
   semester: $Enums.Semester
+  offCycleOption?: boolean
 }
 
 export type StudyPlanSubjectUpdateWithoutPlanInput = {
   year?: Prisma.IntFieldUpdateOperationsInput | number
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
+  offCycleOption?: Prisma.BoolFieldUpdateOperationsInput | boolean
   subject?: Prisma.SubjectUpdateOneRequiredWithoutPlansNestedInput
 }
 
 export type StudyPlanSubjectUncheckedUpdateWithoutPlanInput = {
-  subjectId?: Prisma.IntFieldUpdateOperationsInput | number
+  subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
+  offCycleOption?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type StudyPlanSubjectUncheckedUpdateManyWithoutPlanInput = {
-  subjectId?: Prisma.IntFieldUpdateOperationsInput | number
+  subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
+  offCycleOption?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type StudyPlanSubjectCreateManySubjectInput = {
-  planId: number
+  planId: string
   year: number
   semester: $Enums.Semester
+  offCycleOption?: boolean
 }
 
 export type StudyPlanSubjectUpdateWithoutSubjectInput = {
   year?: Prisma.IntFieldUpdateOperationsInput | number
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
+  offCycleOption?: Prisma.BoolFieldUpdateOperationsInput | boolean
   plan?: Prisma.StudyPlanUpdateOneRequiredWithoutSubjectsNestedInput
 }
 
 export type StudyPlanSubjectUncheckedUpdateWithoutSubjectInput = {
-  planId?: Prisma.IntFieldUpdateOperationsInput | number
+  planId?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
+  offCycleOption?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type StudyPlanSubjectUncheckedUpdateManyWithoutSubjectInput = {
-  planId?: Prisma.IntFieldUpdateOperationsInput | number
+  planId?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
   semester?: Prisma.EnumSemesterFieldUpdateOperationsInput | $Enums.Semester
+  offCycleOption?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -588,6 +611,7 @@ export type StudyPlanSubjectSelect<ExtArgs extends runtime.Types.Extensions.Inte
   subjectId?: boolean
   year?: boolean
   semester?: boolean
+  offCycleOption?: boolean
   plan?: boolean | Prisma.StudyPlanDefaultArgs<ExtArgs>
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["studyPlanSubject"]>
@@ -597,6 +621,7 @@ export type StudyPlanSubjectSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   subjectId?: boolean
   year?: boolean
   semester?: boolean
+  offCycleOption?: boolean
   plan?: boolean | Prisma.StudyPlanDefaultArgs<ExtArgs>
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["studyPlanSubject"]>
@@ -606,6 +631,7 @@ export type StudyPlanSubjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   subjectId?: boolean
   year?: boolean
   semester?: boolean
+  offCycleOption?: boolean
   plan?: boolean | Prisma.StudyPlanDefaultArgs<ExtArgs>
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["studyPlanSubject"]>
@@ -615,9 +641,10 @@ export type StudyPlanSubjectSelectScalar = {
   subjectId?: boolean
   year?: boolean
   semester?: boolean
+  offCycleOption?: boolean
 }
 
-export type StudyPlanSubjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"planId" | "subjectId" | "year" | "semester", ExtArgs["result"]["studyPlanSubject"]>
+export type StudyPlanSubjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"planId" | "subjectId" | "year" | "semester" | "offCycleOption", ExtArgs["result"]["studyPlanSubject"]>
 export type StudyPlanSubjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   plan?: boolean | Prisma.StudyPlanDefaultArgs<ExtArgs>
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
@@ -638,10 +665,11 @@ export type $StudyPlanSubjectPayload<ExtArgs extends runtime.Types.Extensions.In
     subject: Prisma.$SubjectPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    planId: number
-    subjectId: number
+    planId: string
+    subjectId: string
     year: number
     semester: $Enums.Semester
+    offCycleOption: boolean
   }, ExtArgs["result"]["studyPlanSubject"]>
   composites: {}
 }
@@ -1067,10 +1095,11 @@ export interface Prisma__StudyPlanSubjectClient<T, Null = never, ExtArgs extends
  * Fields of the StudyPlanSubject model
  */
 export interface StudyPlanSubjectFieldRefs {
-  readonly planId: Prisma.FieldRef<"StudyPlanSubject", 'Int'>
-  readonly subjectId: Prisma.FieldRef<"StudyPlanSubject", 'Int'>
+  readonly planId: Prisma.FieldRef<"StudyPlanSubject", 'String'>
+  readonly subjectId: Prisma.FieldRef<"StudyPlanSubject", 'String'>
   readonly year: Prisma.FieldRef<"StudyPlanSubject", 'Int'>
   readonly semester: Prisma.FieldRef<"StudyPlanSubject", 'Semester'>
+  readonly offCycleOption: Prisma.FieldRef<"StudyPlanSubject", 'Boolean'>
 }
     
 

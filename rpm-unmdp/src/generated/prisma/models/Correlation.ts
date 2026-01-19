@@ -20,30 +20,18 @@ export type CorrelationModel = runtime.Types.Result.DefaultSelection<Prisma.$Cor
 
 export type AggregateCorrelation = {
   _count: CorrelationCountAggregateOutputType | null
-  _avg: CorrelationAvgAggregateOutputType | null
-  _sum: CorrelationSumAggregateOutputType | null
   _min: CorrelationMinAggregateOutputType | null
   _max: CorrelationMaxAggregateOutputType | null
 }
 
-export type CorrelationAvgAggregateOutputType = {
-  predecessorId: number | null
-  successorId: number | null
-}
-
-export type CorrelationSumAggregateOutputType = {
-  predecessorId: number | null
-  successorId: number | null
-}
-
 export type CorrelationMinAggregateOutputType = {
-  predecessorId: number | null
-  successorId: number | null
+  predecessorId: string | null
+  successorId: string | null
 }
 
 export type CorrelationMaxAggregateOutputType = {
-  predecessorId: number | null
-  successorId: number | null
+  predecessorId: string | null
+  successorId: string | null
 }
 
 export type CorrelationCountAggregateOutputType = {
@@ -52,16 +40,6 @@ export type CorrelationCountAggregateOutputType = {
   _all: number
 }
 
-
-export type CorrelationAvgAggregateInputType = {
-  predecessorId?: true
-  successorId?: true
-}
-
-export type CorrelationSumAggregateInputType = {
-  predecessorId?: true
-  successorId?: true
-}
 
 export type CorrelationMinAggregateInputType = {
   predecessorId?: true
@@ -117,18 +95,6 @@ export type CorrelationAggregateArgs<ExtArgs extends runtime.Types.Extensions.In
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: CorrelationAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: CorrelationSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: CorrelationMinAggregateInputType
@@ -159,18 +125,14 @@ export type CorrelationGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   _count?: CorrelationCountAggregateInputType | true
-  _avg?: CorrelationAvgAggregateInputType
-  _sum?: CorrelationSumAggregateInputType
   _min?: CorrelationMinAggregateInputType
   _max?: CorrelationMaxAggregateInputType
 }
 
 export type CorrelationGroupByOutputType = {
-  predecessorId: number
-  successorId: number
+  predecessorId: string
+  successorId: string
   _count: CorrelationCountAggregateOutputType | null
-  _avg: CorrelationAvgAggregateOutputType | null
-  _sum: CorrelationSumAggregateOutputType | null
   _min: CorrelationMinAggregateOutputType | null
   _max: CorrelationMaxAggregateOutputType | null
 }
@@ -194,8 +156,8 @@ export type CorrelationWhereInput = {
   AND?: Prisma.CorrelationWhereInput | Prisma.CorrelationWhereInput[]
   OR?: Prisma.CorrelationWhereInput[]
   NOT?: Prisma.CorrelationWhereInput | Prisma.CorrelationWhereInput[]
-  predecessorId?: Prisma.IntFilter<"Correlation"> | number
-  successorId?: Prisma.IntFilter<"Correlation"> | number
+  predecessorId?: Prisma.StringFilter<"Correlation"> | string
+  successorId?: Prisma.StringFilter<"Correlation"> | string
   predecessor?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
   successor?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
 }
@@ -212,8 +174,8 @@ export type CorrelationWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.CorrelationWhereInput | Prisma.CorrelationWhereInput[]
   OR?: Prisma.CorrelationWhereInput[]
   NOT?: Prisma.CorrelationWhereInput | Prisma.CorrelationWhereInput[]
-  predecessorId?: Prisma.IntFilter<"Correlation"> | number
-  successorId?: Prisma.IntFilter<"Correlation"> | number
+  predecessorId?: Prisma.StringFilter<"Correlation"> | string
+  successorId?: Prisma.StringFilter<"Correlation"> | string
   predecessor?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
   successor?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
 }, "predecessorId_successorId">
@@ -222,18 +184,16 @@ export type CorrelationOrderByWithAggregationInput = {
   predecessorId?: Prisma.SortOrder
   successorId?: Prisma.SortOrder
   _count?: Prisma.CorrelationCountOrderByAggregateInput
-  _avg?: Prisma.CorrelationAvgOrderByAggregateInput
   _max?: Prisma.CorrelationMaxOrderByAggregateInput
   _min?: Prisma.CorrelationMinOrderByAggregateInput
-  _sum?: Prisma.CorrelationSumOrderByAggregateInput
 }
 
 export type CorrelationScalarWhereWithAggregatesInput = {
   AND?: Prisma.CorrelationScalarWhereWithAggregatesInput | Prisma.CorrelationScalarWhereWithAggregatesInput[]
   OR?: Prisma.CorrelationScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CorrelationScalarWhereWithAggregatesInput | Prisma.CorrelationScalarWhereWithAggregatesInput[]
-  predecessorId?: Prisma.IntWithAggregatesFilter<"Correlation"> | number
-  successorId?: Prisma.IntWithAggregatesFilter<"Correlation"> | number
+  predecessorId?: Prisma.StringWithAggregatesFilter<"Correlation"> | string
+  successorId?: Prisma.StringWithAggregatesFilter<"Correlation"> | string
 }
 
 export type CorrelationCreateInput = {
@@ -242,8 +202,8 @@ export type CorrelationCreateInput = {
 }
 
 export type CorrelationUncheckedCreateInput = {
-  predecessorId: number
-  successorId: number
+  predecessorId: string
+  successorId: string
 }
 
 export type CorrelationUpdateInput = {
@@ -252,13 +212,13 @@ export type CorrelationUpdateInput = {
 }
 
 export type CorrelationUncheckedUpdateInput = {
-  predecessorId?: Prisma.IntFieldUpdateOperationsInput | number
-  successorId?: Prisma.IntFieldUpdateOperationsInput | number
+  predecessorId?: Prisma.StringFieldUpdateOperationsInput | string
+  successorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type CorrelationCreateManyInput = {
-  predecessorId: number
-  successorId: number
+  predecessorId: string
+  successorId: string
 }
 
 export type CorrelationUpdateManyMutationInput = {
@@ -266,8 +226,8 @@ export type CorrelationUpdateManyMutationInput = {
 }
 
 export type CorrelationUncheckedUpdateManyInput = {
-  predecessorId?: Prisma.IntFieldUpdateOperationsInput | number
-  successorId?: Prisma.IntFieldUpdateOperationsInput | number
+  predecessorId?: Prisma.StringFieldUpdateOperationsInput | string
+  successorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type CorrelationListRelationFilter = {
@@ -281,16 +241,11 @@ export type CorrelationOrderByRelationAggregateInput = {
 }
 
 export type CorrelationPredecessorIdSuccessorIdCompoundUniqueInput = {
-  predecessorId: number
-  successorId: number
+  predecessorId: string
+  successorId: string
 }
 
 export type CorrelationCountOrderByAggregateInput = {
-  predecessorId?: Prisma.SortOrder
-  successorId?: Prisma.SortOrder
-}
-
-export type CorrelationAvgOrderByAggregateInput = {
   predecessorId?: Prisma.SortOrder
   successorId?: Prisma.SortOrder
 }
@@ -301,11 +256,6 @@ export type CorrelationMaxOrderByAggregateInput = {
 }
 
 export type CorrelationMinOrderByAggregateInput = {
-  predecessorId?: Prisma.SortOrder
-  successorId?: Prisma.SortOrder
-}
-
-export type CorrelationSumOrderByAggregateInput = {
   predecessorId?: Prisma.SortOrder
   successorId?: Prisma.SortOrder
 }
@@ -399,7 +349,7 @@ export type CorrelationCreateWithoutSuccessorInput = {
 }
 
 export type CorrelationUncheckedCreateWithoutSuccessorInput = {
-  predecessorId: number
+  predecessorId: string
 }
 
 export type CorrelationCreateOrConnectWithoutSuccessorInput = {
@@ -417,7 +367,7 @@ export type CorrelationCreateWithoutPredecessorInput = {
 }
 
 export type CorrelationUncheckedCreateWithoutPredecessorInput = {
-  successorId: number
+  successorId: string
 }
 
 export type CorrelationCreateOrConnectWithoutPredecessorInput = {
@@ -450,8 +400,8 @@ export type CorrelationScalarWhereInput = {
   AND?: Prisma.CorrelationScalarWhereInput | Prisma.CorrelationScalarWhereInput[]
   OR?: Prisma.CorrelationScalarWhereInput[]
   NOT?: Prisma.CorrelationScalarWhereInput | Prisma.CorrelationScalarWhereInput[]
-  predecessorId?: Prisma.IntFilter<"Correlation"> | number
-  successorId?: Prisma.IntFilter<"Correlation"> | number
+  predecessorId?: Prisma.StringFilter<"Correlation"> | string
+  successorId?: Prisma.StringFilter<"Correlation"> | string
 }
 
 export type CorrelationUpsertWithWhereUniqueWithoutPredecessorInput = {
@@ -471,11 +421,11 @@ export type CorrelationUpdateManyWithWhereWithoutPredecessorInput = {
 }
 
 export type CorrelationCreateManySuccessorInput = {
-  predecessorId: number
+  predecessorId: string
 }
 
 export type CorrelationCreateManyPredecessorInput = {
-  successorId: number
+  successorId: string
 }
 
 export type CorrelationUpdateWithoutSuccessorInput = {
@@ -483,11 +433,11 @@ export type CorrelationUpdateWithoutSuccessorInput = {
 }
 
 export type CorrelationUncheckedUpdateWithoutSuccessorInput = {
-  predecessorId?: Prisma.IntFieldUpdateOperationsInput | number
+  predecessorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type CorrelationUncheckedUpdateManyWithoutSuccessorInput = {
-  predecessorId?: Prisma.IntFieldUpdateOperationsInput | number
+  predecessorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type CorrelationUpdateWithoutPredecessorInput = {
@@ -495,11 +445,11 @@ export type CorrelationUpdateWithoutPredecessorInput = {
 }
 
 export type CorrelationUncheckedUpdateWithoutPredecessorInput = {
-  successorId?: Prisma.IntFieldUpdateOperationsInput | number
+  successorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type CorrelationUncheckedUpdateManyWithoutPredecessorInput = {
-  successorId?: Prisma.IntFieldUpdateOperationsInput | number
+  successorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -551,8 +501,8 @@ export type $CorrelationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     successor: Prisma.$SubjectPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    predecessorId: number
-    successorId: number
+    predecessorId: string
+    successorId: string
   }, ExtArgs["result"]["correlation"]>
   composites: {}
 }
@@ -978,8 +928,8 @@ export interface Prisma__CorrelationClient<T, Null = never, ExtArgs extends runt
  * Fields of the Correlation model
  */
 export interface CorrelationFieldRefs {
-  readonly predecessorId: Prisma.FieldRef<"Correlation", 'Int'>
-  readonly successorId: Prisma.FieldRef<"Correlation", 'Int'>
+  readonly predecessorId: Prisma.FieldRef<"Correlation", 'String'>
+  readonly successorId: Prisma.FieldRef<"Correlation", 'String'>
 }
     
 

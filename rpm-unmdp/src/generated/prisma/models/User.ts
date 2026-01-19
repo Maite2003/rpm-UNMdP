@@ -20,22 +20,12 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
-  _avg: UserAvgAggregateOutputType | null
-  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
 
-export type UserAvgAggregateOutputType = {
-  id: number | null
-}
-
-export type UserSumAggregateOutputType = {
-  id: number | null
-}
-
 export type UserMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   docType: $Enums.DocType | null
   docNumber: string | null
   firstName: string | null
@@ -48,7 +38,7 @@ export type UserMinAggregateOutputType = {
 }
 
 export type UserMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   docType: $Enums.DocType | null
   docNumber: string | null
   firstName: string | null
@@ -74,14 +64,6 @@ export type UserCountAggregateOutputType = {
   _all: number
 }
 
-
-export type UserAvgAggregateInputType = {
-  id?: true
-}
-
-export type UserSumAggregateInputType = {
-  id?: true
-}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -161,18 +143,6 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: UserAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: UserSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -203,14 +173,12 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
-  _avg?: UserAvgAggregateInputType
-  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
 
 export type UserGroupByOutputType = {
-  id: number
+  id: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -221,8 +189,6 @@ export type UserGroupByOutputType = {
   studentStatus: $Enums.StudentStatus | null
   isDeleted: boolean
   _count: UserCountAggregateOutputType | null
-  _avg: UserAvgAggregateOutputType | null
-  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -246,7 +212,7 @@ export type UserWhereInput = {
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  id?: Prisma.IntFilter<"User"> | number
+  id?: Prisma.StringFilter<"User"> | string
   docType?: Prisma.EnumDocTypeFilter<"User"> | $Enums.DocType
   docNumber?: Prisma.StringFilter<"User"> | string
   firstName?: Prisma.StringFilter<"User"> | string
@@ -282,7 +248,7 @@ export type UserOrderByWithRelationInput = {
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   email?: string
   docType_docNumber?: Prisma.UserDocTypeDocNumberCompoundUniqueInput
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -315,17 +281,15 @@ export type UserOrderByWithAggregationInput = {
   studentStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
-  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
-  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
   AND?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   OR?: Prisma.UserScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"User"> | number
+  id?: Prisma.StringWithAggregatesFilter<"User"> | string
   docType?: Prisma.EnumDocTypeWithAggregatesFilter<"User"> | $Enums.DocType
   docNumber?: Prisma.StringWithAggregatesFilter<"User"> | string
   firstName?: Prisma.StringWithAggregatesFilter<"User"> | string
@@ -338,6 +302,7 @@ export type UserScalarWhereWithAggregatesInput = {
 }
 
 export type UserCreateInput = {
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -355,7 +320,7 @@ export type UserCreateInput = {
 }
 
 export type UserUncheckedCreateInput = {
-  id?: number
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -373,6 +338,7 @@ export type UserUncheckedCreateInput = {
 }
 
 export type UserUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -390,7 +356,7 @@ export type UserUpdateInput = {
 }
 
 export type UserUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -408,7 +374,7 @@ export type UserUncheckedUpdateInput = {
 }
 
 export type UserCreateManyInput = {
-  id?: number
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -421,6 +387,7 @@ export type UserCreateManyInput = {
 }
 
 export type UserUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -433,7 +400,7 @@ export type UserUpdateManyMutationInput = {
 }
 
 export type UserUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -463,10 +430,6 @@ export type UserCountOrderByAggregateInput = {
   isDeleted?: Prisma.SortOrder
 }
 
-export type UserAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-}
-
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   docType?: Prisma.SortOrder
@@ -491,10 +454,6 @@ export type UserMinOrderByAggregateInput = {
   isAdmin?: Prisma.SortOrder
   studentStatus?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
-}
-
-export type UserSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -590,6 +549,7 @@ export type UserUpdateOneWithoutAuditLogsNestedInput = {
 }
 
 export type UserCreateWithoutEnrollmentsInput = {
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -606,7 +566,7 @@ export type UserCreateWithoutEnrollmentsInput = {
 }
 
 export type UserUncheckedCreateWithoutEnrollmentsInput = {
-  id?: number
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -639,6 +599,7 @@ export type UserUpdateToOneWithWhereWithoutEnrollmentsInput = {
 }
 
 export type UserUpdateWithoutEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -655,7 +616,7 @@ export type UserUpdateWithoutEnrollmentsInput = {
 }
 
 export type UserUncheckedUpdateWithoutEnrollmentsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -672,6 +633,7 @@ export type UserUncheckedUpdateWithoutEnrollmentsInput = {
 }
 
 export type UserCreateWithoutReportedReviewsInput = {
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -688,7 +650,7 @@ export type UserCreateWithoutReportedReviewsInput = {
 }
 
 export type UserUncheckedCreateWithoutReportedReviewsInput = {
-  id?: number
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -710,6 +672,7 @@ export type UserCreateOrConnectWithoutReportedReviewsInput = {
 }
 
 export type UserCreateWithoutReviewsInput = {
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -726,7 +689,7 @@ export type UserCreateWithoutReviewsInput = {
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
-  id?: number
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -759,6 +722,7 @@ export type UserUpdateToOneWithWhereWithoutReportedReviewsInput = {
 }
 
 export type UserUpdateWithoutReportedReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -775,7 +739,7 @@ export type UserUpdateWithoutReportedReviewsInput = {
 }
 
 export type UserUncheckedUpdateWithoutReportedReviewsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -803,6 +767,7 @@ export type UserUpdateToOneWithWhereWithoutReviewsInput = {
 }
 
 export type UserUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -819,7 +784,7 @@ export type UserUpdateWithoutReviewsInput = {
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -836,6 +801,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
 }
 
 export type UserCreateWithoutVotesInput = {
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -852,7 +818,7 @@ export type UserCreateWithoutVotesInput = {
 }
 
 export type UserUncheckedCreateWithoutVotesInput = {
-  id?: number
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -885,6 +851,7 @@ export type UserUpdateToOneWithWhereWithoutVotesInput = {
 }
 
 export type UserUpdateWithoutVotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -901,7 +868,7 @@ export type UserUpdateWithoutVotesInput = {
 }
 
 export type UserUncheckedUpdateWithoutVotesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -918,6 +885,7 @@ export type UserUncheckedUpdateWithoutVotesInput = {
 }
 
 export type UserCreateWithoutAuditLogsInput = {
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -934,7 +902,7 @@ export type UserCreateWithoutAuditLogsInput = {
 }
 
 export type UserUncheckedCreateWithoutAuditLogsInput = {
-  id?: number
+  id?: string
   docType: $Enums.DocType
   docNumber: string
   firstName: string
@@ -967,6 +935,7 @@ export type UserUpdateToOneWithWhereWithoutAuditLogsInput = {
 }
 
 export type UserUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -983,7 +952,7 @@ export type UserUpdateWithoutAuditLogsInput = {
 }
 
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   docType?: Prisma.EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
   docNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1146,7 +1115,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     auditLogs: Prisma.$ReviewAuditPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     docType: $Enums.DocType
     docNumber: string
     firstName: string
@@ -1584,7 +1553,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
  * Fields of the User model
  */
 export interface UserFieldRefs {
-  readonly id: Prisma.FieldRef<"User", 'Int'>
+  readonly id: Prisma.FieldRef<"User", 'String'>
   readonly docType: Prisma.FieldRef<"User", 'DocType'>
   readonly docNumber: Prisma.FieldRef<"User", 'String'>
   readonly firstName: Prisma.FieldRef<"User", 'String'>

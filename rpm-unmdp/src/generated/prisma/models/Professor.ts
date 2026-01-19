@@ -20,27 +20,17 @@ export type ProfessorModel = runtime.Types.Result.DefaultSelection<Prisma.$Profe
 
 export type AggregateProfessor = {
   _count: ProfessorCountAggregateOutputType | null
-  _avg: ProfessorAvgAggregateOutputType | null
-  _sum: ProfessorSumAggregateOutputType | null
   _min: ProfessorMinAggregateOutputType | null
   _max: ProfessorMaxAggregateOutputType | null
 }
 
-export type ProfessorAvgAggregateOutputType = {
-  id: number | null
-}
-
-export type ProfessorSumAggregateOutputType = {
-  id: number | null
-}
-
 export type ProfessorMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   full_name: string | null
 }
 
 export type ProfessorMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   full_name: string | null
 }
 
@@ -50,14 +40,6 @@ export type ProfessorCountAggregateOutputType = {
   _all: number
 }
 
-
-export type ProfessorAvgAggregateInputType = {
-  id?: true
-}
-
-export type ProfessorSumAggregateInputType = {
-  id?: true
-}
 
 export type ProfessorMinAggregateInputType = {
   id?: true
@@ -113,18 +95,6 @@ export type ProfessorAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inte
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: ProfessorAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: ProfessorSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: ProfessorMinAggregateInputType
@@ -155,18 +125,14 @@ export type ProfessorGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   _count?: ProfessorCountAggregateInputType | true
-  _avg?: ProfessorAvgAggregateInputType
-  _sum?: ProfessorSumAggregateInputType
   _min?: ProfessorMinAggregateInputType
   _max?: ProfessorMaxAggregateInputType
 }
 
 export type ProfessorGroupByOutputType = {
-  id: number
+  id: string
   full_name: string
   _count: ProfessorCountAggregateOutputType | null
-  _avg: ProfessorAvgAggregateOutputType | null
-  _sum: ProfessorSumAggregateOutputType | null
   _min: ProfessorMinAggregateOutputType | null
   _max: ProfessorMaxAggregateOutputType | null
 }
@@ -190,7 +156,7 @@ export type ProfessorWhereInput = {
   AND?: Prisma.ProfessorWhereInput | Prisma.ProfessorWhereInput[]
   OR?: Prisma.ProfessorWhereInput[]
   NOT?: Prisma.ProfessorWhereInput | Prisma.ProfessorWhereInput[]
-  id?: Prisma.IntFilter<"Professor"> | number
+  id?: Prisma.StringFilter<"Professor"> | string
   full_name?: Prisma.StringFilter<"Professor"> | string
   commissions?: Prisma.CommissionProfessorListRelationFilter
   reviews?: Prisma.ReviewProfessorDetailListRelationFilter
@@ -204,7 +170,7 @@ export type ProfessorOrderByWithRelationInput = {
 }
 
 export type ProfessorWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.ProfessorWhereInput | Prisma.ProfessorWhereInput[]
   OR?: Prisma.ProfessorWhereInput[]
   NOT?: Prisma.ProfessorWhereInput | Prisma.ProfessorWhereInput[]
@@ -217,67 +183,64 @@ export type ProfessorOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   full_name?: Prisma.SortOrder
   _count?: Prisma.ProfessorCountOrderByAggregateInput
-  _avg?: Prisma.ProfessorAvgOrderByAggregateInput
   _max?: Prisma.ProfessorMaxOrderByAggregateInput
   _min?: Prisma.ProfessorMinOrderByAggregateInput
-  _sum?: Prisma.ProfessorSumOrderByAggregateInput
 }
 
 export type ProfessorScalarWhereWithAggregatesInput = {
   AND?: Prisma.ProfessorScalarWhereWithAggregatesInput | Prisma.ProfessorScalarWhereWithAggregatesInput[]
   OR?: Prisma.ProfessorScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ProfessorScalarWhereWithAggregatesInput | Prisma.ProfessorScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Professor"> | number
+  id?: Prisma.StringWithAggregatesFilter<"Professor"> | string
   full_name?: Prisma.StringWithAggregatesFilter<"Professor"> | string
 }
 
 export type ProfessorCreateInput = {
+  id?: string
   full_name: string
   commissions?: Prisma.CommissionProfessorCreateNestedManyWithoutProfessorInput
   reviews?: Prisma.ReviewProfessorDetailCreateNestedManyWithoutProfessorInput
 }
 
 export type ProfessorUncheckedCreateInput = {
-  id?: number
+  id?: string
   full_name: string
   commissions?: Prisma.CommissionProfessorUncheckedCreateNestedManyWithoutProfessorInput
   reviews?: Prisma.ReviewProfessorDetailUncheckedCreateNestedManyWithoutProfessorInput
 }
 
 export type ProfessorUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
   commissions?: Prisma.CommissionProfessorUpdateManyWithoutProfessorNestedInput
   reviews?: Prisma.ReviewProfessorDetailUpdateManyWithoutProfessorNestedInput
 }
 
 export type ProfessorUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
   commissions?: Prisma.CommissionProfessorUncheckedUpdateManyWithoutProfessorNestedInput
   reviews?: Prisma.ReviewProfessorDetailUncheckedUpdateManyWithoutProfessorNestedInput
 }
 
 export type ProfessorCreateManyInput = {
-  id?: number
+  id?: string
   full_name: string
 }
 
 export type ProfessorUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProfessorUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProfessorCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   full_name?: Prisma.SortOrder
-}
-
-export type ProfessorAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
 }
 
 export type ProfessorMaxOrderByAggregateInput = {
@@ -288,10 +251,6 @@ export type ProfessorMaxOrderByAggregateInput = {
 export type ProfessorMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   full_name?: Prisma.SortOrder
-}
-
-export type ProfessorSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
 }
 
 export type ProfessorScalarRelationFilter = {
@@ -328,12 +287,13 @@ export type ProfessorUpdateOneRequiredWithoutReviewsNestedInput = {
 }
 
 export type ProfessorCreateWithoutCommissionsInput = {
+  id?: string
   full_name: string
   reviews?: Prisma.ReviewProfessorDetailCreateNestedManyWithoutProfessorInput
 }
 
 export type ProfessorUncheckedCreateWithoutCommissionsInput = {
-  id?: number
+  id?: string
   full_name: string
   reviews?: Prisma.ReviewProfessorDetailUncheckedCreateNestedManyWithoutProfessorInput
 }
@@ -355,23 +315,25 @@ export type ProfessorUpdateToOneWithWhereWithoutCommissionsInput = {
 }
 
 export type ProfessorUpdateWithoutCommissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
   reviews?: Prisma.ReviewProfessorDetailUpdateManyWithoutProfessorNestedInput
 }
 
 export type ProfessorUncheckedUpdateWithoutCommissionsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
   reviews?: Prisma.ReviewProfessorDetailUncheckedUpdateManyWithoutProfessorNestedInput
 }
 
 export type ProfessorCreateWithoutReviewsInput = {
+  id?: string
   full_name: string
   commissions?: Prisma.CommissionProfessorCreateNestedManyWithoutProfessorInput
 }
 
 export type ProfessorUncheckedCreateWithoutReviewsInput = {
-  id?: number
+  id?: string
   full_name: string
   commissions?: Prisma.CommissionProfessorUncheckedCreateNestedManyWithoutProfessorInput
 }
@@ -393,12 +355,13 @@ export type ProfessorUpdateToOneWithWhereWithoutReviewsInput = {
 }
 
 export type ProfessorUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
   commissions?: Prisma.CommissionProfessorUpdateManyWithoutProfessorNestedInput
 }
 
 export type ProfessorUncheckedUpdateWithoutReviewsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
   commissions?: Prisma.CommissionProfessorUncheckedUpdateManyWithoutProfessorNestedInput
 }
@@ -482,7 +445,7 @@ export type $ProfessorPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     reviews: Prisma.$ReviewProfessorDetailPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     full_name: string
   }, ExtArgs["result"]["professor"]>
   composites: {}
@@ -909,7 +872,7 @@ export interface Prisma__ProfessorClient<T, Null = never, ExtArgs extends runtim
  * Fields of the Professor model
  */
 export interface ProfessorFieldRefs {
-  readonly id: Prisma.FieldRef<"Professor", 'Int'>
+  readonly id: Prisma.FieldRef<"Professor", 'String'>
   readonly full_name: Prisma.FieldRef<"Professor", 'String'>
 }
     

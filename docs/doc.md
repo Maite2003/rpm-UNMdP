@@ -39,7 +39,13 @@ Secciones:
 - Listado de profesores
 - Listado de universidades, facultades
 - Carreras y Planes
-- Listado de materias con sus comisiones
+- Materias con sus comisiones
+
+### Rutas
+- admin/academic/universities es una lista de universidades con opcion de ir a la pagina de la universidad o eliminar universidad
+- admin/academic/unievrsities/universityId tiene formulario para editar info de la unievrsidad, boton para agregar facultades y lista de facultades de la universidad (con conteo de carreras por facultad)
+- admin/academic/universities/universityId/faculties/facultyId tiene un formulario para editar info de la facultad, boton para agregar carreras y lista de carreras (con conteo de planes de estudio por carreras)
+- admin/academic/universities/universityId/faculties/facultyId/careers/careerId?planId= tiene un formulario para editar info de la carrera, un dropdown para seleccionar el plan que se esta visualizando actualmente, un boton para agregar un plan, un boton para agregar materias al plan seleccionado actualmente y una lista de las materias de el plan seleccionado, dividido por años y cuatrimestres. Cada materia tiene un boton para editar (tanto la materia en si, como su posicion en el plan de estudios seleccionado) y un boton para borrar (del plan de estudios seleccionado (deberia permitir tambien borrar por completo?)). 
 
 ## Privacidad
-Permitir que las reseñas sean anonimas
+Dar la opcion de que las reseñas sean anonimas

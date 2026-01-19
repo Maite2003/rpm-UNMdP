@@ -22,14 +22,17 @@ export const getUniversities = async () => {
  * Retrieves a single university by its ID.
  * Includes the full list of faculties associated with it.
  */
-export const getUniversityById = async (id: number) => {
+export const getUniversityById = async (id: string) => {
   return await prisma.university.findUnique({
     where: { id },
     include: {
       faculties: {
         orderBy: { name: 'asc' },
-      },
-    },
+        include: {
+          _count: { select: { careers: true } }
+        }
+      }
+    }
   });
 };
 
@@ -48,7 +51,7 @@ export const createUniversity = async (data: Prisma.UniversityCreateInput) => {
  * @param id - The ID of the university to update.
  * @param data - The fields to update.
  */
-export const updateUniversity = async (id: number, data: Prisma.UniversityUpdateInput) => {
+export const updateUniversity = async (id: string, data: Prisma.UniversityUpdateInput) => {
   return await prisma.university.update({
     where: { id },
     data,
@@ -58,7 +61,7 @@ export const updateUniversity = async (id: number, data: Prisma.UniversityUpdate
 /**
  * Deletes a university by its ID.
  */
-export const deleteUniversity = async (id: number) => {
+export const deleteUniversity = async (id: string) => {
   return await prisma.university.delete({
     where: { id },
   });

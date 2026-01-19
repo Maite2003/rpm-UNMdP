@@ -20,31 +20,19 @@ export type CommissionProfessorModel = runtime.Types.Result.DefaultSelection<Pri
 
 export type AggregateCommissionProfessor = {
   _count: CommissionProfessorCountAggregateOutputType | null
-  _avg: CommissionProfessorAvgAggregateOutputType | null
-  _sum: CommissionProfessorSumAggregateOutputType | null
   _min: CommissionProfessorMinAggregateOutputType | null
   _max: CommissionProfessorMaxAggregateOutputType | null
 }
 
-export type CommissionProfessorAvgAggregateOutputType = {
-  commissionId: number | null
-  professorId: number | null
-}
-
-export type CommissionProfessorSumAggregateOutputType = {
-  commissionId: number | null
-  professorId: number | null
-}
-
 export type CommissionProfessorMinAggregateOutputType = {
-  commissionId: number | null
-  professorId: number | null
+  commissionId: string | null
+  professorId: string | null
   role: $Enums.CommissionRole | null
 }
 
 export type CommissionProfessorMaxAggregateOutputType = {
-  commissionId: number | null
-  professorId: number | null
+  commissionId: string | null
+  professorId: string | null
   role: $Enums.CommissionRole | null
 }
 
@@ -55,16 +43,6 @@ export type CommissionProfessorCountAggregateOutputType = {
   _all: number
 }
 
-
-export type CommissionProfessorAvgAggregateInputType = {
-  commissionId?: true
-  professorId?: true
-}
-
-export type CommissionProfessorSumAggregateInputType = {
-  commissionId?: true
-  professorId?: true
-}
 
 export type CommissionProfessorMinAggregateInputType = {
   commissionId?: true
@@ -123,18 +101,6 @@ export type CommissionProfessorAggregateArgs<ExtArgs extends runtime.Types.Exten
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: CommissionProfessorAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: CommissionProfessorSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: CommissionProfessorMinAggregateInputType
@@ -165,19 +131,15 @@ export type CommissionProfessorGroupByArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   _count?: CommissionProfessorCountAggregateInputType | true
-  _avg?: CommissionProfessorAvgAggregateInputType
-  _sum?: CommissionProfessorSumAggregateInputType
   _min?: CommissionProfessorMinAggregateInputType
   _max?: CommissionProfessorMaxAggregateInputType
 }
 
 export type CommissionProfessorGroupByOutputType = {
-  commissionId: number
-  professorId: number
+  commissionId: string
+  professorId: string
   role: $Enums.CommissionRole
   _count: CommissionProfessorCountAggregateOutputType | null
-  _avg: CommissionProfessorAvgAggregateOutputType | null
-  _sum: CommissionProfessorSumAggregateOutputType | null
   _min: CommissionProfessorMinAggregateOutputType | null
   _max: CommissionProfessorMaxAggregateOutputType | null
 }
@@ -201,8 +163,8 @@ export type CommissionProfessorWhereInput = {
   AND?: Prisma.CommissionProfessorWhereInput | Prisma.CommissionProfessorWhereInput[]
   OR?: Prisma.CommissionProfessorWhereInput[]
   NOT?: Prisma.CommissionProfessorWhereInput | Prisma.CommissionProfessorWhereInput[]
-  commissionId?: Prisma.IntFilter<"CommissionProfessor"> | number
-  professorId?: Prisma.IntFilter<"CommissionProfessor"> | number
+  commissionId?: Prisma.StringFilter<"CommissionProfessor"> | string
+  professorId?: Prisma.StringFilter<"CommissionProfessor"> | string
   role?: Prisma.EnumCommissionRoleFilter<"CommissionProfessor"> | $Enums.CommissionRole
   commission?: Prisma.XOR<Prisma.CommissionScalarRelationFilter, Prisma.CommissionWhereInput>
   professor?: Prisma.XOR<Prisma.ProfessorScalarRelationFilter, Prisma.ProfessorWhereInput>
@@ -221,8 +183,8 @@ export type CommissionProfessorWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.CommissionProfessorWhereInput | Prisma.CommissionProfessorWhereInput[]
   OR?: Prisma.CommissionProfessorWhereInput[]
   NOT?: Prisma.CommissionProfessorWhereInput | Prisma.CommissionProfessorWhereInput[]
-  commissionId?: Prisma.IntFilter<"CommissionProfessor"> | number
-  professorId?: Prisma.IntFilter<"CommissionProfessor"> | number
+  commissionId?: Prisma.StringFilter<"CommissionProfessor"> | string
+  professorId?: Prisma.StringFilter<"CommissionProfessor"> | string
   role?: Prisma.EnumCommissionRoleFilter<"CommissionProfessor"> | $Enums.CommissionRole
   commission?: Prisma.XOR<Prisma.CommissionScalarRelationFilter, Prisma.CommissionWhereInput>
   professor?: Prisma.XOR<Prisma.ProfessorScalarRelationFilter, Prisma.ProfessorWhereInput>
@@ -233,18 +195,16 @@ export type CommissionProfessorOrderByWithAggregationInput = {
   professorId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   _count?: Prisma.CommissionProfessorCountOrderByAggregateInput
-  _avg?: Prisma.CommissionProfessorAvgOrderByAggregateInput
   _max?: Prisma.CommissionProfessorMaxOrderByAggregateInput
   _min?: Prisma.CommissionProfessorMinOrderByAggregateInput
-  _sum?: Prisma.CommissionProfessorSumOrderByAggregateInput
 }
 
 export type CommissionProfessorScalarWhereWithAggregatesInput = {
   AND?: Prisma.CommissionProfessorScalarWhereWithAggregatesInput | Prisma.CommissionProfessorScalarWhereWithAggregatesInput[]
   OR?: Prisma.CommissionProfessorScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CommissionProfessorScalarWhereWithAggregatesInput | Prisma.CommissionProfessorScalarWhereWithAggregatesInput[]
-  commissionId?: Prisma.IntWithAggregatesFilter<"CommissionProfessor"> | number
-  professorId?: Prisma.IntWithAggregatesFilter<"CommissionProfessor"> | number
+  commissionId?: Prisma.StringWithAggregatesFilter<"CommissionProfessor"> | string
+  professorId?: Prisma.StringWithAggregatesFilter<"CommissionProfessor"> | string
   role?: Prisma.EnumCommissionRoleWithAggregatesFilter<"CommissionProfessor"> | $Enums.CommissionRole
 }
 
@@ -255,8 +215,8 @@ export type CommissionProfessorCreateInput = {
 }
 
 export type CommissionProfessorUncheckedCreateInput = {
-  commissionId: number
-  professorId: number
+  commissionId: string
+  professorId: string
   role: $Enums.CommissionRole
 }
 
@@ -267,14 +227,14 @@ export type CommissionProfessorUpdateInput = {
 }
 
 export type CommissionProfessorUncheckedUpdateInput = {
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
-  professorId?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
+  professorId?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumCommissionRoleFieldUpdateOperationsInput | $Enums.CommissionRole
 }
 
 export type CommissionProfessorCreateManyInput = {
-  commissionId: number
-  professorId: number
+  commissionId: string
+  professorId: string
   role: $Enums.CommissionRole
 }
 
@@ -283,8 +243,8 @@ export type CommissionProfessorUpdateManyMutationInput = {
 }
 
 export type CommissionProfessorUncheckedUpdateManyInput = {
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
-  professorId?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
+  professorId?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumCommissionRoleFieldUpdateOperationsInput | $Enums.CommissionRole
 }
 
@@ -299,19 +259,14 @@ export type CommissionProfessorOrderByRelationAggregateInput = {
 }
 
 export type CommissionProfessorCommissionIdProfessorIdCompoundUniqueInput = {
-  commissionId: number
-  professorId: number
+  commissionId: string
+  professorId: string
 }
 
 export type CommissionProfessorCountOrderByAggregateInput = {
   commissionId?: Prisma.SortOrder
   professorId?: Prisma.SortOrder
   role?: Prisma.SortOrder
-}
-
-export type CommissionProfessorAvgOrderByAggregateInput = {
-  commissionId?: Prisma.SortOrder
-  professorId?: Prisma.SortOrder
 }
 
 export type CommissionProfessorMaxOrderByAggregateInput = {
@@ -324,11 +279,6 @@ export type CommissionProfessorMinOrderByAggregateInput = {
   commissionId?: Prisma.SortOrder
   professorId?: Prisma.SortOrder
   role?: Prisma.SortOrder
-}
-
-export type CommissionProfessorSumOrderByAggregateInput = {
-  commissionId?: Prisma.SortOrder
-  professorId?: Prisma.SortOrder
 }
 
 export type CommissionProfessorCreateNestedManyWithoutCommissionInput = {
@@ -425,7 +375,7 @@ export type CommissionProfessorCreateWithoutCommissionInput = {
 }
 
 export type CommissionProfessorUncheckedCreateWithoutCommissionInput = {
-  professorId: number
+  professorId: string
   role: $Enums.CommissionRole
 }
 
@@ -459,8 +409,8 @@ export type CommissionProfessorScalarWhereInput = {
   AND?: Prisma.CommissionProfessorScalarWhereInput | Prisma.CommissionProfessorScalarWhereInput[]
   OR?: Prisma.CommissionProfessorScalarWhereInput[]
   NOT?: Prisma.CommissionProfessorScalarWhereInput | Prisma.CommissionProfessorScalarWhereInput[]
-  commissionId?: Prisma.IntFilter<"CommissionProfessor"> | number
-  professorId?: Prisma.IntFilter<"CommissionProfessor"> | number
+  commissionId?: Prisma.StringFilter<"CommissionProfessor"> | string
+  professorId?: Prisma.StringFilter<"CommissionProfessor"> | string
   role?: Prisma.EnumCommissionRoleFilter<"CommissionProfessor"> | $Enums.CommissionRole
 }
 
@@ -470,7 +420,7 @@ export type CommissionProfessorCreateWithoutProfessorInput = {
 }
 
 export type CommissionProfessorUncheckedCreateWithoutProfessorInput = {
-  commissionId: number
+  commissionId: string
   role: $Enums.CommissionRole
 }
 
@@ -501,7 +451,7 @@ export type CommissionProfessorUpdateManyWithWhereWithoutProfessorInput = {
 }
 
 export type CommissionProfessorCreateManyCommissionInput = {
-  professorId: number
+  professorId: string
   role: $Enums.CommissionRole
 }
 
@@ -511,17 +461,17 @@ export type CommissionProfessorUpdateWithoutCommissionInput = {
 }
 
 export type CommissionProfessorUncheckedUpdateWithoutCommissionInput = {
-  professorId?: Prisma.IntFieldUpdateOperationsInput | number
+  professorId?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumCommissionRoleFieldUpdateOperationsInput | $Enums.CommissionRole
 }
 
 export type CommissionProfessorUncheckedUpdateManyWithoutCommissionInput = {
-  professorId?: Prisma.IntFieldUpdateOperationsInput | number
+  professorId?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumCommissionRoleFieldUpdateOperationsInput | $Enums.CommissionRole
 }
 
 export type CommissionProfessorCreateManyProfessorInput = {
-  commissionId: number
+  commissionId: string
   role: $Enums.CommissionRole
 }
 
@@ -531,12 +481,12 @@ export type CommissionProfessorUpdateWithoutProfessorInput = {
 }
 
 export type CommissionProfessorUncheckedUpdateWithoutProfessorInput = {
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumCommissionRoleFieldUpdateOperationsInput | $Enums.CommissionRole
 }
 
 export type CommissionProfessorUncheckedUpdateManyWithoutProfessorInput = {
-  commissionId?: Prisma.IntFieldUpdateOperationsInput | number
+  commissionId?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumCommissionRoleFieldUpdateOperationsInput | $Enums.CommissionRole
 }
 
@@ -593,8 +543,8 @@ export type $CommissionProfessorPayload<ExtArgs extends runtime.Types.Extensions
     professor: Prisma.$ProfessorPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    commissionId: number
-    professorId: number
+    commissionId: string
+    professorId: string
     role: $Enums.CommissionRole
   }, ExtArgs["result"]["commissionProfessor"]>
   composites: {}
@@ -1021,8 +971,8 @@ export interface Prisma__CommissionProfessorClient<T, Null = never, ExtArgs exte
  * Fields of the CommissionProfessor model
  */
 export interface CommissionProfessorFieldRefs {
-  readonly commissionId: Prisma.FieldRef<"CommissionProfessor", 'Int'>
-  readonly professorId: Prisma.FieldRef<"CommissionProfessor", 'Int'>
+  readonly commissionId: Prisma.FieldRef<"CommissionProfessor", 'String'>
+  readonly professorId: Prisma.FieldRef<"CommissionProfessor", 'String'>
   readonly role: Prisma.FieldRef<"CommissionProfessor", 'CommissionRole'>
 }
     

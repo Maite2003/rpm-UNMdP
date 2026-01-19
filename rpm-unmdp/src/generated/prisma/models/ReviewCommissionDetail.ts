@@ -27,25 +27,23 @@ export type AggregateReviewCommissionDetail = {
 }
 
 export type ReviewCommissionDetailAvgAggregateOutputType = {
-  reviewId: number | null
   contentScore: number | null
   difficultyScore: number | null
 }
 
 export type ReviewCommissionDetailSumAggregateOutputType = {
-  reviewId: number | null
   contentScore: number | null
   difficultyScore: number | null
 }
 
 export type ReviewCommissionDetailMinAggregateOutputType = {
-  reviewId: number | null
+  reviewId: string | null
   contentScore: number | null
   difficultyScore: number | null
 }
 
 export type ReviewCommissionDetailMaxAggregateOutputType = {
-  reviewId: number | null
+  reviewId: string | null
   contentScore: number | null
   difficultyScore: number | null
 }
@@ -59,13 +57,11 @@ export type ReviewCommissionDetailCountAggregateOutputType = {
 
 
 export type ReviewCommissionDetailAvgAggregateInputType = {
-  reviewId?: true
   contentScore?: true
   difficultyScore?: true
 }
 
 export type ReviewCommissionDetailSumAggregateInputType = {
-  reviewId?: true
   contentScore?: true
   difficultyScore?: true
 }
@@ -176,7 +172,7 @@ export type ReviewCommissionDetailGroupByArgs<ExtArgs extends runtime.Types.Exte
 }
 
 export type ReviewCommissionDetailGroupByOutputType = {
-  reviewId: number
+  reviewId: string
   contentScore: number
   difficultyScore: number
   _count: ReviewCommissionDetailCountAggregateOutputType | null
@@ -205,7 +201,7 @@ export type ReviewCommissionDetailWhereInput = {
   AND?: Prisma.ReviewCommissionDetailWhereInput | Prisma.ReviewCommissionDetailWhereInput[]
   OR?: Prisma.ReviewCommissionDetailWhereInput[]
   NOT?: Prisma.ReviewCommissionDetailWhereInput | Prisma.ReviewCommissionDetailWhereInput[]
-  reviewId?: Prisma.IntFilter<"ReviewCommissionDetail"> | number
+  reviewId?: Prisma.StringFilter<"ReviewCommissionDetail"> | string
   contentScore?: Prisma.IntFilter<"ReviewCommissionDetail"> | number
   difficultyScore?: Prisma.IntFilter<"ReviewCommissionDetail"> | number
   review?: Prisma.XOR<Prisma.ReviewScalarRelationFilter, Prisma.ReviewWhereInput>
@@ -219,7 +215,7 @@ export type ReviewCommissionDetailOrderByWithRelationInput = {
 }
 
 export type ReviewCommissionDetailWhereUniqueInput = Prisma.AtLeast<{
-  reviewId?: number
+  reviewId?: string
   AND?: Prisma.ReviewCommissionDetailWhereInput | Prisma.ReviewCommissionDetailWhereInput[]
   OR?: Prisma.ReviewCommissionDetailWhereInput[]
   NOT?: Prisma.ReviewCommissionDetailWhereInput | Prisma.ReviewCommissionDetailWhereInput[]
@@ -243,7 +239,7 @@ export type ReviewCommissionDetailScalarWhereWithAggregatesInput = {
   AND?: Prisma.ReviewCommissionDetailScalarWhereWithAggregatesInput | Prisma.ReviewCommissionDetailScalarWhereWithAggregatesInput[]
   OR?: Prisma.ReviewCommissionDetailScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ReviewCommissionDetailScalarWhereWithAggregatesInput | Prisma.ReviewCommissionDetailScalarWhereWithAggregatesInput[]
-  reviewId?: Prisma.IntWithAggregatesFilter<"ReviewCommissionDetail"> | number
+  reviewId?: Prisma.StringWithAggregatesFilter<"ReviewCommissionDetail"> | string
   contentScore?: Prisma.IntWithAggregatesFilter<"ReviewCommissionDetail"> | number
   difficultyScore?: Prisma.IntWithAggregatesFilter<"ReviewCommissionDetail"> | number
 }
@@ -255,7 +251,7 @@ export type ReviewCommissionDetailCreateInput = {
 }
 
 export type ReviewCommissionDetailUncheckedCreateInput = {
-  reviewId: number
+  reviewId: string
   contentScore: number
   difficultyScore: number
 }
@@ -267,13 +263,13 @@ export type ReviewCommissionDetailUpdateInput = {
 }
 
 export type ReviewCommissionDetailUncheckedUpdateInput = {
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
   contentScore?: Prisma.IntFieldUpdateOperationsInput | number
   difficultyScore?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ReviewCommissionDetailCreateManyInput = {
-  reviewId: number
+  reviewId: string
   contentScore: number
   difficultyScore: number
 }
@@ -284,7 +280,7 @@ export type ReviewCommissionDetailUpdateManyMutationInput = {
 }
 
 export type ReviewCommissionDetailUncheckedUpdateManyInput = {
-  reviewId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewId?: Prisma.StringFieldUpdateOperationsInput | string
   contentScore?: Prisma.IntFieldUpdateOperationsInput | number
   difficultyScore?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -301,7 +297,6 @@ export type ReviewCommissionDetailCountOrderByAggregateInput = {
 }
 
 export type ReviewCommissionDetailAvgOrderByAggregateInput = {
-  reviewId?: Prisma.SortOrder
   contentScore?: Prisma.SortOrder
   difficultyScore?: Prisma.SortOrder
 }
@@ -319,7 +314,6 @@ export type ReviewCommissionDetailMinOrderByAggregateInput = {
 }
 
 export type ReviewCommissionDetailSumOrderByAggregateInput = {
-  reviewId?: Prisma.SortOrder
   contentScore?: Prisma.SortOrder
   difficultyScore?: Prisma.SortOrder
 }
@@ -438,7 +432,7 @@ export type $ReviewCommissionDetailPayload<ExtArgs extends runtime.Types.Extensi
     review: Prisma.$ReviewPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    reviewId: number
+    reviewId: string
     contentScore: number
     difficultyScore: number
   }, ExtArgs["result"]["reviewCommissionDetail"]>
@@ -865,7 +859,7 @@ export interface Prisma__ReviewCommissionDetailClient<T, Null = never, ExtArgs e
  * Fields of the ReviewCommissionDetail model
  */
 export interface ReviewCommissionDetailFieldRefs {
-  readonly reviewId: Prisma.FieldRef<"ReviewCommissionDetail", 'Int'>
+  readonly reviewId: Prisma.FieldRef<"ReviewCommissionDetail", 'String'>
   readonly contentScore: Prisma.FieldRef<"ReviewCommissionDetail", 'Int'>
   readonly difficultyScore: Prisma.FieldRef<"ReviewCommissionDetail", 'Int'>
 }

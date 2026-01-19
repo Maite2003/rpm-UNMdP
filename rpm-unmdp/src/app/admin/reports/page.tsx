@@ -1,0 +1,1 @@
+// Listado de reseñas qe hay que revisar porque fueron baneadas con opc de ignorar o banear

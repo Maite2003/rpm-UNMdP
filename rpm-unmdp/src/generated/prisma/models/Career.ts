@@ -20,87 +20,45 @@ export type CareerModel = runtime.Types.Result.DefaultSelection<Prisma.$CareerPa
 
 export type AggregateCareer = {
   _count: CareerCountAggregateOutputType | null
-  _avg: CareerAvgAggregateOutputType | null
-  _sum: CareerSumAggregateOutputType | null
   _min: CareerMinAggregateOutputType | null
   _max: CareerMaxAggregateOutputType | null
 }
 
-export type CareerAvgAggregateOutputType = {
-  id: number | null
-  subjectCount: number | null
-  years: number | null
-  facultyId: number | null
-}
-
-export type CareerSumAggregateOutputType = {
-  id: number | null
-  subjectCount: number | null
-  years: number | null
-  facultyId: number | null
-}
-
 export type CareerMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   name: string | null
-  subjectCount: number | null
-  years: number | null
-  facultyId: number | null
+  facultyId: string | null
 }
 
 export type CareerMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   name: string | null
-  subjectCount: number | null
-  years: number | null
-  facultyId: number | null
+  facultyId: string | null
 }
 
 export type CareerCountAggregateOutputType = {
   id: number
   name: number
-  subjectCount: number
-  years: number
   facultyId: number
   _all: number
 }
 
 
-export type CareerAvgAggregateInputType = {
-  id?: true
-  subjectCount?: true
-  years?: true
-  facultyId?: true
-}
-
-export type CareerSumAggregateInputType = {
-  id?: true
-  subjectCount?: true
-  years?: true
-  facultyId?: true
-}
-
 export type CareerMinAggregateInputType = {
   id?: true
   name?: true
-  subjectCount?: true
-  years?: true
   facultyId?: true
 }
 
 export type CareerMaxAggregateInputType = {
   id?: true
   name?: true
-  subjectCount?: true
-  years?: true
   facultyId?: true
 }
 
 export type CareerCountAggregateInputType = {
   id?: true
   name?: true
-  subjectCount?: true
-  years?: true
   facultyId?: true
   _all?: true
 }
@@ -143,18 +101,6 @@ export type CareerAggregateArgs<ExtArgs extends runtime.Types.Extensions.Interna
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: CareerAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: CareerSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: CareerMinAggregateInputType
@@ -185,21 +131,15 @@ export type CareerGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   _count?: CareerCountAggregateInputType | true
-  _avg?: CareerAvgAggregateInputType
-  _sum?: CareerSumAggregateInputType
   _min?: CareerMinAggregateInputType
   _max?: CareerMaxAggregateInputType
 }
 
 export type CareerGroupByOutputType = {
-  id: number
+  id: string
   name: string
-  subjectCount: number
-  years: number
-  facultyId: number
+  facultyId: string
   _count: CareerCountAggregateOutputType | null
-  _avg: CareerAvgAggregateOutputType | null
-  _sum: CareerSumAggregateOutputType | null
   _min: CareerMinAggregateOutputType | null
   _max: CareerMaxAggregateOutputType | null
 }
@@ -223,11 +163,9 @@ export type CareerWhereInput = {
   AND?: Prisma.CareerWhereInput | Prisma.CareerWhereInput[]
   OR?: Prisma.CareerWhereInput[]
   NOT?: Prisma.CareerWhereInput | Prisma.CareerWhereInput[]
-  id?: Prisma.IntFilter<"Career"> | number
+  id?: Prisma.StringFilter<"Career"> | string
   name?: Prisma.StringFilter<"Career"> | string
-  subjectCount?: Prisma.IntFilter<"Career"> | number
-  years?: Prisma.IntFilter<"Career"> | number
-  facultyId?: Prisma.IntFilter<"Career"> | number
+  facultyId?: Prisma.StringFilter<"Career"> | string
   faculty?: Prisma.XOR<Prisma.FacultyScalarRelationFilter, Prisma.FacultyWhereInput>
   studyPlans?: Prisma.StudyPlanListRelationFilter
   enrollments?: Prisma.EnrollmentListRelationFilter
@@ -236,8 +174,6 @@ export type CareerWhereInput = {
 export type CareerOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  subjectCount?: Prisma.SortOrder
-  years?: Prisma.SortOrder
   facultyId?: Prisma.SortOrder
   faculty?: Prisma.FacultyOrderByWithRelationInput
   studyPlans?: Prisma.StudyPlanOrderByRelationAggregateInput
@@ -245,14 +181,12 @@ export type CareerOrderByWithRelationInput = {
 }
 
 export type CareerWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.CareerWhereInput | Prisma.CareerWhereInput[]
   OR?: Prisma.CareerWhereInput[]
   NOT?: Prisma.CareerWhereInput | Prisma.CareerWhereInput[]
   name?: Prisma.StringFilter<"Career"> | string
-  subjectCount?: Prisma.IntFilter<"Career"> | number
-  years?: Prisma.IntFilter<"Career"> | number
-  facultyId?: Prisma.IntFilter<"Career"> | number
+  facultyId?: Prisma.StringFilter<"Career"> | string
   faculty?: Prisma.XOR<Prisma.FacultyScalarRelationFilter, Prisma.FacultyWhereInput>
   studyPlans?: Prisma.StudyPlanListRelationFilter
   enrollments?: Prisma.EnrollmentListRelationFilter
@@ -261,85 +195,68 @@ export type CareerWhereUniqueInput = Prisma.AtLeast<{
 export type CareerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  subjectCount?: Prisma.SortOrder
-  years?: Prisma.SortOrder
   facultyId?: Prisma.SortOrder
   _count?: Prisma.CareerCountOrderByAggregateInput
-  _avg?: Prisma.CareerAvgOrderByAggregateInput
   _max?: Prisma.CareerMaxOrderByAggregateInput
   _min?: Prisma.CareerMinOrderByAggregateInput
-  _sum?: Prisma.CareerSumOrderByAggregateInput
 }
 
 export type CareerScalarWhereWithAggregatesInput = {
   AND?: Prisma.CareerScalarWhereWithAggregatesInput | Prisma.CareerScalarWhereWithAggregatesInput[]
   OR?: Prisma.CareerScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CareerScalarWhereWithAggregatesInput | Prisma.CareerScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Career"> | number
+  id?: Prisma.StringWithAggregatesFilter<"Career"> | string
   name?: Prisma.StringWithAggregatesFilter<"Career"> | string
-  subjectCount?: Prisma.IntWithAggregatesFilter<"Career"> | number
-  years?: Prisma.IntWithAggregatesFilter<"Career"> | number
-  facultyId?: Prisma.IntWithAggregatesFilter<"Career"> | number
+  facultyId?: Prisma.StringWithAggregatesFilter<"Career"> | string
 }
 
 export type CareerCreateInput = {
+  id?: string
   name: string
-  subjectCount: number
-  years: number
   faculty: Prisma.FacultyCreateNestedOneWithoutCareersInput
   studyPlans?: Prisma.StudyPlanCreateNestedManyWithoutCareerInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutCareerInput
 }
 
 export type CareerUncheckedCreateInput = {
-  id?: number
+  id?: string
   name: string
-  subjectCount: number
-  years: number
-  facultyId: number
+  facultyId: string
   studyPlans?: Prisma.StudyPlanUncheckedCreateNestedManyWithoutCareerInput
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutCareerInput
 }
 
 export type CareerUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  subjectCount?: Prisma.IntFieldUpdateOperationsInput | number
-  years?: Prisma.IntFieldUpdateOperationsInput | number
   faculty?: Prisma.FacultyUpdateOneRequiredWithoutCareersNestedInput
   studyPlans?: Prisma.StudyPlanUpdateManyWithoutCareerNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutCareerNestedInput
 }
 
 export type CareerUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  subjectCount?: Prisma.IntFieldUpdateOperationsInput | number
-  years?: Prisma.IntFieldUpdateOperationsInput | number
-  facultyId?: Prisma.IntFieldUpdateOperationsInput | number
+  facultyId?: Prisma.StringFieldUpdateOperationsInput | string
   studyPlans?: Prisma.StudyPlanUncheckedUpdateManyWithoutCareerNestedInput
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutCareerNestedInput
 }
 
 export type CareerCreateManyInput = {
-  id?: number
+  id?: string
   name: string
-  subjectCount: number
-  years: number
-  facultyId: number
+  facultyId: string
 }
 
 export type CareerUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  subjectCount?: Prisma.IntFieldUpdateOperationsInput | number
-  years?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type CareerUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  subjectCount?: Prisma.IntFieldUpdateOperationsInput | number
-  years?: Prisma.IntFieldUpdateOperationsInput | number
-  facultyId?: Prisma.IntFieldUpdateOperationsInput | number
+  facultyId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type CareerListRelationFilter = {
@@ -355,38 +272,18 @@ export type CareerOrderByRelationAggregateInput = {
 export type CareerCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  subjectCount?: Prisma.SortOrder
-  years?: Prisma.SortOrder
-  facultyId?: Prisma.SortOrder
-}
-
-export type CareerAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  subjectCount?: Prisma.SortOrder
-  years?: Prisma.SortOrder
   facultyId?: Prisma.SortOrder
 }
 
 export type CareerMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  subjectCount?: Prisma.SortOrder
-  years?: Prisma.SortOrder
   facultyId?: Prisma.SortOrder
 }
 
 export type CareerMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  subjectCount?: Prisma.SortOrder
-  years?: Prisma.SortOrder
-  facultyId?: Prisma.SortOrder
-}
-
-export type CareerSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  subjectCount?: Prisma.SortOrder
-  years?: Prisma.SortOrder
   facultyId?: Prisma.SortOrder
 }
 
@@ -466,18 +363,15 @@ export type CareerUpdateOneRequiredWithoutEnrollmentsNestedInput = {
 }
 
 export type CareerCreateWithoutFacultyInput = {
+  id?: string
   name: string
-  subjectCount: number
-  years: number
   studyPlans?: Prisma.StudyPlanCreateNestedManyWithoutCareerInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutCareerInput
 }
 
 export type CareerUncheckedCreateWithoutFacultyInput = {
-  id?: number
+  id?: string
   name: string
-  subjectCount: number
-  years: number
   studyPlans?: Prisma.StudyPlanUncheckedCreateNestedManyWithoutCareerInput
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutCareerInput
 }
@@ -512,27 +406,22 @@ export type CareerScalarWhereInput = {
   AND?: Prisma.CareerScalarWhereInput | Prisma.CareerScalarWhereInput[]
   OR?: Prisma.CareerScalarWhereInput[]
   NOT?: Prisma.CareerScalarWhereInput | Prisma.CareerScalarWhereInput[]
-  id?: Prisma.IntFilter<"Career"> | number
+  id?: Prisma.StringFilter<"Career"> | string
   name?: Prisma.StringFilter<"Career"> | string
-  subjectCount?: Prisma.IntFilter<"Career"> | number
-  years?: Prisma.IntFilter<"Career"> | number
-  facultyId?: Prisma.IntFilter<"Career"> | number
+  facultyId?: Prisma.StringFilter<"Career"> | string
 }
 
 export type CareerCreateWithoutStudyPlansInput = {
+  id?: string
   name: string
-  subjectCount: number
-  years: number
   faculty: Prisma.FacultyCreateNestedOneWithoutCareersInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutCareerInput
 }
 
 export type CareerUncheckedCreateWithoutStudyPlansInput = {
-  id?: number
+  id?: string
   name: string
-  subjectCount: number
-  years: number
-  facultyId: number
+  facultyId: string
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutCareerInput
 }
 
@@ -553,36 +442,30 @@ export type CareerUpdateToOneWithWhereWithoutStudyPlansInput = {
 }
 
 export type CareerUpdateWithoutStudyPlansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  subjectCount?: Prisma.IntFieldUpdateOperationsInput | number
-  years?: Prisma.IntFieldUpdateOperationsInput | number
   faculty?: Prisma.FacultyUpdateOneRequiredWithoutCareersNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutCareerNestedInput
 }
 
 export type CareerUncheckedUpdateWithoutStudyPlansInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  subjectCount?: Prisma.IntFieldUpdateOperationsInput | number
-  years?: Prisma.IntFieldUpdateOperationsInput | number
-  facultyId?: Prisma.IntFieldUpdateOperationsInput | number
+  facultyId?: Prisma.StringFieldUpdateOperationsInput | string
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutCareerNestedInput
 }
 
 export type CareerCreateWithoutEnrollmentsInput = {
+  id?: string
   name: string
-  subjectCount: number
-  years: number
   faculty: Prisma.FacultyCreateNestedOneWithoutCareersInput
   studyPlans?: Prisma.StudyPlanCreateNestedManyWithoutCareerInput
 }
 
 export type CareerUncheckedCreateWithoutEnrollmentsInput = {
-  id?: number
+  id?: string
   name: string
-  subjectCount: number
-  years: number
-  facultyId: number
+  facultyId: string
   studyPlans?: Prisma.StudyPlanUncheckedCreateNestedManyWithoutCareerInput
 }
 
@@ -603,51 +486,41 @@ export type CareerUpdateToOneWithWhereWithoutEnrollmentsInput = {
 }
 
 export type CareerUpdateWithoutEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  subjectCount?: Prisma.IntFieldUpdateOperationsInput | number
-  years?: Prisma.IntFieldUpdateOperationsInput | number
   faculty?: Prisma.FacultyUpdateOneRequiredWithoutCareersNestedInput
   studyPlans?: Prisma.StudyPlanUpdateManyWithoutCareerNestedInput
 }
 
 export type CareerUncheckedUpdateWithoutEnrollmentsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  subjectCount?: Prisma.IntFieldUpdateOperationsInput | number
-  years?: Prisma.IntFieldUpdateOperationsInput | number
-  facultyId?: Prisma.IntFieldUpdateOperationsInput | number
+  facultyId?: Prisma.StringFieldUpdateOperationsInput | string
   studyPlans?: Prisma.StudyPlanUncheckedUpdateManyWithoutCareerNestedInput
 }
 
 export type CareerCreateManyFacultyInput = {
-  id?: number
+  id?: string
   name: string
-  subjectCount: number
-  years: number
 }
 
 export type CareerUpdateWithoutFacultyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  subjectCount?: Prisma.IntFieldUpdateOperationsInput | number
-  years?: Prisma.IntFieldUpdateOperationsInput | number
   studyPlans?: Prisma.StudyPlanUpdateManyWithoutCareerNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutCareerNestedInput
 }
 
 export type CareerUncheckedUpdateWithoutFacultyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  subjectCount?: Prisma.IntFieldUpdateOperationsInput | number
-  years?: Prisma.IntFieldUpdateOperationsInput | number
   studyPlans?: Prisma.StudyPlanUncheckedUpdateManyWithoutCareerNestedInput
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutCareerNestedInput
 }
 
 export type CareerUncheckedUpdateManyWithoutFacultyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  subjectCount?: Prisma.IntFieldUpdateOperationsInput | number
-  years?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -693,8 +566,6 @@ export type CareerCountOutputTypeCountEnrollmentsArgs<ExtArgs extends runtime.Ty
 export type CareerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  subjectCount?: boolean
-  years?: boolean
   facultyId?: boolean
   faculty?: boolean | Prisma.FacultyDefaultArgs<ExtArgs>
   studyPlans?: boolean | Prisma.Career$studyPlansArgs<ExtArgs>
@@ -705,8 +576,6 @@ export type CareerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type CareerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  subjectCount?: boolean
-  years?: boolean
   facultyId?: boolean
   faculty?: boolean | Prisma.FacultyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["career"]>
@@ -714,8 +583,6 @@ export type CareerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type CareerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  subjectCount?: boolean
-  years?: boolean
   facultyId?: boolean
   faculty?: boolean | Prisma.FacultyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["career"]>
@@ -723,12 +590,10 @@ export type CareerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type CareerSelectScalar = {
   id?: boolean
   name?: boolean
-  subjectCount?: boolean
-  years?: boolean
   facultyId?: boolean
 }
 
-export type CareerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "subjectCount" | "years" | "facultyId", ExtArgs["result"]["career"]>
+export type CareerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "facultyId", ExtArgs["result"]["career"]>
 export type CareerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   faculty?: boolean | Prisma.FacultyDefaultArgs<ExtArgs>
   studyPlans?: boolean | Prisma.Career$studyPlansArgs<ExtArgs>
@@ -750,11 +615,9 @@ export type $CareerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     enrollments: Prisma.$EnrollmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     name: string
-    subjectCount: number
-    years: number
-    facultyId: number
+    facultyId: string
   }, ExtArgs["result"]["career"]>
   composites: {}
 }
@@ -1181,11 +1044,9 @@ export interface Prisma__CareerClient<T, Null = never, ExtArgs extends runtime.T
  * Fields of the Career model
  */
 export interface CareerFieldRefs {
-  readonly id: Prisma.FieldRef<"Career", 'Int'>
+  readonly id: Prisma.FieldRef<"Career", 'String'>
   readonly name: Prisma.FieldRef<"Career", 'String'>
-  readonly subjectCount: Prisma.FieldRef<"Career", 'Int'>
-  readonly years: Prisma.FieldRef<"Career", 'Int'>
-  readonly facultyId: Prisma.FieldRef<"Career", 'Int'>
+  readonly facultyId: Prisma.FieldRef<"Career", 'String'>
 }
     
 

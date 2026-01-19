@@ -99,7 +99,8 @@ export type FacultyScalarFieldEnum = (typeof FacultyScalarFieldEnum)[keyof typeo
 export const UniversityScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  abbreviation: 'abbreviation'
+  abbreviation: 'abbreviation',
+  website: 'website'
 } as const
 
 export type UniversityScalarFieldEnum = (typeof UniversityScalarFieldEnum)[keyof typeof UniversityScalarFieldEnum]
@@ -108,8 +109,6 @@ export type UniversityScalarFieldEnum = (typeof UniversityScalarFieldEnum)[keyof
 export const CareerScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  subjectCount: 'subjectCount',
-  years: 'years',
   facultyId: 'facultyId'
 } as const
 
@@ -119,6 +118,8 @@ export type CareerScalarFieldEnum = (typeof CareerScalarFieldEnum)[keyof typeof 
 export const StudyPlanScalarFieldEnum = {
   id: 'id',
   careerId: 'careerId',
+  subjectCount: 'subjectCount',
+  totalYears: 'totalYears',
   isActive: 'isActive',
   year: 'year'
 } as const
@@ -129,6 +130,7 @@ export type StudyPlanScalarFieldEnum = (typeof StudyPlanScalarFieldEnum)[keyof t
 export const SubjectScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  code: 'code',
   credits: 'credits',
   hours: 'hours'
 } as const
@@ -140,7 +142,8 @@ export const StudyPlanSubjectScalarFieldEnum = {
   planId: 'planId',
   subjectId: 'subjectId',
   year: 'year',
-  semester: 'semester'
+  semester: 'semester',
+  offCycleOption: 'offCycleOption'
 } as const
 
 export type StudyPlanSubjectScalarFieldEnum = (typeof StudyPlanSubjectScalarFieldEnum)[keyof typeof StudyPlanSubjectScalarFieldEnum]

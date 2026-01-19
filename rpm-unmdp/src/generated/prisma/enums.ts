@@ -30,7 +30,7 @@ export type DocType = (typeof DocType)[keyof typeof DocType]
 export const Semester = {
   FIRST: 'FIRST',
   SECOND: 'SECOND',
-  BOTH: 'BOTH'
+  ANNUAL: 'ANNUAL'
 } as const
 
 export type Semester = (typeof Semester)[keyof typeof Semester]

@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma, StudentStatus } from "@/generated/prisma/client";
+import { DocType, Prisma, StudentStatus } from "@/generated/prisma/client";
+import { email } from "zod";
 
 /**
  * Retrieves a user by their email address.
@@ -135,3 +136,39 @@ export const enrollUserInCareer = async (studentId: number, careerId: number, fi
     },
   });
 };
+
+/**
+ * Checks for duplicates.
+ * Returns null if safe to register.
+ * Returns 'EMAIL_EXISTS' or 'DOCUMENT_EXISTS' if there is a conflict.
+ */
+export const validateNewUserInfo = async (email: string, docType: DocType, docNumber: string) => {
+  const existingUser = await prisma.user.findFirst({
+    where: {
+      OR: [
+        { email: email },
+        {
+          AND: [
+            { docType: docType },
+            { docNumber: docNumber }
+          ]
+        }
+      ]
+    },
+    select: {
+      id: true,
+      email: true,
+      docType: true,
+      docNumber: true,
+      isDeleted: true
+    }
+  });
+
+  if (!existingUser) return null;
+
+  if (existingUser.email === email) {
+    return { error: 'EMAIL_EXISTS', isDeleted: existingUser.isDeleted };
+  }
+
+  return { error: 'DOCUMENT_EXISTS', isDeleted: existingUser.isDeleted };
+}
